@@ -12,7 +12,10 @@ return [
     'language' => 'ru-RU',
     'name' => 'Дежурная ветаптека',
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'common\bootstrap\SetUp',
+    ],
     'modules' => [],
     'aliases' => [
         '@staticRoot' => $params['staticPath'],
@@ -54,11 +57,20 @@ return [
             'errorAction' => 'site/error',
         ],
 
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-
+        'backendUrlManager' => require __DIR__ . '/urlManager.php',
+        'frontendUrlManager' => require __DIR__ . '/../../frontend/config/urlManager.php',
+        'urlManager' => function()
+        {
+            return Yii::$app->get('backendUrlManager');
+        }
+    ],
+    'as access' => [
+        'class' => 'yii\filters\AccessControl',
+        'except' => ['site/login', 'site/error'],
+        'rules' => [
+            [
+                'allow' => true,
+                'roles' => ['@'],
             ],
         ],
     ],

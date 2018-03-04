@@ -11,7 +11,9 @@ class SignupForm extends Model
 {
     public $username;
     public $email;
+    public $phone;
     public $password;
+    public $accept = true;
 
 
     /**
@@ -22,37 +24,34 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\store\entities\user\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => User::class, 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\store\entities\user\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => User::class, 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['phone', 'required'],
+            ['phone', 'string', 'max' => 255],
+
+            ['accept', 'boolean'],
+            ['accept', 'compare', 'compareValue' => true, 'message' => 'Необходимо Ваше согласие на обработку персональных данных.'],
         ];
     }
 
-    /**
-     * Signs user up.
-     *
-     * @return User|null the saved model or null if saving fails
-     */
-    public function signup()
+    public function attributeLabels()
     {
-        if (!$this->validate()) {
-            return null;
-        }
-        
-        $user = new User();
-        $user->username = $this->username;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
-        
-        return $user->save() ? $user : null;
+        return [
+            'username' => 'Логин',
+            'email' => 'Email',
+            'password' => 'Пароль',
+            'phone' => 'Телефон',
+            'accept' => 'Согласен на обработку моих данных'
+        ];
     }
 }

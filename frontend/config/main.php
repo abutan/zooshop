@@ -11,7 +11,10 @@ return [
     'basePath' => dirname(__DIR__),
     'language' => 'ru-RU',
     'name' => 'Дежурная ветаптека',
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'common\bootstrap\SetUp',
+    ],
     'controllerNamespace' => 'frontend\controllers',
     'aliases' => [
         '@staticRoot' => $params['staticPath'],

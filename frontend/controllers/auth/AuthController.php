@@ -1,16 +1,14 @@
 <?php
-namespace backend\controllers;
+
+namespace frontend\controllers\auth;
 
 use store\forms\auth\LoginForm;
-use store\services\auth\AuthService;
 use Yii;
-use yii\base\Module;
+use store\services\auth\AuthService;
 use yii\web\Controller;
+use yii\base\Module;
 
-/**
- * Site controller
- */
-class SiteController extends Controller
+class AuthController extends Controller
 {
     private $service;
 
@@ -25,25 +23,10 @@ class SiteController extends Controller
         $this->service = $service;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
-
-    public function actionLogin()
-    {
+    public function actionLogin(){
         if (!Yii::$app->user->isGuest){
-            return $this->goBack();
+            return $this->goHome();
         }
-
-        $this->layout = 'main-login';
 
         $form = new LoginForm();
         if ($form->load(Yii::$app->request->post()) && $form->validate()){
@@ -57,7 +40,7 @@ class SiteController extends Controller
             }
         }
         return $this->render('login', [
-            'model' => $form
+            'model' => $form,
         ]);
     }
 
@@ -65,15 +48,5 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
         return $this->goHome();
-    }
-
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        return $this->render('index');
     }
 }

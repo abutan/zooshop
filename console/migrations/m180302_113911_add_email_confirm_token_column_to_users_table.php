@@ -12,7 +12,8 @@ class m180302_113911_add_email_confirm_token_column_to_users_table extends Migra
      */
     public function safeUp()
     {
-        $this->addColumn('users', 'email_confirm_token', $this->string());
+        $this->addColumn('{{%users}}', 'email_confirm_token', $this->string()->unique()->after('email'));
+        $this->addColumn('{{%users}}', 'phone', $this->string()->after('username'));
     }
 
     /**
@@ -20,6 +21,7 @@ class m180302_113911_add_email_confirm_token_column_to_users_table extends Migra
      */
     public function safeDown()
     {
-        $this->dropColumn('users', 'email_confirm_token');
+        $this->dropColumn('{{%users}}', 'email_confirm_token');
+        $this->dropColumn('{{%users}}', 'phone');
     }
 }
