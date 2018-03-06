@@ -9,5 +9,7 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'frontendUrlManager' => require __DIR__ . '/../../frontend/config/urlManager.php',
+        'backendUrlManager' => require  __DIR__ . '/../../backend/config/urlManager.php',
     ],
 ];

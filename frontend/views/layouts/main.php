@@ -1,83 +1,253 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this yii\web\View */
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use rmrevin\yii\fontawesome\FA;
 use frontend\assets\AppAsset;
+use frontend\assets\LtAppAsset;
+use yii\helpers\Url;
 use common\widgets\Alert;
+use yii\bootstrap\Modal;
+//use frontend\widgets\shop\CartWidget;
 
 AppAsset::register($this);
+LtAppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Html::encode('Дежурная ветаптека | '.$this->title) ?></title>
     <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/auth/signup/request']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/auth/auth/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/auth/auth/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+<div class="page-wrapper container">
+    <div class="top-block">
+        <div class="row">
+            <?php if (Yii::$app->user->isGuest): ?>
+                <div class="enter col-sm-1 col-sm-offset-4">
+                    <p>
+                        <i class="fa fa-sign-in-alt fa-2x" ></i>  <?= Html::a('Вход', ['/auth/auth/login']) ?>
+                    </p>
+                </div><!--enter-->
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+                <div class="registration col-sm-2 col-sm-offset-1">
+                    <p>
+                        <i class="fa fa-user-plus"></i>  <?= Html::a('Регистрация', ['/auth/signup/request']) ?>
+
+                    </p>
+                </div><!--registration-->
+
+                <div class="backcall col-sm-3">
+                    <p>
+                        <i class="fa fa-phone-volume fa-2x"></i>   <?= Html::a('Обратный звонок', ['/call/node'], ['class' => 'backPhone']) ?>
+                    </p>
+                </div><!--backcall-->
+
+            <?php else: ?>
+
+                <div class="user-office col-sm-3 col-sm-offset-3">
+                    <p>
+                        <i class="fa fa-user"></i>  <?= Html::a('Личный кабинет', ['/cabinet/default/index']) ?>
+
+                    </p>
+                </div><!--user-office-->
+
+                <div class="logout-user col-sm-3">
+                    <?= Html::beginForm(['/auth/auth/logout'], 'post') ?>
+                    <?= Html::submitButton('<i class="fa fa-sign-out-alt fa-2x pull-left"></i> &nbsp; Выход  '.Yii::$app->user->identity['username'], ['class' => 'btn btn-link logout btn-block btn-lg']) ?>
+                    <?= Html::endForm() ?>
+                </div><!--logout-->
+
+                <div class="backcall col-sm-3">
+                    <p>
+                        <?= FA::icon('phone')->size(FA::SIZE_2X) ?>   <?= Html::a('Обратный звонок', ['/call/node'], ['class' => 'backPhone']) ?>
+                    </p>
+                </div><!--backcall-->
+            <?php endif; ?>
+        </div>
+
+    </div><!--top-block-->
+
+    <div class="alert-message">
         <?= Alert::widget() ?>
+    </div>
+
+    <header class="header">
+        <div class="row">
+            <div class="logo-1 col-sm-5 col-sm-offset-1">
+                <a href="<?= Url::to(Yii::$app->homeUrl) ?>">
+                    <?= Html::img(YII::getAlias('@web/files/default/logo_01.png'), ['alt' => 'На главную', 'class' => 'img-responsive']) ?>
+                </a>
+            </div><!--logo-1-->
+
+            <div class="logo-2 col-sm-6">
+                <a href="<?= Url::to(Yii::$app->homeUrl) ?>">
+                    <?= Html::img(YII::getAlias('@web/files/default/logo_02.png'), ['alt' => 'На главную', 'class' => 'img-responsive']) ?>
+                </a>
+            </div><!--logo-2-->
+        </div>
+    </header><!--header-->
+
+    <div class="down-block">
+        <div class="row">
+            <div class="shop-address col-sm-2 text-center">
+               <i class="fa fa-map-marker hidden-sm"></i>
+                <?= Html::a('Адреса магазинов', ['/article/node', 'alias' => '']) ?>
+            </div><!--shop-address-->
+
+            <div class="shop-phone col-sm-2 text-center">
+                <i class="fa fa-phone hidden-sm"></i>  <span>+7(999)1234567</span>
+            </div><!--shop-phone-->
+
+            <div class="shop-search col-sm-3">
+                <?= Html::beginForm(['#'], 'post', ['class' => '']) ?>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Поиск товаров ...">
+                    <span class="input-group-btn">
+                         <button class="btn btn-info" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                         </button>
+                    </span>
+                </div>
+                <?= Html::endForm() ?>
+            </div><!--shop-search-->
+
+            <div class="shop-pay col-sm-1 text-right">
+                <i class="fa fa-database hidden-sm"></i>
+                <?= Html::a('Оплата', ['/article/node', 'alias' => '']) ?>
+            </div><!--shop-pay-->
+
+            <div class="shop-shipping col-sm-2  text-right" data-template="">
+                <i class="fa fa-truck hidden-sm"></i>
+                <?= Html::a('Доставка', ['/article/node', 'alias' => '']) ?>
+            </div><!--shop-shipping-->
+
+            <!--<div class="shop-card col-sm-4 text-center">
+                <?/*= CartWidget::widget() */?>
+            </div><!--shop-card-->
+        </div>
+    </div><!--down-block-->
+
+    <div class="picture-menu">
+        <div class="item-block">
+            <div class="block-title text-center">
+                <?= Html::a('Ветаптека', ['/shop/catalog/category', 'id' => 6]) ?>
+            </div>
+            <div class="block-picture">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 6]) ?>">
+                    <?= Html::img('/files/default/01_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
+                </a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="block-title text-center">
+                <?= Html::a('Собаки', ['/shop/catalog/category', 'id' => 35]) ?>
+            </div>
+            <div class="block-picture">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 35]) ?>">
+                    <?= Html::img('/files/default/02_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
+                </a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="block-title text-center">
+                <?= Html::a('Кошки', ['/shop/catalog/category', 'id' => 74]) ?>
+            </div>
+            <div class="block-picture">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 74]) ?>">
+                    <?= Html::img('/files/default/03_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
+                </a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="block-title text-center">
+                <?= Html::a('Птицы', ['/shop/catalog/category', 'id' => 122]) ?>
+            </div>
+            <div class="block-picture">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 122]) ?>">
+                    <?= Html::img('/files/default/04_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
+                </a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="block-title text-center">
+                <?= Html::a('Грызуны', ['/shop/catalog/category', 'id' => 137]) ?>
+            </div>
+            <div class="block-picture">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 137]) ?>">
+                    <?= Html::img('/files/default/05_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
+                </a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="block-title text-center">
+                <?= Html::a('Рептилии', ['/shop/catalog/category', 'id' => 158]) ?>
+            </div>
+            <div class="block-picture">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 158]) ?>">
+                    <?= Html::img('/files/default/06_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
+                </a>
+            </div>
+        </div>
+        <div class="item-block">
+            <div class="block-title text-center">
+                <?= Html::a('Рыбы', ['/shop/catalog/category', 'id' => 168]) ?>
+            </div>
+            <div class="block-picture">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 168]) ?>">
+                    <?= Html::img('/files/default/07_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
+                </a>
+            </div>
+        </div>
+    </div><!--picture-menu-->
+
+    <div class="main-content">
         <?= $content ?>
-    </div>
-</div>
+    </div><!--main-content-->
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+    <div class="footer-push"></div><!--footer-push-->
+</div><!--page-wrapper-->
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+<footer class="footer container">
+
+</footer><!--footer-->
+<?php
+Modal::begin([
+    'id' => 'attModal',
+    'headerOptions' => ['id' => 'modal-header'],
+    'header' => '',
+    'size' => 'modal-lg',
+    'clientOptions' => false
+])
+?>
+<div id="modal-content"></div>
+<?php Modal::end() ?>
+<?php
+Modal::begin([
+    'id' => 'phoneModal',
+    'headerOptions' => ['id' => 'modal-header'],
+    'header' => '<h4>Заказать звонок</h4>',
+    'size' => 'modal-sm',
+    'clientOptions' => false
+])
+?>
+<div id="modal-content"></div>
+<?php Modal::end() ?>
 
 <?php $this->endBody() ?>
 </body>
 </html>
+
 <?php $this->endPage() ?>
+
+

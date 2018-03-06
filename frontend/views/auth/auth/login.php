@@ -4,7 +4,6 @@
 
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
 
 $this->title = 'Вход';
 $this->params['breadcrumbs'][] = $this->title;
@@ -12,12 +11,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="site-login">
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
-
-    <?=
-    Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]);
-    ?>
 
     <?php
     $fieldOptions1 = [
@@ -54,7 +47,13 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
 
             <div class="text-center" style="color:#999;margin:1em 0">
-                Если Вы забыли свой пароль, то  <?= Html::a('его можно восстановить', ['/auth/reset/request-password-reset']) ?>.
+                Если Вы забыли свой пароль, то  <?= Html::a('его можно восстановить', ['/auth/reset/request']) ?>.
             </div>
 
             <?php ActiveForm::end(); ?>
+            <h4 class="text-center">ИЛИ</h4>
+            <h4>Войти на сайт через социальные сети</h4>
+            <?= yii\authclient\widgets\AuthChoice::widget([
+                'baseAuthUrl' => ['auth/network/auth']
+            ]); ?>
+    </div>

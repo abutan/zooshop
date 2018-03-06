@@ -1,9 +1,11 @@
 <?php
 namespace store\entities\user;
 
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
@@ -22,6 +24,8 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ *
+ * @property Network[] $networks
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -52,6 +56,18 @@ class User extends ActiveRecord implements IdentityInterface
         $this->removeEmailConfirmToken();
     }
 
+    public static function signupByNetwork($identity, $network): self
+    {
+        $user = new static();
+        $user->created_at = time();
+        $user->status = self::STATUS_ACTIVE;
+        $user->generateAuthKey();
+        $user->networks = [Network::create($identity, $network)];
+
+        return $user;
+
+    }
+
     public static function create($username, $email, $phone, $password): self
     {
         $user = new static();
@@ -66,11 +82,12 @@ class User extends ActiveRecord implements IdentityInterface
         return $user;
     }
 
-    public function edit($username, $email, $phone): void
+    public function edit($username, $email, $phone, $password): void
     {
         $this->username = $username;
         $this->email = $email;
         $this->phone = $phone;
+        $this->password = $password;
         $this->updated_at = time();
     }
 
@@ -91,6 +108,20 @@ class User extends ActiveRecord implements IdentityInterface
     public function isActive(): bool
     {
         return $this->status == self::STATUS_ACTIVE;
+    }
+
+    ##########
+
+    public function attachNetwork($identity, $network): void
+    {
+        $networks = $this->networks;
+        foreach ($networks as $current){
+            if ($current->isForNetwork($identity, $networks)){
+                throw new \DomainException('Эта соцсеть уже привязана к Вашему профилю');
+            }
+        }
+        $networks[] = Network::create($identity, $network);
+        $this->networks = $networks;
     }
 
     ##########
@@ -241,6 +272,36 @@ class User extends ActiveRecord implements IdentityInterface
 
     ##########
 
+    public function getNetworks(): ActiveQuery
+    {
+        return $this->hasMany(Network::class, ['user_id' => 'id']);
+    }
+
+    ##########
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+            [
+                'class' => SaveRelationsBehavior::class,
+                'relations' => [
+                    'networks',
+                ],
+            ],
+        ];
+    }
+
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_ALL,
+        ];
+    }
+
+
+    ##########
+
     /**
      * {@inheritdoc}
      */
@@ -258,45 +319,7 @@ class User extends ActiveRecord implements IdentityInterface
             'phone' => 'Телефон',
             'status' => 'Состояние',
             'created_at' => 'Создан',
-            'updated' => 'Отредактирован',
+            'updated_at' => 'Отредактирован',
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    /*public function behaviors()
-    {
-        return [
-            TimestampBehavior::class,
-        ];
-    }*/
-
-    /**
-     * {@inheritdoc}
-     */
-    /*public function rules()
-    {
-        return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-        ];
-    }*/
-
-
-    /**
-     * Generates new password reset token
-     */
-    /*public function generatePasswordResetToken()
-    {
-        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
-    }*/
-
-    /**
-     * Removes password reset token
-     */
-    /*public function removePasswordResetToken()
-    {
-        $this->password_reset_token = null;
-    }*/
 }

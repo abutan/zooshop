@@ -5,7 +5,6 @@
 
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
 use yii\widgets\MaskedInput;
 
 $this->title = 'Регистрация';
@@ -15,12 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="site-signup">
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
-
-    <?=
-    Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]);
-    ?>
 
     <?php
     $fieldOptions1 = [
@@ -92,4 +85,14 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4 text-center">
+            <h4 class="text-center">ИЛИ</h4>
+            <h4>Войти на сайт через социальные сети</h4>
+            <?= yii\authclient\widgets\AuthChoice::widget([
+                'baseAuthUrl' => ['auth/network/auth']
+            ]); ?>
+        </div>
+    </div>
+
 </div>

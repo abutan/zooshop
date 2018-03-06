@@ -12,6 +12,8 @@ use yii\base\Module;
 
 class ResetController extends Controller
 {
+    public $layout = 'blank';
+
     private $service;
 
     public function __construct(

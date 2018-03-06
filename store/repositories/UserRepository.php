@@ -50,6 +50,16 @@ class UserRepository
         return (bool) User::findByPasswordResetToken($token);
     }
 
+    public function findByUsernameOrEmail($value): ?User
+    {
+        return User::find()->andWhere(['or', ['username' => $value], ['email' => $value]])->one();
+    }
+
+    public function findByNetworkIdentity($identity, $network): ?User
+    {
+        return User::find()->joinWith('networks n')->andWhere(['n.identity' => $identity, 'n.network' => $network])->one();
+    }
+
     public function save(User $user): void
     {
         if (!$user->save()){

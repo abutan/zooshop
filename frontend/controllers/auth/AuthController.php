@@ -10,6 +10,7 @@ use yii\base\Module;
 
 class AuthController extends Controller
 {
+
     private $service;
 
     public function __construct(
@@ -23,7 +24,10 @@ class AuthController extends Controller
         $this->service = $service;
     }
 
-    public function actionLogin(){
+    public function actionLogin()
+    {
+        $this->layout = 'blank';
+
         if (!Yii::$app->user->isGuest){
             return $this->goHome();
         }
