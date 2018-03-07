@@ -34,6 +34,7 @@
                     ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user/index']],
                     ['label' => 'Магазин', 'icon' => 'shopping-bag', 'url' => ['#'], 'items' => [
                         ['label' => 'Бренды', 'icon' => 'copyright', 'url' => ['/shop/brand/index']],
+                        ['label' => 'Производители', 'icon' => 'industry', 'url' => ['/shop/maker/index']],
                     ]
 
                     ],
