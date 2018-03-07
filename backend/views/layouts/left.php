@@ -32,6 +32,11 @@
                 'items' => [
                     ['label' => 'Menu администратора', 'options' => ['class' => 'header']],
                     ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user/index']],
+                    ['label' => 'Магазин', 'icon' => 'shopping-bag', 'url' => ['#'], 'items' => [
+                        ['label' => 'Бренды', 'icon' => 'copyright', 'url' => ['/shop/brand/index']],
+                    ]
+
+                    ],
 
                     /*['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
