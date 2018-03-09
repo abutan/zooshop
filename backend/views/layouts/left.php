@@ -36,6 +36,7 @@
                         ['label' => 'Бренды', 'icon' => 'copyright', 'url' => ['/shop/brand/index']],
                         ['label' => 'Производители', 'icon' => 'industry', 'url' => ['/shop/maker/index']],
                         ['label' => 'Теги (метки)', 'icon' => 'code', 'url' => ['/shop/tag/index']],
+                        ['label' => 'Категории', 'icon' => 'server', 'url' => ['/shop/category/index']],
                     ]
 
                     ],
