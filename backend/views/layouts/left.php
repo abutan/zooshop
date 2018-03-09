@@ -25,6 +25,7 @@
                         ['label' => 'Производители', 'icon' => 'industry', 'url' => ['/shop/maker/index']],
                         ['label' => 'Теги (метки)', 'icon' => 'code', 'url' => ['/shop/tag/index']],
                         ['label' => 'Категории', 'icon' => 'server', 'url' => ['/shop/category/index']],
+                        ['label' => 'Атрибуты', 'icon' => 'cog', 'url' => ['/shop/characteristic/index']],
                     ]
 
                     ],
