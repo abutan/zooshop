@@ -28,7 +28,8 @@
         "mihaildev/yii2-ckeditor": "*",
         "mihaildev/yii2-elfinder": "*",
         "paulzi/yii2-nested-sets": "^1.0",
-        "yii-dream-team/yii2-upload-behavior": "*"
+        "yii-dream-team/yii2-upload-behavior": "*",
+        "elisdn/yii2-composite-form": "^1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

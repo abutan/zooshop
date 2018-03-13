@@ -6,14 +6,18 @@ namespace store\services\manage\shop;
 use store\entities\shop\Maker;
 use store\forms\manage\shop\MakerManageForm;
 use store\repositories\manage\shop\MakerRepository;
+use store\repositories\manage\shop\ProductRepository;
 use yii\helpers\Inflector;
 
 class MakerManageService
 {
     private $makers;
+    private $products;
 
-    public function __construct(MakerRepository $makers) {
+    public function __construct(MakerRepository $makers, ProductRepository $products)
+    {
         $this->makers = $makers;
+        $this->products = $products;
     }
 
     public function create(MakerManageForm $form): Maker
@@ -47,6 +51,9 @@ class MakerManageService
     public function remove($id)
     {
         $maker = $this->makers->get($id);
+        if ($this->products->existsByMaker($maker->id)){
+            throw new \DomainException('Невозможно удалить производителя к которому привязаны товары.');
+        }
         $this->makers->remove($maker);
     }
 }

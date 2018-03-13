@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 /**
  * @property int $id [int(11)]
  * @property int $user_id [int(11)]
+ * @property int $product_id [int(11)]
  * @property int $vote [int(11)]
  * @property string $text
  * @property bool $active [tinyint(1)]
