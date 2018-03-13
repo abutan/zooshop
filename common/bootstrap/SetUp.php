@@ -3,6 +3,7 @@
 namespace common\bootstrap;
 
 
+use store\services\manage\site\CallManageService;
 use yii\base\BootstrapInterface;
 use yii\mail\MailerInterface;
 
@@ -15,5 +16,9 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(MailerInterface::class, function () use ($app){
             return $app->mailer;
         });
+
+        $container->setSingleton(CallManageService::class, [], [
+            $app->params['adminEmail'],
+        ]);
     }
 }
