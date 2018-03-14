@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `calls`.
+ * Handles the creation of table `site_sliders`.
  */
-class m180313_193350_create_calls_table extends Migration
+class m180314_073809_create_site_sliders_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -14,10 +14,9 @@ class m180313_193350_create_calls_table extends Migration
     {
         $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
 
-        $this->createTable('{{%calls}}', [
+        $this->createTable('{{%site_sliders}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
-            'phone' => $this->string()->notNull(),
             'status' => $this->smallInteger(),
             'created_at' => $this->integer(),
         ], $tableOptions);
@@ -28,6 +27,6 @@ class m180313_193350_create_calls_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%calls}}');
+        $this->dropTable('{{%site_sliders}}');
     }
 }
