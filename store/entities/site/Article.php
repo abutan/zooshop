@@ -48,16 +48,17 @@ class Article extends ActiveRecord
         $this->title = $title;
         $this->description = $description;
         $this->keywords = $keywords;
+        $this->updated_at = time();
     }
 
     public function isActive(): bool
     {
-        return $this->status = self::STATUS_ACTIVE;
+        return $this->status == self::STATUS_ACTIVE;
     }
 
     public function isDraft(): bool
     {
-        return $this->status = self::STATUS_DRAFT;
+        return $this->status == self::STATUS_DRAFT;
     }
 
     public function activate(): void

@@ -26,7 +26,11 @@
                         ['label' => 'Теги (метки)', 'icon' => 'code', 'url' => ['/shop/tag/index']],
                         ['label' => 'Категории', 'icon' => 'server', 'url' => ['/shop/category/index']],
                         ['label' => 'Атрибуты', 'icon' => 'cog', 'url' => ['/shop/characteristic/index']],
-                    ]
+                        ],
+                    ],
+                    ['label' => 'Сайт', 'icon' => 'paste', 'url' => ['#'], 'items' => [
+                            ['label' => 'Статьи', 'icon' => 'clone', 'url' => ['/sites/article/index']],
+                        ],
 
                     ],
 
