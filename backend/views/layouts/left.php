@@ -20,6 +20,7 @@
                 'items' => [
                     ['label' => 'Menu администратора', 'options' => ['class' => 'header']],
                     ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user/index']],
+                    ['label' => 'Заказы звонка', 'icon' => 'phone-volume', 'url' => ['/sites/call/index']],
                     ['label' => 'Магазин', 'icon' => 'shopping-bag', 'url' => ['#'], 'items' => [
                         ['label' => 'Бренды', 'icon' => 'copyright', 'url' => ['/shop/brand/index']],
                         ['label' => 'Производители', 'icon' => 'industry', 'url' => ['/shop/maker/index']],
