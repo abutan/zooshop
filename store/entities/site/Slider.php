@@ -98,14 +98,14 @@ class Slider extends ActiveRecord
         foreach ($slides as $i => $slide){
             if ($slide->isEqualTo($id)){
                 if ($prev = $slides[$i - 1] ?? null){
-                    $slides[$i -1] = $slide;
+                    $slides[$i - 1] = $slide;
                     $slides[$i] = $prev;
                     $this->updateSlides($slides);
                 }
                 return;
             }
         }
-        throw new \DomainException('Слайд не найден.');
+        throw new \DomainException('Слайд не найден');
     }
 
     public function moveSlideDown($id): void
@@ -121,7 +121,7 @@ class Slider extends ActiveRecord
                 return;
             }
         }
-        throw new \DomainException('Слайд не найден.');
+        throw new \DomainException('Слайд не найден');
     }
 
     private function updateSlides(array $slides): void
@@ -168,7 +168,7 @@ class Slider extends ActiveRecord
 
     public function getSlides(): ActiveQuery
     {
-        return $this->hasMany(Slide::class, ['slider_id' => 'id']);
+        return $this->hasMany(Slide::class, ['slider_id' => 'id'])->orderBy('sort');
     }
 
     public function getSliderAssignments(): ActiveQuery
@@ -223,6 +223,8 @@ class Slider extends ActiveRecord
     {
         return [
             'name' => 'Название слайдера',
+            'status' => 'Состояние',
+            'created_at' => 'Создан',
         ];
     }
 }

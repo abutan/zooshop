@@ -12,6 +12,8 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property int $id [int(11)]
  * @property int $slider_id [int(11)]
  * @property int $sort [int(11)]
+ *
+ * @mixin ImageUploadBehavior
  */
 class Slide extends ActiveRecord
 {

@@ -15,6 +15,7 @@ class SliderEditForm extends CompositeForm
 
     public function __construct(Slider $slider, array $config = [])
     {
+        $this->name = $slider->name;
         $this->categories = new SliderCategoriesForm($slider);
         parent::__construct($config);
     }

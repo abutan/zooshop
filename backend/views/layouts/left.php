@@ -31,6 +31,7 @@
                     ],
                     ['label' => 'Сайт', 'icon' => 'paste', 'url' => ['#'], 'items' => [
                             ['label' => 'Статьи', 'icon' => 'clone', 'url' => ['/sites/article/index']],
+                            ['label' => 'Слайдеры', 'icon' => 'magic', 'url' => ['/sites/slider/index']],
                         ],
 
                     ],

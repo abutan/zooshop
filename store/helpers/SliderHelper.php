@@ -17,7 +17,7 @@ class SliderHelper
         ];
     }
 
-    public function statusLabel($status): string
+    public static function statusLabel($status): string
     {
         switch ($status){
             case Slider::STATUS_DRAFT :
