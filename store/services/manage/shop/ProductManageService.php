@@ -160,6 +160,14 @@ class ProductManageService
         $this->products->save($product);
     }
 
+    public function addValues($id, ProductEditForm $form): void
+    {
+        $product = $this->products->get($id);
+        foreach ($form->values as $value){
+            $product->setValue($value->characteristicId, $value->text);
+        }
+    }
+
     public function activate($id): void
     {
         $product = $this->products->get($id);
@@ -255,6 +263,13 @@ class ProductManageService
             $modification = $product->getModification($modificationId);
             $modification->setValue($value->characteristicId, $value->text);
         }
+        $this->products->save($product);
+    }
+
+    public function removeModification($id, $modificationId): void
+    {
+        $product = $this->products->get($id);
+        $product->removeModification($modificationId);
         $this->products->save($product);
     }
 

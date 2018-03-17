@@ -20,13 +20,14 @@
                 'items' => [
                     ['label' => 'Menu администратора', 'options' => ['class' => 'header']],
                     ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user/index']],
-                    ['label' => 'Заказы звонка', 'icon' => 'phone-volume', 'url' => ['/sites/call/index']],
+                    ['label' => 'Заказы звонка', 'icon' => 'phone', 'url' => ['/sites/call/index']],
                     ['label' => 'Магазин', 'icon' => 'shopping-bag', 'url' => ['#'], 'items' => [
                         ['label' => 'Бренды', 'icon' => 'copyright', 'url' => ['/shop/brand/index']],
                         ['label' => 'Производители', 'icon' => 'industry', 'url' => ['/shop/maker/index']],
                         ['label' => 'Теги (метки)', 'icon' => 'code', 'url' => ['/shop/tag/index']],
                         ['label' => 'Категории', 'icon' => 'server', 'url' => ['/shop/category/index']],
                         ['label' => 'Атрибуты', 'icon' => 'cog', 'url' => ['/shop/characteristic/index']],
+                        ['label' => 'Товары', 'icon' => 'cart-arrow-down', 'url' => ['/shop/product/index']],
                         ],
                     ],
                     ['label' => 'Сайт', 'icon' => 'paste', 'url' => ['#'], 'items' => [
