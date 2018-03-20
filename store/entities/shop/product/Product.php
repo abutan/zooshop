@@ -92,26 +92,20 @@ class Product extends ActiveRecord
         $this->updated_at = time();
     }
 
-    public function setPrice($new, $old): void
+    public function setPrice($old, $new): void
     {
-        $this->price_new = $new;
         $this->price_old = $old;
+        $this->price_new = $new;
     }
 
     public function changeQuantity($quantity): void
     {
-        if ($this->modifications){
-            throw new \DomainException('Изменяйте количество в модификациях');
-        }
         $this->setQuantity($quantity);
     }
 
     public function setQuantity($quantity): void
     {
-        if ($this->modifications){
-            throw new \DomainException('Товар имеет модификации. Количество изменяйте в модификациях.');
-        }
-        $this->quantity = $quantity;
+        $this->quantity = $quantity ;
     }
 
     public function changeMainCategory($categoryId): void
@@ -384,8 +378,14 @@ class Product extends ActiveRecord
         $photos = $this->photos;
         foreach ($photos as $i => $photo){
             if ($photo->isEqualTo($id)){
-                unset($photos[$i]);
-                $this->updatePhotos($photos);
+                if ($this->main_photo_id == $photo->id){
+                    $this->updateAttributes(['main_photo_id' => null]);
+                    unset($photos[$i]);
+                    $this->updatePhotos($photos);
+                }else{
+                    unset($photos[$i]);
+                    $this->updatePhotos($photos);
+                }
                 return;
             }
         }
@@ -552,7 +552,7 @@ class Product extends ActiveRecord
     }
     public function getCategoryAssignments(): ActiveQuery
     {
-        return $this->hasMany(CategoryAssignment::class, ['product_id' => $this->id]);
+        return $this->hasMany(CategoryAssignment::class, ['product_id' => 'id']);
     }
     public function getCategories(): ActiveQuery
     {

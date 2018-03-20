@@ -46,6 +46,11 @@ class ProductController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
+                    'draft' => ['POST'],
+                    'activate' => ['POST'],
+                    'move-photo-up' => ['POST'],
+                    'move-photo-down' => ['POST'],
+                    'remove-photo' => ['POST'],
                 ],
             ],
         ];
@@ -253,12 +258,11 @@ class ProductController extends Controller
      * @param $photoId
      * @return \yii\web\Response
      */
-    public function removePhoto($id, $photoId)
+    public function actionRemovePhoto($id, $photoId)
     {
         try{
             $this->service->removePhoto($id, $photoId);
         }catch (\DomainException $e){
-            Yii::$app->errorHandler->logException($e);
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
         return $this->redirect(['view', 'id' => $id, '#' => 'photos']);
@@ -279,7 +283,7 @@ class ProductController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try{
                 $this->service->edit($product->id, $form);
-                Yii::$app->session->setFlash('success', 'Товар отредактирова.');
+                Yii::$app->session->setFlash('success', 'Товар отредактирован.');
                 return $this->redirect(['view', 'id' => $product->id]);
             }catch (\DomainException $e){
                 Yii::$app->errorHandler->logException($e);

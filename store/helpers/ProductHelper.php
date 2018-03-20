@@ -12,8 +12,8 @@ class ProductHelper
     public static function statusList(): array
     {
         return [
-            Product::STATUS_DRAFT => 'Опубликован',
-            Product::STATUS_ACTIVE => 'Отключен',
+            Product::STATUS_DRAFT => 'Отключен',
+            Product::STATUS_ACTIVE => 'Опубликован',
         ];
     }
 

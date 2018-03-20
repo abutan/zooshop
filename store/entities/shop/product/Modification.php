@@ -22,6 +22,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  *
  * @property ModificationValue[] $values
  * @property Product $product
+ * @mixin ImageUploadBehavior
  */
 class Modification extends ActiveRecord
 {
@@ -44,6 +45,8 @@ class Modification extends ActiveRecord
         $this->price = $price;
         $this->quantity = $quantity;
     }
+
+
 
     public function setPhoto(UploadedFile $image): void
     {
@@ -83,6 +86,7 @@ class Modification extends ActiveRecord
             'code' => 'Артикул',
             'price' => 'Цена',
             'image' => 'Фото',
+            'quantity' => 'Количество на складе',
         ];
     }
 
@@ -143,6 +147,7 @@ class Modification extends ActiveRecord
                 'thumbUrl' => '@static/modifications/cache/[[profile]]/[[id]].[[extension]]',
                 'thumbs' => [
                     'modification' => ['width' => 50, 'height' => 120],
+                    'full' => ['width' => 1200, 'height' => 1200],
                 ],
             ],
             [

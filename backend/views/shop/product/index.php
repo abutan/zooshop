@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use store\entities\shop\product\Product;
 use store\helpers\ProductHelper;
+use yii\helpers\StringHelper;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\ProductSearch */
@@ -38,9 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'name',
-                        'value' => function(Product $product)
+                        'content' => function(Product $product)
                         {
-                            return Html::a(Html::encode($product->name), ['view', 'id' => $product->id]);
+                            return Html::a(Html::encode(StringHelper::truncateWords($product->name, 2)  ), ['view', 'id' => $product->id], ['title' => $product->name, 'data-toggle' => 'tooltip']);
                         },
                         'format' => 'html',
                     ],

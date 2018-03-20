@@ -41,6 +41,11 @@ div.required label:after {
     font-style: italic;
 }
 
+#photos a.fancybox img{
+    margin: 10px auto 0;
+    height: 90px;
+}
+
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
     position: relative;

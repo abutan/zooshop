@@ -12,6 +12,7 @@ use store\entities\shop\product\ProductValue;
 use yii\grid\GridView;
 use yii\grid\ActionColumn;
 use store\entities\shop\product\Modification;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $product store\entities\shop\product\Product */
@@ -49,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     [
                         'attribute' => 'main_photo_id',
-                        'value' => $product->mainPhoto->getThumbFileUrl('file', 'admin'),
+                        'value' => $product->mainPhoto ? Html::img($product->mainPhoto->getThumbFileUrl('file', 'admin'))  : null,
                         'format' => 'html',
                     ],
                     'code',
@@ -77,86 +78,107 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'label' => 'Теги (метки)',
-                        'value' => ArrayHelper::getColumn($product->tags, 'name'),
+                        'value' => implode(', ',  ArrayHelper::getColumn($product->tags, 'name')) ,
                     ],
-                    'body:ntext',
-                    'price_old',
-                    'price_new',
-
                     'rating',
                     'slug',
-                    'created_at',
-                    'updated_at',
+                    'created_at:datetime',
+                    'updated_at:datetime',
+                    'body:html',
                 ],
             ]) ?>
         </div>
     </div>
 
-    <div class="row col-sm-6">
-        <div class="box">
-            <div class="box-header with-border">Складские свойства</div>
-            <div class="box-body">
-                <?= DetailView::widget([
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="box">
+                <div class="box-header with-border">Складские свойства</div>
+                <div class="box-body">
+                    <?= DetailView::widget([
                         'model' => $product,
-                    'attributes' => [
-                        [
-                            'attribute' => 'weight',
-                            'value' => WeightHelper::format($product->weight),
+                        'attributes' => [
+                            [
+                                'attribute' => 'weight',
+                                'value' => WeightHelper::format($product->weight),
+                                'format' => 'html'
+                            ],
+                            'quantity',
                         ],
-                        'quantity',
-                    ],
-                ]) ?>
-                <div class="text-center">
-                    <?= Html::a('Изменить количество', ['quantity', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
+                    ]) ?>
+                    <div>
+                        <?= Html::a('Изменить количество', ['quantity', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="box">
+                <div class="box-header with-border">Настройки цены</div>
+                <div class="box-body">
+                    <?= DetailView::widget([
+                        'model' => $product,
+                        'attributes' => [
+                            [
+                                'attribute' => 'price_old',
+                                'value' => PriceHelper::format($product->price_old),
+                                'format' => 'html'
+                            ],
+                            [
+                                'attribute' => 'price_new',
+                                'value' => PriceHelper::format($product->price_new),
+                                'format' => 'html',
+                            ],
+                        ],
+                    ]) ?>
+                </div>
+                <div>
+                    <?= Html::a('Изменить цену', ['price', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row col-sm-6">
-        <div class="box">
-            <div class="box-header with-border">Настройки цены</div>
-            <div class="box-body">
+    <br>
+
+
+    <div class="box">
+        <div class="box-header with-border">Атрибуты товара</div>
+        <div class="box-body">
+            <?php if (count($product->values) > 0 ): ?>
                 <?= DetailView::widget([
                     'model' => $product,
-                    'attributes' => [
-                        [
-                            'attribute' => 'price_old',
-                            'value' => PriceHelper::format($product->price_old),
-                        ],
-                        [
-                            'attribute' => 'price_new',
-                            'value' => PriceHelper::format($product->price_new),
-                        ],
-                    ],
+                    'attributes' => array_map(function (ProductValue $value){
+                        return [
+                            'label' => $value->characteristic->name,
+                            'value' => $value->value,
+                        ];
+                    }, $product->values)
                 ]) ?>
-            </div>
-            <div class="text-center">
-                <?= Html::a('Изменить цену', ['price', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
-            </div>
+            <?php else: ?>
+                <?= Html::a('Установить атрибуты товару', ['value', 'id' => $product->id], ['class' => 'btn btn-primary text-center']) ?>
+            <?php  endif; ?>
         </div>
     </div>
 
-    <?php if (count($product->values) > 0 ): ?>
-        <?= DetailView::widget([
-            'model' => $product,
-            'attributes' => array_map(function (ProductValue $value){
-                return [
-                    'label' => $value->characteristic->name,
-                    'value' => $value->value,
-                ];
-            }, $product->values)
-        ]) ?>
-    <?php else: ?>
-    <?= Html::a('Установить атрибуты товару', ['value', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
-    <?php  endif; ?>
 
     <div class="box" id="modifications">
         <div class="box-header with-border">Модификации товара</div>
         <div class="box-body">
-            <p></p>
+            <p>
+                <?= Html::a('Добавить модификацию', ['shop/modification/create', 'product_id' => $product->id], ['class' => 'btn btn-primary']) ?>
+            </p>
             <?= GridView::widget([
                 'dataProvider' => $modificationsProvider,
                 'columns' => [
+                    [
+                        'value' => function(Modification $modification)
+                        {
+                            return $modification->image ? Html::a(Html::img($modification->getThumbFileUrl('image', 'modification'), ['class' => 'img-responsive']), $modification->getThumbFileUrl('image', 'full'), ['class' => 'fancybox'])
+                                /*Html::img($modification->getThumbFileUrl('image', 'modification'))*/ : null;
+                        },
+                        'format' => 'html'
+                    ],
                     'name',
                     'code',
                     [
@@ -164,7 +186,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => function(Modification $modification)
                         {
                             return PriceHelper::format($modification->price);
-                        }
+                        },
+                        'format' => 'html',
                     ],
                     'quantity',
                     [
@@ -191,32 +214,54 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
+    <div class="box" id="photos">
+        <div class="box-header with-border">Фотографии</div>
+        <div class="box-body">
 
-    .box>.box-header.with-border{Общие свойства товара}+.box-body
-    <?= DetailView::widget([
-        'model' => $product,
-        'attributes' => [
-            'id',
-            'code',
-            'name',
-            'main_photo_id',
-            'category_id',
-            'brand_id',
-            'maker_id',
-            'body:ntext',
-            'price_old',
-            'price_new',
-            'weight',
-            'quantity',
-            'rating',
-            'slug',
-            'status',
-            'title',
-            'description',
-            'keywords',
-            'created_at',
-            'updated_at',
-        ],
-    ]) ?>
+            <div class="row">
+                <?php foreach ($product->photos as $photo): ?>
+                    <div class="col-sm-2" style="text-align: center">
+                        <div class="btn-group">
+                            <?= Html::a('<span class="glyphicon glyphicon-arrow-left"></span>', ['move-photo-up', 'id' => $product->id, 'photoId' => $photo->id], [
+                                'class' => 'btn btn-default',
+                                'data-method' => 'post',
+                            ]); ?>
+                            <?= Html::a('<span class="glyphicon glyphicon-remove"></span>', ['remove-photo', 'id' => $product->id, 'photoId' => $photo->id], [
+                                'class' => 'btn btn-default',
+                                'data-method' => 'post',
+                                'data-confirm' => 'Удалить фото?',
+                            ]); ?>
+                            <?= Html::a('<span class="glyphicon glyphicon-arrow-right"></span>', ['move-photo-down', 'id' => $product->id, 'photoId' => $photo->id], [
+                                'class' => 'btn btn-default',
+                                'data-method' => 'post',
+                            ]); ?>
+                        </div>
+                        <div>
+                            <a href="<?= Url::to($photo->getThumbFileUrl('file', 'full')) ?>" class="fancybox">
+                                <?= Html::img($photo->getThumbFileUrl('file', 'full'), ['class' => 'img-responsive'])?>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <br><br>
 
-</div>
+            <?php $form = ActiveForm::begin([
+                'options' => ['enctype'=>'multipart/form-data'],
+            ]); ?>
+
+            <?= $form->field($photosForm, 'files[]')->label(false)->widget(FileInput::class, [
+                'options' => [
+                    'accept' => 'image/*',
+                    'multiple' => true,
+                ]
+            ]) ?>
+
+            <div class="form-group">
+                <?= Html::submitButton('Закачать', ['class' => 'btn btn-success']) ?>
+            </div>
+
+            <?php ActiveForm::end(); ?>
+
+
+        </div>

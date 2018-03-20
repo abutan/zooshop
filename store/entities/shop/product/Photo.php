@@ -62,7 +62,7 @@ class Photo extends ActiveRecord
                     'admin' => ['width' => 100, 'height' => 70],
                     'list' => ['width' => 150, 'height' => 100],
                     'product' => ['width' => 300, 'height' => 200],
-                    'full' => ['width' => 600, 'height' => 400],
+                    'full' => ['width' => 1200, 'height' => 1200],
                 ],
             ],
         ];

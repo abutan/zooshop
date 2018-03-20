@@ -65,6 +65,29 @@ class ProductEditForm extends CompositeForm
         ];
     }
 
+    public function attributeLabels(): array
+    {
+        return [
+            'code' => 'Артикул',
+            'name' => 'Название',
+            'category_id' => 'Категория',
+            'maker_id' => 'Производитель',
+            'brand_id' => 'Бренд',
+            'main_photo_id' => 'Главное фото',
+            'price_new' => 'Цена',
+            'price_old' => 'Старая цена',
+            'body' => 'Описание',
+            'rating' => 'Рейтинг',
+            'slug' => 'Алиас',
+            'status' => 'Состояние',
+            'weight' => 'Вес',
+            'quantity' => 'Количество на складе',
+            'title' => 'МЕТА заголовок',
+            'description' => 'МЕТА описание',
+            'keywords' => 'МЕТА ключевые слова',
+        ];
+    }
+
     public function brandList(): array
     {
         return ArrayHelper::map(Brand::find()->orderBy('name')->asArray()->all(), 'id', 'name');
