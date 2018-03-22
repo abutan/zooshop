@@ -5,7 +5,6 @@ namespace store\entities\shop;
 
 use paulzi\nestedsets\NestedSetsBehavior;
 use store\entities\shop\queries\CategoryQuery;
-use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -24,6 +23,7 @@ use yii\db\ActiveRecord;
  * @mixin NestedSetsBehavior
  * @property Category $prev
  * @property Category $next
+ * @property Category[] $parents
  */
 class Category extends ActiveRecord
 {
