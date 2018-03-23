@@ -26,6 +26,7 @@ use yii\web\IdentityInterface;
  * @property string $password write-only password
  *
  * @property Network[] $networks
+ * @property User $isGuest
  */
 class User extends ActiveRecord implements IdentityInterface
 {
