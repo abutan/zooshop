@@ -1,3 +1,8 @@
+<?php
+
+/* @var $this \yii\web\View */
+/* @var $directoryAsset false|string */
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -28,6 +33,7 @@
                         ['label' => 'Категории', 'icon' => 'server', 'url' => ['/shop/category/index']],
                         ['label' => 'Атрибуты', 'icon' => 'cog', 'url' => ['/shop/characteristic/index']],
                         ['label' => 'Товары', 'icon' => 'cart-arrow-down', 'url' => ['/shop/product/index']],
+                        ['label' => 'Методы доставки', 'icon' => 'truck', 'url' => ['/shop/delivery/index']],
                         ],
                     ],
                     ['label' => 'Сайт', 'icon' => 'paste', 'url' => ['#'], 'items' => [
