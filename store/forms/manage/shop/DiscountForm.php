@@ -35,9 +35,8 @@ class DiscountForm extends Model
     {
         return [
             [['percent', 'name', 'sort'], 'required'],
-            ['name', 'string', 'max' => 255],
+            [['name', 'fromDate', 'toDate'], 'string', 'max' => 255],
             [['percent', 'sort'], 'integer'],
-            [['fromDate', 'toDate'], 'date'],
             ['name', 'unique', 'targetClass' => Discount::class, 'message' => 'Такое название скидки уже используется.', 'filter' => $this->_discount ? ['<>', 'id', $this->_discount->id] : null],
         ];
     }

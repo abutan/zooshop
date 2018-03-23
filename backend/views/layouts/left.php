@@ -32,8 +32,9 @@
                         ['label' => 'Теги (метки)', 'icon' => 'code', 'url' => ['/shop/tag/index']],
                         ['label' => 'Категории', 'icon' => 'server', 'url' => ['/shop/category/index']],
                         ['label' => 'Атрибуты', 'icon' => 'cog', 'url' => ['/shop/characteristic/index']],
-                        ['label' => 'Товары', 'icon' => 'cart-arrow-down', 'url' => ['/shop/product/index']],
                         ['label' => 'Методы доставки', 'icon' => 'truck', 'url' => ['/shop/delivery/index']],
+                        ['label' => 'Скидки', 'icon' => 'arrow-circle-down', 'url' => ['/shop/discount/index']],
+                        ['label' => 'Товары', 'icon' => 'cart-arrow-down', 'url' => ['/shop/product/index']],
                         ],
                     ],
                     ['label' => 'Сайт', 'icon' => 'paste', 'url' => ['#'], 'items' => [

@@ -63,4 +63,17 @@ class Discount extends ActiveRecord
     {
         return new DiscountQuery(static::class);
     }
+
+    public function attributeLabels(): array
+    {
+        return [
+            'percent' => 'Размер скидки %',
+            'name' => 'Название',
+            'fromDate' => 'Дата начала',
+            'from_date' => 'Дата начала',
+            'toDate' => 'Дата окончания',
+            'to_date' => 'Дата окончания',
+            'active' => 'Состояние',
+        ];
+    }
 }
