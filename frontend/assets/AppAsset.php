@@ -14,12 +14,10 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/style.css',
         'css/jquery.fancybox.css',
-        'css/slick.css',
     ];
     public $js = [
         'js/jquery.fancybox.js',
         'js/jquery.fancybox.pack.js',
-        'js/slick.js',
         'js/main.js',
     ];
     public $depends = [

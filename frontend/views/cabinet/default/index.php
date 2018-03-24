@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="cabinet-index container-fluid">
-    <h1>Здравствуйте <small><?= Yii::$app->user->identity['username'] ?: 'пользователь '. Yii::$app->user->id ?></small></h1>
+    <h2>Здравствуйте <small><?= Yii::$app->user->identity['username'] ?: 'пользователь '. Yii::$app->user->id ?></small></h2>
 
     <?=
     Breadcrumbs::widget([
