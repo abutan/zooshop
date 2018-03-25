@@ -141,70 +141,70 @@ LtAppAsset::register($this);
     <div class="picture-menu">
         <div class="item-block">
             <div class="block-title text-center">
-                <?= Html::a('Ветаптека', ['/shop/catalog/category', 'id' => 6]) ?>
+                <?= Html::a('Ветаптека', ['/shop/catalog/category', 'id' => 2]) ?>
             </div>
             <div class="block-picture">
-                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 6]) ?>">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 2]) ?>">
                     <?= Html::img('/files/default/01_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
                 </a>
             </div>
         </div>
         <div class="item-block">
             <div class="block-title text-center">
-                <?= Html::a('Собаки', ['/shop/catalog/category', 'id' => 35]) ?>
+                <?= Html::a('Собаки', ['/shop/catalog/category', 'id' => 3]) ?>
             </div>
             <div class="block-picture">
-                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 35]) ?>">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 3]) ?>">
                     <?= Html::img('/files/default/02_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
                 </a>
             </div>
         </div>
         <div class="item-block">
             <div class="block-title text-center">
-                <?= Html::a('Кошки', ['/shop/catalog/category', 'id' => 74]) ?>
+                <?= Html::a('Кошки', ['/shop/catalog/category', 'id' => 4]) ?>
             </div>
             <div class="block-picture">
-                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 74]) ?>">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 4]) ?>">
                     <?= Html::img('/files/default/03_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
                 </a>
             </div>
         </div>
         <div class="item-block">
             <div class="block-title text-center">
-                <?= Html::a('Птицы', ['/shop/catalog/category', 'id' => 122]) ?>
+                <?= Html::a('Птицы', ['/shop/catalog/category', 'id' => 5]) ?>
             </div>
             <div class="block-picture">
-                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 122]) ?>">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 5]) ?>">
                     <?= Html::img('/files/default/04_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
                 </a>
             </div>
         </div>
         <div class="item-block">
             <div class="block-title text-center">
-                <?= Html::a('Грызуны', ['/shop/catalog/category', 'id' => 137]) ?>
+                <?= Html::a('Грызуны', ['/shop/catalog/category', 'id' => 6]) ?>
             </div>
             <div class="block-picture">
-                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 137]) ?>">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 6]) ?>">
                     <?= Html::img('/files/default/05_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
                 </a>
             </div>
         </div>
         <div class="item-block">
             <div class="block-title text-center">
-                <?= Html::a('Рептилии', ['/shop/catalog/category', 'id' => 158]) ?>
+                <?= Html::a('Рептилии', ['/shop/catalog/category', 'id' => 7]) ?>
             </div>
             <div class="block-picture">
-                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 158]) ?>">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 7]) ?>">
                     <?= Html::img('/files/default/06_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
                 </a>
             </div>
         </div>
         <div class="item-block">
             <div class="block-title text-center">
-                <?= Html::a('Рыбы', ['/shop/catalog/category', 'id' => 168]) ?>
+                <?= Html::a('Рыбы', ['/shop/catalog/category', 'id' => 8]) ?>
             </div>
             <div class="block-picture">
-                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 168]) ?>">
+                <a href="<?= Url::to(['/shop/catalog/category', 'id' => 8]) ?>">
                     <?= Html::img('/files/default/07_icon_categ.png', ['alt' => 'Icon', 'class' => 'img-responsive']) ?>
                 </a>
             </div>

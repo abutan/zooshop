@@ -1,3 +1,5 @@
+
+
 //Tooltip on hover
 $("[data-toggle='tooltip']").tooltip();
 

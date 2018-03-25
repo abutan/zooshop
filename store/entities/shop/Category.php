@@ -52,6 +52,11 @@ class Category extends ActiveRecord
         $this->keywords = $keywords;
     }
 
+    public function getTitle(): string
+    {
+        return $this->title ?: $this->name;
+    }
+
     public function behaviors() {
         return [
             NestedSetsBehavior::class,

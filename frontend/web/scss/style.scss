@@ -371,7 +371,7 @@ body{
       a{
         background-color: #00cc00;
         color: #000;
-        font-size: 14px;
+        font-size: 13px;
         text-transform: uppercase;
         font-weight: bold;
         border: 1px solid #00cc00;
@@ -442,7 +442,7 @@ body{
       }
       a {
         color: #000;
-        font-size: 14px;
+        font-size: 13px;
         text-transform: uppercase;
         font-weight: bold;
         img {
@@ -547,8 +547,8 @@ body{
               text-align: center;
               font-size: 16px;
               color: #000;
-              height: 65px;
-              margin-bottom: 5px;
+              margin-bottom: 8px;
+              height: 35px;
             }
           }
           .price{
@@ -556,8 +556,8 @@ body{
             font-size: 24px;
             font-weight: bold;
             color: #045DA5;
-            i{
-              font-size: 16px;
+            .glyphicon-rub{
+              font-size: 17px;
               color: #000;
               font-weight: normal;
             }
@@ -575,6 +575,21 @@ body{
 }
 
 .single-product-page{
+  .col-sm-7{
+    .product-main-photo{
+      border: 1px dotted #9e9e9e;
+      margin-bottom: 25px;
+      img{
+        max-height: 250px;
+      }
+    }
+    .product-other-photos{
+      img{
+        border: 1px dotted #9e9e9e;
+        margin-bottom: 7px;
+      }
+    }
+  }
   .col-sm-5{
     .common-properties{
       .common-description-link{
@@ -791,7 +806,7 @@ body{
       }
       a {
         color: #000;
-        font-size: 14px;
+        font-size: 13px;
         text-transform: uppercase;
         font-weight: bold;
         img {
@@ -846,6 +861,11 @@ body{
   .article-menu .nav li a{
     font-size: 11px;
   }
+  .main-content .col-sm-9 .panel.subcategories .panel-body .row .col-sm-3{
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+  }
 }
 
 @media screen and (max-width: 993px){
@@ -864,11 +884,20 @@ body{
   .sale a{
     font-size: 18px;
   }
+  .aside-menu ul li a{
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+  }
+
+  .main-content .col-sm-9 .panel.subcategories .panel-body .row .col-sm-3 div a{
+    height: 93px;
+  }
 }
 
 @media screen and (max-width: 768px){
   .top-block .row .user-office p{
-    text-align: center;
+    /*text-align: center;*/
   }
   .top-block .row .logout-user form button{
     width: 50px;
@@ -896,6 +925,17 @@ body{
       img{
         margin: auto;
       }
+    }
+  }
+  .logout-user{
+    float: left;
+  }
+  .backcall{
+    float: left;
+    clear: both;
+    a{
+      width: 350px;
+      text-align: left;
     }
   }
   .shop-search{
