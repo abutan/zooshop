@@ -27,6 +27,7 @@ use yii\web\IdentityInterface;
  *
  * @property Network[] $networks
  * @property User $isGuest
+ * @property WhishlistItem[] $whishlistItems
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -123,6 +124,33 @@ class User extends ActiveRecord implements IdentityInterface
         }
         $networks[] = Network::create($identity, $network);
         $this->networks = $networks;
+    }
+
+    ##########
+
+    public function addToWhishlist($productId): void
+    {
+        $items = $this->whishlistItems;
+        foreach ($items as $item){
+            if ($item->isForProduct($productId)){
+                throw new \DomainException('Позиция уже добавлена.');
+            }
+        }
+        $item[] = WhishlistItem::create($productId);
+        $this->whishlistItems = $items;
+    }
+
+    public function removeFromWhishlist($productId): void
+    {
+        $items = $this->whishlistItems;
+        foreach ($items as $i => $item){
+            if ($item->isForProduct($productId)){
+                unset($items[$i]);
+                $this->whishlistItems = $items;
+                return;
+            }
+        }
+        throw new \DomainException('Позиция не найдена.');
     }
 
     ##########
@@ -278,6 +306,11 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Network::class, ['user_id' => 'id']);
     }
 
+    public function getWhishlistItems(): ActiveQuery
+    {
+        return $this->hasMany(WhishlistItem::class, ['user_id' => 'id']);
+    }
+
     ##########
 
     public function behaviors()
@@ -287,7 +320,7 @@ class User extends ActiveRecord implements IdentityInterface
             [
                 'class' => SaveRelationsBehavior::class,
                 'relations' => [
-                    'networks',
+                    'networks', 'whishlistItems',
                 ],
             ],
         ];

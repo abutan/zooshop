@@ -9,6 +9,7 @@ use store\entities\shop\Category;
 use store\entities\shop\Maker;
 use store\entities\shop\product\queries\ProductQuery;
 use store\entities\shop\Tag;
+use store\entities\user\WhishlistItem;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
@@ -50,6 +51,7 @@ use yii\helpers\ArrayHelper;
  * @property RelatedAssignment[] $relatedAssignments
  * @property Product $relates
  * @property Review[] $reviews
+ * @property WhishlistItem[] $whishlistItems
  */
 class Product extends ActiveRecord
 {
@@ -609,6 +611,11 @@ class Product extends ActiveRecord
     public function getReviews(): ActiveQuery
     {
         return $this->hasMany(Review::class, ['product_id' => 'id']);
+    }
+
+    public function getWishlistItems(): ActiveQuery
+    {
+        return $this->hasMany(WhishlistItem::class, ['product_id' => 'id']);
     }
 
     ###########

@@ -102,4 +102,15 @@ class ProductReadRepository
         $themes = $this->getProvider($query);
         return $themes->getTotalCount();
     }
+
+    public function getWhishlist($userId): ActiveDataProvider
+    {
+        return new ActiveDataProvider([
+            'query' => Product::find()
+                ->alias('p')->active('p')
+                ->joinWith('wishlistItems w', false, 'INNER JOIN')
+                ->andWhere(['w.user_id' => $userId]),
+            'sort' => false,
+        ]);
+    }
 }

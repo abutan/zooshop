@@ -17,6 +17,15 @@ use yii\helpers\Html;
                 <a href="<?= Html::encode(Url::to(['/cabinet/default/index'])) ?>" class="list-group-item">
                     Личные данные
                 </a>
+                <a href="<?= Html::encode(Url::to(['/cabinet/profile/edit'])) ?>" class="list-group-item">
+                    Редактировать профиль
+                </a>
+                <a href="<?= Html::encode(Url::to(['/auth/reset/request'])) ?>" class="list-group-item">
+                    Изменить пароль
+                </a>
+                <a href="<?= Html::encode(Url::to(['/cabinet/whishlist/index'])) ?>" class="list-group-item">
+                    Избранное (лист жеданий)
+                </a>
             </div>
         </aside>
     </div>
