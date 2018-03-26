@@ -832,6 +832,16 @@ body{
   margin: 25px;
 }
 
+.product-review{
+  margin-top: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #00cc00;
+}
+div.required label:after {
+  content: " *";
+  color: red;
+}
+
 
 /*FOOTER*/
 .footer-push{

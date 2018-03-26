@@ -3,6 +3,7 @@
 namespace backend\controllers\shop;
 
 use store\entities\shop\product\Modification;
+use store\entities\shop\product\Review;
 use store\forms\manage\shop\product\PhotosForm;
 use store\forms\manage\shop\product\PriceForm;
 use store\forms\manage\shop\product\ProductCreateForm;
@@ -80,6 +81,16 @@ class ProductController extends Controller
     public function actionView($id)
     {
         $product = $this->findModel($id);
+        $reviewProvider = new ActiveDataProvider([
+            'query' => $product->getReviews(),
+            'key' => function(Review $review) use($product){
+                return [
+                    'product_id' => $product->id,
+                    'id' => $review->id,
+                ];
+            },
+            'pagination' => false,
+        ]);
         $modificationsProvider = new ActiveDataProvider([
             'query' => $product->getModifications()->orderBy('name'),
             'key' => function(Modification $modification) use($product)
@@ -105,6 +116,7 @@ class ProductController extends Controller
         return $this->render('view', [
             'product' => $product,
             'modificationsProvider' => $modificationsProvider,
+            'reviewProvider' => $reviewProvider,
             'photosForm' => $photosForm,
         ]);
     }

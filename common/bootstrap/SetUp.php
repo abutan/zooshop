@@ -3,6 +3,7 @@
 namespace common\bootstrap;
 
 
+use store\services\manage\shop\ProductManageService;
 use store\services\manage\site\CallManageService;
 use yii\base\BootstrapInterface;
 use yii\mail\MailerInterface;
@@ -18,6 +19,10 @@ class SetUp implements BootstrapInterface
         });
 
         $container->setSingleton(CallManageService::class, [], [
+            $app->params['adminEmail'],
+        ]);
+
+        $container->setSingleton(ProductManageService::class, [], [
             $app->params['adminEmail'],
         ]);
     }

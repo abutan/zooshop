@@ -2,7 +2,8 @@
 
 namespace frontend\controllers\shop;
 
-
+use store\services\manage\shop\ProductManageService;
+use Yii;
 use store\forms\shop\AddToCartForm;
 use store\forms\shop\ReviewForm;
 use store\frontModels\shop\BrandReadRepository;
@@ -23,6 +24,7 @@ class CatalogController extends Controller
     private $makers;
     private $brands;
     private $tags;
+    private $service;
 
     public function __construct(
         $id,
@@ -32,6 +34,7 @@ class CatalogController extends Controller
         MakerReadRepository $makers,
         BrandReadRepository $brands,
         TagReadRepository $tags,
+        ProductManageService $service,
         array $config = []
     )
     {
@@ -41,6 +44,7 @@ class CatalogController extends Controller
         $this->makers = $makers;
         $this->brands = $brands;
         $this->tags = $tags;
+        $this->service = $service;
     }
 
     public function actionIndex()
@@ -113,6 +117,17 @@ class CatalogController extends Controller
         }
 
         $reviewForm = new ReviewForm();
+        if ($reviewForm->load(Yii::$app->request->post()) && $reviewForm->validate()){
+            try{
+                $this->service->addReview($product->id, Yii::$app->user->id, $reviewForm);
+                Yii::$app->session->setFlash('success', 'Спасибо! Ваш отзыв получен. После проверки модератором, он будет опубликован на сайте.');
+                return $this->redirect(['/shop/catalog/product', 'id' => $product->id]);
+            }catch (\DomainException $e){
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
+
         $addToCart = new AddToCartForm($product);
 
         return $this->render('product', [

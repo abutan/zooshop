@@ -10,6 +10,7 @@ use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Tabs;
 use yii\widgets\Breadcrumbs;
 use store\helpers\PriceHelper;
+use kartik\rating\StarRating;
 
 
 $this->title = $product->getTitle();
@@ -82,7 +83,8 @@ $this->params['active_category'] = $product->category;
                 [
                     'label' => 'Отзывы',
                     'content' => $this->render('_review', [
-                        'reviewForm' => $reviewForm
+                        'reviewForm' => $reviewForm,
+                        'product' => $product,
                     ])
                 ],
             ],
@@ -138,15 +140,17 @@ $this->params['active_category'] = $product->category;
         </div>
 
         <div class="rating">
+            <?= StarRating::widget([
+                'name' => 'rating',
+                'value' => $product->rating,
+                'pluginOptions' => ['displayOnly' => true],
+            ]) ?>
+
             <p>
-                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                <br>
-                <a href="" onclick="$('a[href=\'#w0-tab1\']').trigger('click'); return false;">0 отзывов </a> / <a href="" onclick="$('a[href=\'#w0-tab1\']').trigger('click'); return false;">Написать отзыв</a>
+                <a href="" onclick="$('a[href=\'#w0-tab1\']').trigger('click'); return false;"><?= count($product->reviews) ?> отзывов </a> / <a href="" onclick="$('a[href=\'#w0-tab1\']').trigger('click'); return false;">Написать отзыв</a>
             </p>
+            <hr>
+
             <hr>
             <!-- AddThis Button BEGIN -->
             <div class="addthis_toolbox addthis_default_style" data-url="/index.php?route=product/product&amp;product_id=47">

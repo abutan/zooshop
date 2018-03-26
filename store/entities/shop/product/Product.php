@@ -466,6 +466,17 @@ class Product extends ActiveRecord
 
     ###########
 
+    public function getReview($id): Review
+    {
+        $reviews = $this->reviews;
+        foreach ($reviews as $review){
+            if ($review->isEqualTo($id)){
+                return $review;
+            }
+        }
+        throw new \DomainException('Отзыв не найден.');
+    }
+
     public function addReview($userId, $vote, $text): void
     {
         $reviews = $this->reviews;
@@ -522,16 +533,15 @@ class Product extends ActiveRecord
 
     private function updateReviews(array $reviews): void
     {
-        $amount = 0;
         $total = 0;
         foreach ($reviews as $review){
-            if ($review->isActive){
-                $amount ++;
-                $total += $review->getRating();
+            if ($review->isActive()){
+                $total += $review->vote;
             }
         }
         $this->reviews = $reviews;
-        $this->rating = $amount ? $total / $amount : null;
+        $amount = count($this->reviews);
+        $this->rating = $amount ? $total/$amount : null;
     }
 
     ###########

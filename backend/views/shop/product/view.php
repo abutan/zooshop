@@ -13,11 +13,14 @@ use yii\grid\GridView;
 use yii\grid\ActionColumn;
 use store\entities\shop\product\Modification;
 use yii\helpers\Url;
+use store\entities\shop\product\Review;
+use store\entities\user\User;
 
 /* @var $this yii\web\View */
 /* @var $product store\entities\shop\product\Product */
 /* @var $photosForm \store\forms\manage\shop\product\PhotosForm */
 /* @var $modificationsProvider \yii\data\ActiveDataProvider */
+/* @var $reviewProvider \yii\data\ActiveDataProvider */
 
 $this->title = $product->name;
 $this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['index']];
@@ -174,8 +177,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'value' => function(Modification $modification)
                         {
-                            return $modification->image ? Html::a(Html::img($modification->getThumbFileUrl('image', 'modification'), ['class' => 'img-responsive']), $modification->getThumbFileUrl('image', 'full'), ['class' => 'fancybox'])
-                                /*Html::img($modification->getThumbFileUrl('image', 'modification'))*/ : null;
+                            return $modification->image ? Html::a(Html::img($modification->getThumbFileUrl('image', 'modification'), ['class' => 'img-responsive']), $modification->getThumbFileUrl('image', 'full'), ['class' => 'fancybox']) : null;
                         },
                         'format' => 'html'
                     ],
@@ -194,6 +196,50 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => ActionColumn::class,
                         'controller' => 'shop/modification',
                         'template' => '{update} {delete}',
+                    ],
+                ],
+            ]) ?>
+        </div>
+    </div>
+
+    <div class="box" id="reviews">
+        <div class="box-header with-border">Отзывы</div>
+        <div class="box-body">
+            <?= GridView::widget([
+                'dataProvider' => $reviewProvider,
+                'columns' => [
+                    [
+                        'attribute' => 'user_id',
+                        'value' => function(Review $review)
+                        {
+                            return $review->user->username;
+                        }
+                    ],
+                    'vote',
+                    [
+                        'attribute' => 'active',
+                        'value' => function(Review $review)
+                        {
+                            return $review->active ? '<span class="label label-success">Опубликован</span>' : '<span class="label label-danger">Отключен</span>';
+                        },
+                        'format' => 'raw',
+                    ],
+                    [
+                        'value' => function(Review $review) use($product)
+                        {
+                            if ($review->isDraft()){
+                                return Html::a('Опубликовать', ['/shop/review/activate', 'id' => $product->id, 'reviewId' => $review->id], ['class' => 'btn btn-success', 'data-method' => 'post']);
+                            }else{
+                                return Html::a('Отключить', ['/shop/review/draft', 'id' => $product->id, 'reviewId' => $review->id], ['class' => 'btn btn-danger', 'data-method' => 'post']);
+                            }
+                        },
+                        'format' => 'raw',
+                    ],
+                    'created_at:datetime',
+                    [
+                        'class' => ActionColumn::class,
+                        'controller' => 'shop/review',
+                        'template' => ' {update} {delete}',
                     ],
                 ],
             ]) ?>

@@ -12,6 +12,8 @@ use store\forms\manage\shop\product\PriceForm;
 use store\forms\manage\shop\product\ProductCreateForm;
 use store\forms\manage\shop\product\ProductEditForm;
 use store\forms\manage\shop\product\QuantityForm;
+use store\forms\manage\shop\product\ReviewEditForm;
+use store\forms\shop\ReviewForm;
 use store\repositories\manage\shop\BrandRepository;
 use store\repositories\manage\shop\CategoryRepository;
 use store\repositories\manage\shop\MakerRepository;
@@ -19,6 +21,7 @@ use store\repositories\manage\shop\ProductRepository;
 use store\repositories\manage\shop\TagRepository;
 use store\services\TransactionsManager;
 use yii\helpers\Inflector;
+use yii\mail\MailerInterface;
 
 class ProductManageService
 {
@@ -28,8 +31,10 @@ class ProductManageService
     private $categories;
     private $tags;
     private $transactions;
+    private $mailer;
+    private $adminEmail;
 
-    public function __construct(ProductRepository $products, BrandRepository $brands, MakerRepository $makers, CategoryRepository $categories, TagRepository $tags, TransactionsManager $transactions)
+    public function __construct($adminEmail, ProductRepository $products, BrandRepository $brands, MakerRepository $makers, CategoryRepository $categories, TagRepository $tags, TransactionsManager $transactions, MailerInterface $mailer)
     {
         $this->products = $products;
         $this->brands = $brands;
@@ -37,6 +42,8 @@ class ProductManageService
         $this->categories = $categories;
         $this->tags = $tags;
         $this->transactions = $transactions;
+        $this->mailer = $mailer;
+        $this->adminEmail = $adminEmail;
     }
 
     public function create(ProductCreateForm $form): Product
@@ -270,6 +277,61 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->removeModification($modificationId);
+        $this->products->save($product);
+    }
+
+    public function addReview($id, $userId, ReviewForm $form): void
+    {
+        $product = $this->products->get($id);
+        $product->addReview($userId, $form->vote, $form->text);
+        $this->products->save($product);
+
+
+        $subject = 'Внимание добавлен комментарий к товару.';
+        $body = '<p>Подробности: <br>';
+        $body .= 'Добавлен отзыв к товару ' . $product->id . '</p>';
+        $body .= '<p>Сайт &laquo;'. \Yii::$app->name .'&raquo;</p>';
+        $sent = $this->mailer->compose()
+                    ->setTo($this->adminEmail)
+                    ->setSubject($subject)
+                    ->setHtmlBody($body)
+                    ->send();
+        if (!$sent){
+            throw new \DomainException('Ошибка отправки. Попробуйте позже.');
+        }
+
+
+    }
+
+    public function editReview($id, $reviewId, ReviewEditForm $form): void
+    {
+        $product = $this->products->get($id);
+        $product->editReview(
+            $reviewId,
+            $form->vote,
+            $form->text
+        );
+        $this->products->save($product);
+    }
+
+    public function activateReview($id, $reviewId): void
+    {
+        $product = $this->products->get($id);
+        $product->activateReview($reviewId);
+        $this->products->save($product);
+    }
+
+    public function draftReview($id, $reviewId): void
+    {
+        $product = $this->products->get($id);
+        $product->draftReview($reviewId);
+        $this->products->save($product);
+    }
+
+    public function removeReview($id, $reviewId): void
+    {
+        $product = $this->products->get($id);
+        $product->removeReview($reviewId);
         $this->products->save($product);
     }
 
