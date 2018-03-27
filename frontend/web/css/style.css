@@ -189,9 +189,18 @@ body {
           top: 25%;
           right: 25%; }
 
+.vetshop-cart #cart-total .glyphicon {
+  font-size: 12px; }
+
 #dropdown-cart {
   padding: 10px;
-  width: 160%; }
+  width: 220%; }
+  #dropdown-cart .td-image img {
+    max-height: 50px; }
+
+.cart-index .cart-image img {
+  max-height: 50px;
+  margin: auto; }
 
 /*PICTURE MENU*/
 .picture-menu {

@@ -17,7 +17,7 @@ class CategoryReadRepository
 
     public function getRoot(): Category
     {
-        return Category::find()->roots()->all();
+        return Category::find()->roots()->one();
     }
 
     /**

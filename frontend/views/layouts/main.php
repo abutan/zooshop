@@ -10,7 +10,7 @@ use frontend\assets\LtAppAsset;
 use yii\helpers\Url;
 use common\widgets\Alert;
 use yii\bootstrap\Modal;
-//use frontend\widgets\shop\CartWidget;
+use frontend\widgets\shop\CartWidget;
 
 AppAsset::register($this);
 LtAppAsset::register($this);
@@ -100,10 +100,10 @@ LtAppAsset::register($this);
 
     <div class="down-block">
         <div class="row">
-            <div class="shop-address col-sm-2 text-center">
+            <!--<div class="shop-address col-sm-2 text-center">
                <i class="fa fa-map-marker hidden-sm"></i>
-                <?= Html::a('Адреса магазинов', ['/article/node', 'alias' => '']) ?>
-            </div><!--shop-address-->
+                <?/*= Html::a('Адреса магазинов', ['/article/node', 'alias' => '']) */?>
+            </div>--><!--shop-address-->
 
             <div class="shop-phone col-sm-2 text-center">
                 <i class="fa fa-phone hidden-sm"></i>  <span>+7(999)1234567</span>
@@ -132,8 +132,8 @@ LtAppAsset::register($this);
                 <?= Html::a('Доставка', ['/article/node', 'alias' => '']) ?>
             </div><!--shop-shipping-->
 
-            <!--<div class="shop-card col-sm-4 text-center">
-                <?/*= CartWidget::widget() */?>
+            <div class="shop-card col-sm-4 text-center">
+                <?= CartWidget::widget() ?>
             </div><!--shop-card-->
         </div>
     </div><!--down-block-->
