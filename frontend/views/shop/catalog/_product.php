@@ -43,11 +43,11 @@ $url = Url::to(['product', 'id' => $product->id]);
                 <i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Добавить в корзину</span>
             </button>
             <?php if (Yii::$app->user->isGuest): ?>
-                <button type="button" class="attButton" href="<?= Html::encode(Url::to(['/shop/catalog/attention']))  ?>" data-toggle="tooltip" title="Добавить в избранное">
+                <button type="button" class="attButton" href="<?= Html::encode(Url::to(['/shop/catalog/attention']))  ?>" data-toggle="tooltip" title="Добавить в избранное (лист желаний)">
                     <i class="fa fa-heart text-danger"></i>
                 </button>
             <?php else: ?>
-                <button type="button" href="<?= Url::to(['/cabinet/wishlist/add', 'id' => $product->id]) ?>" data-toggle="tooltip" title="Добавить в избранное" data-method="post">
+                <button type="button" href="<?= Url::to(['/cabinet/whishlist/add', 'id' => $product->id]) ?>" data-toggle="tooltip" title="Добавить в избранное (лист желаний)" data-method="post">
                     <i class="fa fa-heart text-danger"></i>
                 </button>
             <?php endif; ?>

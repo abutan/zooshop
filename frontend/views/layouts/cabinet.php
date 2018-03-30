@@ -24,7 +24,10 @@ use yii\helpers\Html;
                     Изменить пароль
                 </a>
                 <a href="<?= Html::encode(Url::to(['/cabinet/whishlist/index'])) ?>" class="list-group-item">
-                    Избранное (лист жеданий)
+                    Избранное (лист желаний)
+                </a>
+                <a href="<?= Html::encode(Url::to(['/cabinet/order/index'])) ?>" class="list-group-item">
+                    История заказов
                 </a>
             </div>
         </aside>

@@ -9,6 +9,11 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'robokassa' => [
+            'class' => '\robokassa\Merchant',
+            'baseUrl' => 'https://auth.robokassa.ru/Merchant/Index.aspx',
+            'isTest' => !YII_ENV_PROD,
+        ],
         'frontendUrlManager' => require __DIR__ . '/../../frontend/config/urlManager.php',
         'backendUrlManager' => require  __DIR__ . '/../../backend/config/urlManager.php',
     ],

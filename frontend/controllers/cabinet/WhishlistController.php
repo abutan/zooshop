@@ -70,7 +70,7 @@ class WhishlistController extends Controller
             Yii::$app->errorHandler->logException($e);
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
-        return $this->redirect(Yii::$app->request->referrer ?: ['index']);
+        return $this->redirect(Yii::$app->request->referrer ? : ['index']);
     }
 
     public function actionDelete($id)

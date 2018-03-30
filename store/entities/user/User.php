@@ -136,7 +136,7 @@ class User extends ActiveRecord implements IdentityInterface
                 throw new \DomainException('Позиция уже добавлена.');
             }
         }
-        $item[] = WhishlistItem::create($productId);
+        $items[] = WhishlistItem::create($productId);
         $this->whishlistItems = $items;
     }
 

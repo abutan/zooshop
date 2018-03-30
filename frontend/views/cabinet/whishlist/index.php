@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'value' => function(Product $product)
                 {
-                    return $product->main_photo_id ? Html::img($product->mainPhoto->getThumbFileUrl('file', 'fill'), ['alt' => $product->name, 'class' => 'img-responsive']) : null;
+                    return $product->main_photo_id ? Html::img($product->mainPhoto->getThumbFileUrl('file', 'full'), ['alt' => $product->name, 'class' => 'img-responsive', 'style' => 'max-height: 70px; margin: auto;']) : null;
                 },
                 'format' => 'raw',
                 'contentOptions' => ['style' => 'width: 100px'],

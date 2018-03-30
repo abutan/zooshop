@@ -25,6 +25,7 @@
                 'items' => [
                     ['label' => 'Menu администратора', 'options' => ['class' => 'header']],
                     ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user/index']],
+                    ['label' => 'Заказы', 'icon' => 'shopping-basket', 'url' => ['/shop/order/index']],
                     ['label' => 'Заказы звонка', 'icon' => 'phone', 'url' => ['/sites/call/index']],
                     ['label' => 'Магазин', 'icon' => 'shopping-bag', 'url' => ['#'], 'items' => [
                         ['label' => 'Бренды', 'icon' => 'copyright', 'url' => ['/shop/brand/index']],
@@ -33,6 +34,7 @@
                         ['label' => 'Категории', 'icon' => 'server', 'url' => ['/shop/category/index']],
                         ['label' => 'Атрибуты', 'icon' => 'cog', 'url' => ['/shop/characteristic/index']],
                         ['label' => 'Методы доставки', 'icon' => 'truck', 'url' => ['/shop/delivery/index']],
+                        ['label' => 'Методы оплаты', 'icon' => 'gg-circle', 'url' => ['/shop/payment/index']],
                         ['label' => 'Скидки', 'icon' => 'arrow-circle-down', 'url' => ['/shop/discount/index']],
                         ['label' => 'Товары', 'icon' => 'cart-arrow-down', 'url' => ['/shop/product/index']],
                         ],
