@@ -38,7 +38,7 @@ class ProductValue extends ActiveRecord
         $this->value = $value;
     }
 
-    public function isFoeCharacteristic($id): bool
+    public function isForCharacteristic($id): bool
     {
         return $this->characteristic_id == $id;
     }

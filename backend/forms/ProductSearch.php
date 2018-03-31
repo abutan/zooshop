@@ -64,7 +64,7 @@ class ProductSearch extends Model
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'code', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

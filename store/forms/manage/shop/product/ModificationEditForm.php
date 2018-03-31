@@ -28,7 +28,7 @@ class ModificationEditForm extends CompositeForm
             $this->quantity = $modification->quantity;
             $this->values = array_map(function (Characteristic $characteristic) use ($modification){
                 return new ModificationValueForm($characteristic, $modification->getValue($characteristic->id));
-            }, Characteristic::find()->orderBy('name')->andWhere(['category_id' => $modification->getRootCategory()])->all());
+            }, Characteristic::find()->orderBy('name')->andWhere(['category_id' => $modification->product->category_id])->all());
         }
         parent::__construct($config);
     }

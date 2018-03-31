@@ -32,10 +32,18 @@ class AddToCartForm extends Model
         ]);
     }
 
+    public function attributeLabels(): array
+    {
+        return [
+            'modification' => 'Доступные модели товара',
+            'quantity' => 'Количество',
+        ];
+    }
+
     public function modificationsList(): array
     {
         return ArrayHelper::map($this->_product->modifications, 'id', function (Modification $modification) {
-            return $modification->code . ' - ' . $modification->name . ' (' . PriceHelper::format($modification->price ?: $this->_product->price_new) . ')';
+            return $modification->code . ' - ' . $modification->name . ' (' . $modification->price  . 'руб)';
         });
     }
 }

@@ -131,7 +131,7 @@ class ProductManageService
             }
 
             foreach ($form->values as $value){
-                $product->setValue($value->characteristicId, $value->text);
+                $product->setValue($value->id, $value->text);
             }
 
             foreach ($form->tags->existing as $tagId){
@@ -171,7 +171,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         foreach ($form->values as $value){
-            $product->setValue($value->characteristicId, $value->text);
+            $product->setValue($value->id, $value->text);
         }
     }
 

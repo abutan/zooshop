@@ -11,6 +11,8 @@ use yii\db\ActiveRecord;
  * @property string $name [varchar(255)]
  * @property int $category_id [int(11)]
  * @property int $sort [int(11)]
+ *
+ * @property Category $category
  */
 class Characteristic extends ActiveRecord
 {
@@ -38,11 +40,6 @@ class Characteristic extends ActiveRecord
             'category_id' => 'Категория',
             'categoryId' => 'Категория',
         ];
-    }
-
-    public function getCategory(): ActiveQuery
-    {
-        return $this->hasOne(Category::class, ['id' => 'category_id']);
     }
 
     public static function tableName()

@@ -47,7 +47,7 @@ class ProductEditForm extends CompositeForm
         $this->tags = new TagsForm($product);
         $this->values = array_map(function (Characteristic $characteristic) use ($product){
             return new ProductValueForm($characteristic, $product->getValue($characteristic->id));
-        }, Characteristic::find()->andWhere(['category_id' => $product->getRootCategory()])->orderBy('sort')->all());
+        }, Characteristic::find()->andWhere(['category_id' => $product->category_id])->orderBy('sort')->all());
         $this->_product = $product;
         parent::__construct($config);
     }

@@ -13,7 +13,6 @@ use store\entities\user\WhishlistItem;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
-use yii\helpers\ArrayHelper;
 
 /**
  * @property int $id [int(11)]
@@ -191,8 +190,8 @@ class Product extends ActiveRecord
     public function setValue($id, $value): void
     {
         $values = $this->values;
-        foreach ($values as $val){
-            if ($val->isFoeCharacteristic($id)){
+        foreach ($values as $val) {
+            if ($val->isForCharacteristic($id)) {
                 $val->changeValue($value);
                 $this->values = $values;
                 return;
@@ -206,7 +205,7 @@ class Product extends ActiveRecord
     {
         $values = $this->values;
         foreach ($values as $val){
-            if ($val->isFoeCharacteristic($id)){
+            if ($val->isForCharacteristic($id)){
                 return $val;
             }
         }
@@ -295,14 +294,6 @@ class Product extends ActiveRecord
     }
 
     ###########
-
-    public function getRootCategory(): int
-    {
-        $category = Category::findOne($this->category_id);
-        $idx = ArrayHelper::getColumn($category->getParents()->all(), 'id');
-        $root = Category::find()->andWhere(['id' => $idx])->one();
-        return $root->id;
-    }
 
     public function assignCategory($id): void
     {

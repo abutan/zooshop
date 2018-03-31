@@ -69,28 +69,7 @@ class Modification extends ActiveRecord
             throw new \DomainException('Извините, но только '. $this->quantity . ' экземпляров товара доступно для заказа. Добавьте товар в избранное (лист жуданий), и при появлении товара на складе, Вы будете проинформированы.');
         }
         $this->quantity -= $quantity;
-    }
-
-    public function getRootCategory(): int
-    {
-        $category = Category::findOne($this->product->category_id);
-        $idx = ArrayHelper::getColumn($category->getParents()->all(), 'id');
-        $root = Category::find()->andWhere(['id' => $idx])->andWhere(['depth' => 1])->one();
-        return $root->id;
-    }
-
-    public function attributeLabels(): array
-    {
-        return [
-            'name' => 'Название',
-            'code' => 'Артикул',
-            'price' => 'Цена',
-            'image' => 'Фото',
-            'quantity' => 'Количество на складе',
-        ];
-    }
-
-    ############
+    }##########
 
     public function getProduct(): ActiveQuery
     {
@@ -132,6 +111,16 @@ class Modification extends ActiveRecord
     public static function tableName(): string
     {
         return '{{%product_modifications}}';
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Название модели',
+            'code' => 'Артикул модели',
+            'price' => 'Цена',
+            'quantity' => 'Количество на складе',
+        ];
     }
 
     public function behaviors(): array

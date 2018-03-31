@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = 'Добавление';
             <div class="row">
                 <?php foreach ($model->values as $i => $value): ?>
                     <div class="col-sm-6">
-                        <?= $form->field($value, '[' . $i . ']store')->textInput() ?>
+                        <?= $form->field($value, '[' . $i . ']text')->textInput(['maxlength' => true]) ?>
                     </div>
                 <?php endforeach; ?>
             </div>

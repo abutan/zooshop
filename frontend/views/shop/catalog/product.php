@@ -11,6 +11,7 @@ use yii\bootstrap\Tabs;
 use yii\widgets\Breadcrumbs;
 use store\helpers\PriceHelper;
 use kartik\rating\StarRating;
+use yii\helpers\StringHelper;
 
 
 $this->title = $product->getTitle();
@@ -58,10 +59,32 @@ $this->params['active_category'] = $product->category;
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
-
             </div>
         </div>
-
+        <?php if ($product->modifications): ?>
+            <div class="product-modifications">
+                <h3 class="text-center">Модели товара</h3>
+                <div class="row">
+                    <?php foreach ($product->modifications as $modification): ?>
+                        <div class="col-sm-3">
+                            <div class="product-modification-image">
+                                <a href="<?= Url::to($modification->getThumbFileUrl('image', 'full')) ?>" class="fancybox" title="<?= $modification->name ?>">
+                                    <?= Html::img($modification->getThumbFileUrl('image', 'full'), ['alt' => $modification->name, 'class' => 'img-responsive', 'style' => 'height: 100px']) ?>
+                                </a>
+                            </div>
+                            <div class="product-modification-common">
+                                <p class="text-center modification-name" data-toggle="tooltip" title="<?= $modification->name ?>">
+                                    <?= StringHelper::truncateWords($modification->name, 2)  ?>
+                                </p>
+                                <p class="text-center modification-price">
+                                    <?= PriceHelper::format($modification->price) ?>
+                                </p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
         <?php
         $description = Yii::$app->formatter->asHtml($product->description, [
             'Attr.AllowedRel' => array('nofollow'),
@@ -99,8 +122,6 @@ $this->params['active_category'] = $product->category;
             <?php else: ?>
                 <button type="button" data-toggle="tooltip" class="btn btn-default" title="Добавить в избранное" href="<?= Url::to(['/cabinet/wishlist/add', 'id' => $product->id]) ?>" data-method="post"><i class="fa fa-heart"></i></button>
             <?php endif; ?>
-
-            <button type="button" data-toggle="tooltip" class="btn btn-default" title="Сравнить этот товар" onclick="compare.add('47');"><i class="fa fa-exchange"></i></button>
         </p>
 
         <ul class="list-unstyled common-properties">
@@ -125,10 +146,15 @@ $this->params['active_category'] = $product->category;
                 <?= PriceHelper::format($product->price_new) ?>
             </li>
         </ul>
+        <br><br>
         <div class="product-adding">
             <?php $form = ActiveForm::begin([
                 'action' => ['/shop/cart/add', 'id' => $product->id]
             ]) ?>
+
+            <?php if ($modifications = $addToCart->modificationsList()): ?>
+                <?= $form->field($addToCart, 'modification')->dropDownList($modifications, ['prompt' => '--- Выбрать ---']) ?>
+            <?php endif; ?>
 
             <?= $form->field($addToCart, 'quantity')->textInput(['type' => 'number', 'min' => 1, 'step' => 1]) ?>
 
@@ -138,6 +164,7 @@ $this->params['active_category'] = $product->category;
 
             <?php ActiveForm::end() ?>
         </div>
+        <br><br>
 
         <div class="rating">
             <?= StarRating::widget([

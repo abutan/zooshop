@@ -2,14 +2,14 @@
 
 namespace store\forms\manage\shop\product;
 
-
 use store\entities\shop\Characteristic;
 use store\entities\shop\product\ProductValue;
 use yii\base\Model;
 
+/* @property int $id */
+
 class ProductValueForm extends Model
 {
-    public $characteristicId;
     public $text;
 
     private $_characteristic;
@@ -20,15 +20,12 @@ class ProductValueForm extends Model
             $this->text = $value->value;
         }
         $this->_characteristic = $characteristic;
-        $this->characteristicId = $this->_characteristic->id;
         parent::__construct($config);
     }
 
     public function rules(): array
     {
         return [
-            ['characteristicId', 'required'],
-            ['characteristicId', 'integer'],
             ['text', 'string', 'max' => 255],
         ];
     }
@@ -38,5 +35,10 @@ class ProductValueForm extends Model
         return [
             'text' => $this->_characteristic->name,
         ];
+    }
+
+    public function getId(): int
+    {
+        return $this->_characteristic->id;
     }
 }

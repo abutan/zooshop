@@ -610,6 +610,31 @@ body{
       }
     }
   }
+  .product-modifications{
+    margin-bottom: 25px;
+    .product-modification-image{
+      img{
+        margin: 0 auto 8px;
+      }
+    }
+    .product-modification-common{
+      .modification-price{
+        font-size: 20px;
+        font-weight: bold;
+        color: #4267b2;
+        span{
+          font-size: 14px;
+          font-weight: normal;
+          color: #000;
+        }
+      }
+      .modification-name{
+        font-weight: bold;
+        margin-bottom: 7px;
+        height: 40px;
+      }
+    }
+  }
   .col-sm-5{
     .common-properties{
       .common-description-link{
@@ -617,6 +642,16 @@ body{
         font-size: 16px;
         font-weight: bold;
         padding-right: 10px;
+      }
+    }
+    .common-price{
+      color: #4267b2;
+      font-size: 24px;
+      font-weight: bold;
+      span{
+        font-size: 14px;
+        font-weight: normal;
+        color: #000;
       }
     }
   }

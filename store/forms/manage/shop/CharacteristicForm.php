@@ -46,6 +46,8 @@ class CharacteristicForm extends Model
 
     public function categoryList(): array
     {
-        return ArrayHelper::map(Category::find()->andWhere(['depth' => 1])->all(), 'id', 'name');
+        return ArrayHelper::map(Category::find()->orderBy('lft')->asArray()->all(), 'id', function (array  $category){
+            return ($category['depth'] > 1 ? str_repeat('-- ', $category['depth']-1).' ' : '').$category['name'];
+        });
     }
 }
