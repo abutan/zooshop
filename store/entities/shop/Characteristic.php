@@ -42,6 +42,11 @@ class Characteristic extends ActiveRecord
         ];
     }
 
+    public function getCategory(): ActiveQuery
+    {
+        return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+
     public static function tableName()
     {
         return '{{%characteristics}}';

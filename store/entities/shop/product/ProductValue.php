@@ -3,9 +3,11 @@
 namespace store\entities\shop\product;
 
 
+
 use store\entities\shop\Characteristic;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+
 
 /**
  * @property int $product_id [int(11)]
@@ -16,26 +18,26 @@ use yii\db\ActiveRecord;
  */
 class ProductValue extends ActiveRecord
 {
-    public static function create($characteristicId, $text): self
+    public static function create($characteristicId, $value): self
     {
         $item = new static();
         $item->characteristic_id = $characteristicId;
-        $item->value = $text;
+        $item->value = $value;
 
         return $item;
     }
 
     public static function blank($characteristicId): self
     {
-        $item = new static();
-        $item->characteristic_id = $characteristicId;
+        $blank = new static();
+        $blank->characteristic_id = $characteristicId;
 
-        return $item;
+        return $blank;
     }
 
-    public function changeValue($value): void
+    public function change($value): void
     {
-        $this->value = $value;
+
     }
 
     public function isForCharacteristic($id): bool
@@ -43,21 +45,13 @@ class ProductValue extends ActiveRecord
         return $this->characteristic_id == $id;
     }
 
-    public function attributeLabels(): array
+    public function getCharacteristic(): ActiveQuery
     {
-        return [
-            'value' => 'Значение',
-            'text' => 'Значение',
-        ];
+        return $this->hasOne(Characteristic::class, ['id' => 'characteristic_id']);
     }
 
     public static function tableName()
     {
         return '{{%product_values}}';
-    }
-
-    public function getCharacteristic(): ActiveQuery
-    {
-        return $this->hasOne(Characteristic::class, ['id' => 'characteristic_id']);
     }
 }

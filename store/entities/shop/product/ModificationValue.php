@@ -7,6 +7,7 @@ use store\entities\shop\Characteristic;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
+
 /**
  * @property int $modification_id [int(11)]
  * @property int $characteristic_id [int(11)]
@@ -14,13 +15,14 @@ use yii\db\ActiveRecord;
  *
  * @property Characteristic $characteristic
  */
+
 class ModificationValue extends ActiveRecord
 {
-    public static function create($characteristicId, $text): self
+    public static function create($characteristicId, $value): self
     {
         $item = new static();
         $item->characteristic_id = $characteristicId;
-        $item->value = $text;
+        $item->value = $value;
 
         return $item;
     }
@@ -33,31 +35,23 @@ class ModificationValue extends ActiveRecord
         return $item;
     }
 
-    public function changeValue($value): void
+    public function isForCharacteristic($characteristicId): bool
+    {
+        return $this->characteristic_id == $characteristicId;
+    }
+
+    public function change($value): void
     {
         $this->value = $value;
-    }
-
-    public function isFoeCharacteristic($id): bool
-    {
-        return $this->characteristic_id == $id;
-    }
-
-    public function attributeLabels(): array
-    {
-        return [
-            'value' => 'Значение',
-            'text' => 'Значение',
-        ];
-    }
-
-    public static function tableName()
-    {
-        return '{{%modification_values}}';
     }
 
     public function getCharacteristic(): ActiveQuery
     {
         return $this->hasOne(Characteristic::class, ['id' => 'characteristic_id']);
+    }
+
+    public static function tableName()
+    {
+        return '{{%modification_values}}';
     }
 }

@@ -13,8 +13,8 @@ use yii\helpers\ArrayHelper;
 
 /**
  * @property CategoriesForm $categories
- * @property ProductValueForm[] values
  * @property TagsForm $tags
+ * @property ProductValueForm[] $productValues
  */
 class ProductEditForm extends CompositeForm
 {
@@ -45,8 +45,8 @@ class ProductEditForm extends CompositeForm
         $this->keywords = $product->keywords;
         $this->categories = new CategoriesForm($product);
         $this->tags = new TagsForm($product);
-        $this->values = array_map(function (Characteristic $characteristic) use ($product){
-            return new ProductValueForm($characteristic, $product->getValue($characteristic->id));
+        $this->productValues = array_map(function (Characteristic $characteristic) use ($product){
+            return new ProductValueForm($characteristic, $product->getProductValue($characteristic->id));
         }, Characteristic::find()->andWhere(['category_id' => $product->category_id])->orderBy('sort')->all());
         $this->_product = $product;
         parent::__construct($config);
@@ -101,7 +101,7 @@ class ProductEditForm extends CompositeForm
     protected function internalForms(): array
     {
         return [
-            'categories', 'values', 'tags',
+            'categories', 'tags', 'productValues',
         ];
     }
 }

@@ -3,23 +3,21 @@
 namespace store\forms\manage\shop\product;
 
 
-use store\entities\shop\Category;
 use store\entities\shop\Characteristic;
 use store\entities\shop\product\ModificationValue;
 use yii\base\Model;
-use yii\helpers\ArrayHelper;
 
 class ModificationValueForm extends Model
 {
     public $characteristicId;
-    public $text;
+    public $value;
 
     private $_characteristic;
 
     public function __construct(Characteristic $characteristic, ModificationValue $value = null, array $config = [])
     {
         if ($value){
-            $this->text = $value->value;
+            $this->value = $value->value;
         }
         $this->_characteristic = $characteristic;
         $this->characteristicId = $this->_characteristic->id;
@@ -31,14 +29,14 @@ class ModificationValueForm extends Model
         return [
             ['characteristicId', 'required'],
             ['characteristicId', 'integer'],
-            ['text', 'string', 'max' => 255],
+            ['value', 'string', 'max' => 255],
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'text' => $this->_characteristic->name,
+            'value' => $this->_characteristic->name,
         ];
     }
 }

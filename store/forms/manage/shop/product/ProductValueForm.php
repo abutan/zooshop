@@ -6,39 +6,37 @@ use store\entities\shop\Characteristic;
 use store\entities\shop\product\ProductValue;
 use yii\base\Model;
 
-/* @property int $id */
 
 class ProductValueForm extends Model
 {
-    public $text;
+    public $characteristicId;
+    public $value;
 
     private $_characteristic;
 
     public function __construct(Characteristic $characteristic, ProductValue $value = null, array $config = [])
     {
         if ($value){
-            $this->text = $value->value;
+            $this->value = $value->value;
         }
         $this->_characteristic = $characteristic;
+        $this->characteristicId = $this->_characteristic->id;
         parent::__construct($config);
     }
 
     public function rules(): array
     {
         return [
-            ['text', 'string', 'max' => 255],
+            ['characteristicId', 'required'],
+            ['characteristicId', 'integer'],
+            ['value', 'string', 'max' => 255],
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
-            'text' => $this->_characteristic->name,
+            'value' => $this->_characteristic->name,
         ];
-    }
-
-    public function getId(): int
-    {
-        return $this->_characteristic->id;
     }
 }

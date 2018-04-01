@@ -44,13 +44,13 @@ use yii\web\UploadedFile;
  * @property TagAssignment[] $tagAssignments
  * @property Tag[] $tags
  * @property Modification[] $modifications
- * @property ProductValue[] $values
  * @property Photo[] $photos
  * @property Photo $mainPhoto
  * @property RelatedAssignment[] $relatedAssignments
  * @property Product $relates
  * @property Review[] $reviews
  * @property WhishlistItem[] $whishlistItems
+ * @property ProductValue[] $productValues
  */
 class Product extends ActiveRecord
 {
@@ -187,32 +187,7 @@ class Product extends ActiveRecord
 
     ###########
 
-    public function setValue($id, $value): void
-    {
-        $values = $this->values;
-        foreach ($values as $val) {
-            if ($val->isForCharacteristic($id)) {
-                $val->changeValue($value);
-                $this->values = $values;
-                return;
-            }
-        }
-        $values[] = ProductValue::create($id, $value);
-        $this->values = $values;
-    }
 
-    public function getValue($id): ProductValue
-    {
-        $values = $this->values;
-        foreach ($values as $val){
-            if ($val->isForCharacteristic($id)){
-                return $val;
-            }
-        }
-        return ProductValue::blank($id);
-    }
-
-    ###########
 
     public function getModification($id): Modification
     {
@@ -539,6 +514,33 @@ class Product extends ActiveRecord
 
     ###########
 
+    public function setProductValue($characteristicId, $value): void
+    {
+        $productValues = $this->productValues;
+        foreach ($productValues as $productValue){
+            if ($productValue->isForCharacteristic($characteristicId)){
+                $productValue->change($value);
+                $this->productValues = $productValues;
+                return;
+            }
+        }
+        $productValues[] = ProductValue::create($characteristicId, $value);
+        $this->productValues = $productValues;
+    }
+
+    public function getProductValue($characteristicId): ProductValue
+    {
+        $productValues = $this->productValues;
+        foreach ($productValues as $productValue){
+            if ($productValue->isForCharacteristic($characteristicId)){
+                return $productValue;
+            }
+        }
+        return ProductValue::blank($characteristicId);
+    }
+
+    ###########
+
     public function getBrand(): ActiveQuery
     {
         return $this->hasOne(Brand::class, ['id' => 'brand_id']);
@@ -576,11 +578,6 @@ class Product extends ActiveRecord
         return $this->hasMany(Modification::class, ['product_id' => 'id']);
     }
 
-    public function getValues(): ActiveQuery
-    {
-        return $this->hasMany(ProductValue::class, ['product_id' => 'id']);
-    }
-
     public function getPhotos(): ActiveQuery
     {
         return $this->hasMany(Photo::class, ['product_id' => 'id'])->orderBy('sort');
@@ -609,6 +606,11 @@ class Product extends ActiveRecord
         return $this->hasMany(WhishlistItem::class, ['product_id' => 'id']);
     }
 
+    public function getProductValues(): ActiveQuery
+    {
+        return $this->hasMany(ProductValue::class, ['product_id' => 'id']);
+    }
+
     ###########
 
     public function behaviors(): array
@@ -617,7 +619,7 @@ class Product extends ActiveRecord
             [
                 'class' => SaveRelationsBehavior::class,
                 'relations' => [
-                    'categoryAssignments', 'tagAssignments', 'relatedAssignments', 'values', 'photos', 'reviews', 'modifications',
+                    'categoryAssignments', 'tagAssignments', 'relatedAssignments', 'photos', 'reviews', 'modifications', 'productValues',
                 ],
             ],
         ];

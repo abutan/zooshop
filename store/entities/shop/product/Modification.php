@@ -4,10 +4,8 @@ namespace store\entities\shop\product;
 
 
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
-use store\entities\shop\Category;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 use yiidreamteam\upload\ImageUploadBehavior;
 
@@ -20,7 +18,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property int $quantity [int(11)]
  * @property string $image [varchar(255)]
  *
- * @property ModificationValue[] $values
+ * @property ModificationValue[] $modificationValues
  * @property Product $product
  * @mixin ImageUploadBehavior
  */
@@ -69,38 +67,40 @@ class Modification extends ActiveRecord
             throw new \DomainException('Извините, но только '. $this->quantity . ' экземпляров товара доступно для заказа. Добавьте товар в избранное (лист жуданий), и при появлении товара на складе, Вы будете проинформированы.');
         }
         $this->quantity -= $quantity;
-    }##########
+    }
+
+    ##########
 
     public function getProduct(): ActiveQuery
     {
         return $this->hasOne(Product::class, ['id' => 'product_id']);
     }
 
-    public function getValues(): ActiveQuery
+    public function getModificationValues(): ActiveQuery
     {
         return $this->hasMany(ModificationValue::class, ['modification_id' => 'id']);
     }
 
-    public function setValue($id, $value): void
+    public function setModificationValue($id, $value): void
     {
-        $values = $this->values;
-        foreach ($values as $val){
-            if ($val->isFoeCharacteristic($id)){
-                $val->changeValue($value);
-                $this->values = $values;
+        $modificationValues = $this->modificationValues;
+        foreach ($modificationValues as $modificationValue){
+            if ($modificationValue->isForCharacteristic($id)){
+                $modificationValue->change($value);
+                $this->modificationValues = $modificationValues;
                 return;
             }
         }
-        $values[] = ModificationValue::create($id, $value);
-        $this->values = $values;
+        $modificationValues[] = ModificationValue::create($id, $value);
+        $this->modificationValues = $modificationValues;
     }
 
-    public function getValue($id): ModificationValue
+    public function getModificationValue($id): ModificationValue
     {
-        $values = $this->values;
-        foreach ($values as $val){
-            if ($val->isFoeCharacteristic($id)){
-                return $val;
+        $modificationValues = $this->modificationValues;
+        foreach ($modificationValues as $modificationValue){
+            if ($modificationValue->isForCharacteristic($id)){
+                return $modificationValue;
             }
         }
         return ModificationValue::blank($id);
@@ -141,7 +141,7 @@ class Modification extends ActiveRecord
             ],
             [
                 'class' => SaveRelationsBehavior::class,
-                'relations' => ['values'],
+                'relations' => ['modificationValues'],
             ],
         ];
     }

@@ -9,7 +9,7 @@ use store\entities\shop\product\Modification;
 use yii\web\UploadedFile;
 
 /**
- * @property ModificationValueForm[] $values
+ * @property ModificationValueForm[] $modificationValues
  */
 class ModificationEditForm extends CompositeForm
 {
@@ -26,8 +26,8 @@ class ModificationEditForm extends CompositeForm
             $this->code = $modification->code;
             $this->price = $modification->price;
             $this->quantity = $modification->quantity;
-            $this->values = array_map(function (Characteristic $characteristic) use ($modification){
-                return new ModificationValueForm($characteristic, $modification->getValue($characteristic->id));
+            $this->modificationValues = array_map(function (Characteristic $characteristic) use ($modification){
+                return new ModificationValueForm($characteristic, $modification->getModificationValue($characteristic->id));
             }, Characteristic::find()->orderBy('name')->andWhere(['category_id' => $modification->product->category_id])->all());
         }
         parent::__construct($config);
@@ -66,7 +66,7 @@ class ModificationEditForm extends CompositeForm
     protected function internalForms(): array
     {
         return [
-            'values',
+            'modificationValues',
         ];
     }
 }

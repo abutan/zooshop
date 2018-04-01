@@ -14,7 +14,6 @@ use yii\grid\ActionColumn;
 use store\entities\shop\product\Modification;
 use yii\helpers\Url;
 use store\entities\shop\product\Review;
-use store\entities\user\User;
 
 /* @var $this yii\web\View */
 /* @var $product store\entities\shop\product\Product */
@@ -148,7 +147,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box">
         <div class="box-header with-border">Атрибуты товара</div>
         <div class="box-body">
-            <?php if (count($product->values) > 0 ): ?>
+            <?php if (count($product->productValues) > 0 ): ?>
                 <?= DetailView::widget([
                     'model' => $product,
                     'attributes' => array_map(function (ProductValue $value){
@@ -156,10 +155,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             'label' => $value->characteristic->name,
                             'value' => $value->value,
                         ];
-                    }, $product->values)
+                    }, $product->productValues)
                 ]) ?>
             <?php else: ?>
-                <?= Html::a('Установить атрибуты товару', ['value', 'id' => $product->id], ['class' => 'btn btn-primary text-center']) ?>
+                <p>
+                    Атрибуты к этому товару еще не добавлены. Перейдите в редактирование и добавьте атрибуты.
+                </p>
             <?php  endif; ?>
         </div>
     </div>

@@ -130,10 +130,6 @@ class ProductManageService
                 $product->assignCategory($category->id);
             }
 
-            foreach ($form->values as $value){
-                $product->setValue($value->id, $value->text);
-            }
-
             foreach ($form->tags->existing as $tagId){
                 $tag = $this->tags->get($tagId);
                 $product->assignTag($tag->id);
@@ -146,6 +142,11 @@ class ProductManageService
                 }
                 $product->assignTag($tag->id);
             }
+
+            foreach ($form->productValues as $productValue){
+                $product->setProductValue($productValue->characteristicId, $productValue->value);
+            }
+
             $this->products->save($product);
         });
     }
@@ -165,14 +166,6 @@ class ProductManageService
         $product = $this->products->get($id);
         $product->setQuantity($form->quantity);
         $this->products->save($product);
-    }
-
-    public function addValues($id, ProductEditForm $form): void
-    {
-        $product = $this->products->get($id);
-        foreach ($form->values as $value){
-            $product->setValue($value->id, $value->text);
-        }
     }
 
     public function activate($id): void
@@ -217,6 +210,14 @@ class ProductManageService
         $product = $this->products->get($id);
         $product->removePhoto($photoId);
         $this->products->save($product);
+    }
+
+    public function addProductValue($id, ProductEditForm $form): void
+    {
+        $product = $this->products->get($id);
+        foreach ($form->productValues as $productValue){
+            $product->setProductValue($productValue->characteristicId, $productValue->value);
+        }
     }
 
     public function addRelatedProduct($id, $otherId): void
@@ -266,10 +267,12 @@ class ProductManageService
         if (!empty($form->image)){
             $product->addModificationPhoto($modificationId, $form->image);
         }
-        foreach ($form->values as $value){
-            $modification = $product->getModification($modificationId);
-            $modification->setValue($value->characteristicId, $value->text);
+
+        $modification = $product->getModification($modificationId);
+        foreach ($form->modificationValues as $modificationValue){
+            $modification->setModificationValue($modificationValue->characteristicId, $modificationValue->value);
         }
+
         $this->products->save($product);
     }
 

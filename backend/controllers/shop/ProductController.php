@@ -194,25 +194,6 @@ class ProductController extends Controller
         ]);
     }
 
-    public function actionValue($id)
-    {
-        $product = $this->findModel($id);
-        $form  = new ProductEditForm($product);
-        if ($form->load(Yii::$app->request->post()) && $form->validate()){
-            try{
-                $this->service->addValues($product->id, $form);
-                return $this->redirect(['view', 'id' => $product->id]);
-            }catch (\DomainException $e){
-                Yii::$app->errorHandler->logException($e);
-                Yii::$app->session->setFlash('error', $e->getMessage());
-            }
-        }
-        return $this->render('value', [
-            'product' => $product,
-            'model' => $form,
-        ]);
-    }
-
     /**
      * @param $id
      * @return \yii\web\Response

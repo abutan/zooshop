@@ -68,8 +68,8 @@ $this->params['breadcrumbs'][] = 'Редактирование';
             <div class="box">
                 <div class="box-header with-border">Атрибуты</div>
                 <div class="box-body">
-                    <?php foreach ($model->values as $i => $value): ?>
-                        <?= $form->field($value, '[' . $i . ']text')->textInput() ?>
+                    <?php foreach ($model->productValues as $i => $productValue): ?>
+                        <?= $form->field($productValue, '[' . $i . ']value')->textInput() ?>
                     <?php endforeach; ?>
                 </div>
             </div>
