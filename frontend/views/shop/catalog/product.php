@@ -110,6 +110,12 @@ $this->params['active_category'] = $product->category;
                         'product' => $product,
                     ])
                 ],
+                [
+                    'label' => 'Свойства товара',
+                    'content' => $this->render('_values', [
+                        'product' => $product,
+                    ])
+                ],
             ],
         ])
         ?>

@@ -49,7 +49,7 @@ LtAppAsset::register($this);
 
                 <div class="backcall col-sm-3">
                     <p>
-                        <i class="fa fa-phone-volume fa-2x"></i>   <?= Html::a('Обратный звонок', ['/call/node'], ['class' => 'backPhone']) ?>
+                        <i class="fa fa-phone-volume fa-2x"></i>   <?= Html::a('Обратный звонок', ['/sites/call/node'], ['class' => 'backPhone']) ?>
                     </p>
                 </div><!--backcall-->
 
@@ -70,7 +70,7 @@ LtAppAsset::register($this);
 
                 <div class="backcall col-sm-3">
                     <p>
-                        <?= FA::icon('phone')->size(FA::SIZE_2X) ?>   <?= Html::a('Обратный звонок', ['/call/node'], ['class' => 'backPhone']) ?>
+                        <i class="fa fa-phone-volume fa-2x"></i>   <?= Html::a('Обратный звонок', ['/sites/call/node'], ['class' => 'backPhone']) ?>
                     </p>
                 </div><!--backcall-->
             <?php endif; ?>
@@ -124,12 +124,12 @@ LtAppAsset::register($this);
 
             <div class="shop-pay col-sm-1 text-right">
                 <i class="fa fa-database hidden-sm"></i>
-                <?= Html::a('Оплата', ['/article/node', 'alias' => '']) ?>
+                <?= Html::a('Оплата', ['/sites/article/node', 'slug' => 'oplata']) ?>
             </div><!--shop-pay-->
 
-            <div class="shop-shipping col-sm-2  text-right" data-template="">
+            <div class="shop-shipping col-sm-2  text-right" >
                 <i class="fa fa-truck hidden-sm"></i>
-                <?= Html::a('Доставка', ['/article/node', 'alias' => '']) ?>
+                <?= Html::a('Доставка', ['/sites/article/node', 'slug' => 'dostavka']) ?>
             </div><!--shop-shipping-->
 
             <div class="shop-card col-sm-4 text-center">
