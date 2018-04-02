@@ -9,6 +9,7 @@ use store\cart\cost\calculator\SimpleCost;
 use store\cart\storage\HybridStorage;
 use store\services\manage\shop\ProductManageService;
 use store\services\manage\site\CallManageService;
+use store\services\site\CommentService;
 use yii\base\BootstrapInterface;
 use yii\mail\MailerInterface;
 
@@ -27,6 +28,10 @@ class SetUp implements BootstrapInterface
         ]);
 
         $container->setSingleton(ProductManageService::class, [], [
+            $app->params['adminEmail'],
+        ]);
+
+        $container->setSingleton(CommentService::class, [], [
             $app->params['adminEmail'],
         ]);
 
