@@ -61,8 +61,7 @@ $('#comments').find('.comment-reply').click(function () {
    var form = $('#reply-block').find('form');
    var comment = link.closest('.comment-item');
    var data = comment.data('id');
-    $('input#usercommentform-parentid').val(data);
-    $('input#anonymouscommentform-parentid').val(data);
+    $('input#commentform-parentid').val(data);
     /*form.css('display', 'block');*/
     form.css({'display':'block', 'border-top':'1px dotted #007100', 'margin-top':'15px'}).detach().appendTo($(this).parent().parent().parent('div'));
     return false;
