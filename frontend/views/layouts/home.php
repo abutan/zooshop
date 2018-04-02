@@ -52,13 +52,12 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => '']);
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="bonus-title text-center">
-                                <a href="<?= Url::to(['#']) ?>">
+                                <a href="<?= Url::to(['/shop/catalog/featured']) ?>">
                                     <h4>Новинки</h4>
                                 </a>
-
                             </div>
                             <div class="bonus-image">
-                                <a href="<?= Url::to(['#']) ?>">
+                                <a href="<?= Url::to(['/shop/catalog/featured']) ?>">
                                     <?= Html::img(Yii::getAlias('@web/files/default/new_icon.png'), ['alt' => 'Новинки', 'class' => 'img-responsive']) ?>
                                 </a>
                             </div>

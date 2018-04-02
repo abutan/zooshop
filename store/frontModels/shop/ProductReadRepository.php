@@ -113,4 +113,9 @@ class ProductReadRepository
             'sort' => false,
         ]);
     }
+
+    public function getFeatured($limit)
+    {
+        return Product::find()->with('mainPhoto')->active()->orderBy(['id' => SORT_DESC])->limit($limit)->all();
+    }
 }
