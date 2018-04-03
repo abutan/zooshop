@@ -338,6 +338,20 @@ class ProductManageService
         $this->products->save($product);
     }
 
+    public function sale($id): void
+    {
+        $product = $this->products->get($id);
+        $product->sale();
+        $this->products->save($product);
+    }
+
+    public function unSale($id): void
+    {
+        $product = $this->products->get($id);
+        $product->unSale();
+        $this->products->save($product);
+    }
+
     public function remove($id): void
     {
         $product = $this->products->get($id);

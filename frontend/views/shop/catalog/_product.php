@@ -28,14 +28,18 @@ $url = Url::to(['product', 'id' => $product->id]);
                 </h4>
             </a>
             <p class="price">
+                <?php if ($product->price_old): ?>
+
+                    <span class="price-old">
+                        <del style="color: #ff0000;">
+                            <?= PriceHelper::format($product->price_old) ?>
+                        </del>
+                    </span>
+
+                <?php endif; ?>
                 <span class="price-new">
                     <?= PriceHelper::format($product->price_new) ?>
                 </span>
-                <?php if ($product->price_old): ?>
-                    <span class="price-old">
-                    <?= PriceHelper::format($product->price_old) ?>
-                </span>
-                <?php endif; ?>
             </p>
         </div>
         <div class="button-group">

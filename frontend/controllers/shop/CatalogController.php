@@ -145,4 +145,18 @@ class CatalogController extends Controller
     public function actionAttention(){
         return $this->renderAjax('attention');
     }
+
+    public function actionHit()
+    {
+        return $this->render('hit');
+    }
+
+    public function actionSale()
+    {
+        $dataProvider = $this->products->getSaleList();
+
+        return $this->render('sale', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 }

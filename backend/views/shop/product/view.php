@@ -41,6 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?php if (!$product->isSale()): ?>
+        <?= Html::a('Добавить к распродаже', ['sale', 'id' => $product->id], ['class' => 'btn btn-warning', 'data-method' => 'post']) ?>
+        <?php else: ?>
+        <?= Html::a('Удалить из распродажи', ['un-sale', 'id' => $product->id], ['class' => 'btn btn-info', 'data-method' => 'post']) ?>
+        <?php endif; ?>
     </p>
 
     <div class="box">

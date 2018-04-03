@@ -52,6 +52,8 @@ class ProductController extends Controller
                     'move-photo-up' => ['POST'],
                     'move-photo-down' => ['POST'],
                     'remove-photo' => ['POST'],
+                    'sale' => ['POST'],
+                    'un-sale' => ['POST'],
                 ],
             ],
         ];
@@ -287,6 +289,36 @@ class ProductController extends Controller
             'model' => $form,
             'product' => $product,
         ]);
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     */
+    public function actionSale($id)
+    {
+        try{
+            $this->service->sale($id);
+        }catch (\DomainException $e){
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+        return $this->redirect(['view', 'id' => $id]);
+    }
+
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     */
+    public function actionUnSale($id)
+    {
+        try{
+            $this->service->unSale($id);
+        }catch (\DomainException $e){
+            Yii::$app->errorHandler->logException($e);
+            Yii::$app->session->setFlash('error', $e->getMessage());
+        }
+        return $this->redirect(['view', 'id' => $id]);
     }
 
     /**

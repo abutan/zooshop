@@ -27,6 +27,7 @@ use yii\web\UploadedFile;
  * @property int $price_new [int(11)]
  * @property float $weight [float]
  * @property int $quantity [int(11)]
+ * @property int $sale [smallint(6)]
  * @property string $rating [decimal(3,2)]
  * @property string $slug [varchar(255)]
  * @property int $status [smallint(6)]
@@ -140,6 +141,27 @@ class Product extends ActiveRecord
             throw new \DomainException('Товар уже отключен.');
         }
         $this->status = self::STATUS_DRAFT;
+    }
+
+    public function isSale(): bool
+    {
+        return $this->sale == 1;
+    }
+
+    public function sale(): void
+    {
+        if ($this->isSale()){
+            throw new \DomainException('Товар уже добавлен в распродажу');
+        }
+        $this->sale = 1;
+    }
+
+    public function unSale(): void
+    {
+        if (!$this->isSale()){
+            throw new \DomainException('Товар уже удален из распродажи');
+        }
+        $this->sale = 0;
     }
 
     ###########

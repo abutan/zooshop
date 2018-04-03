@@ -399,15 +399,16 @@ body {
           color: #000;
           font-weight: normal; }
     .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 {
-      margin-bottom: 25px; }
+      margin-bottom: 25px;
+      height: 230px; }
       .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-image a img {
         margin: 0 auto 10px; }
       .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-caption a h4 {
         text-align: center;
         font-size: 16px;
         color: #000;
-        margin-bottom: 8px;
-        height: 35px; }
+        margin-bottom: 3px;
+        height: 25px; }
       .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-caption .price {
         text-align: center;
         font-size: 24px;
@@ -416,7 +417,14 @@ body {
         .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-caption .price .glyphicon-rub {
           font-size: 17px;
           color: #000;
+          height: 20px;
           font-weight: normal; }
+        .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-caption .price .price-old {
+          font-weight: normal;
+          color: #000;
+          font-size: 14px; }
+          .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-caption .price .price-old .glyphicon {
+            font-size: 10px; }
   .main-content .col-sm-9 .pagination-panel {
     margin-right: -5px; }
     .main-content .col-sm-9 .pagination-panel .product-quantity {

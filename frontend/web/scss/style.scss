@@ -553,6 +553,7 @@ body{
       }
       .product-layout.col-sm-4{
         margin-bottom: 25px;
+        height: 230px;
         .product-image{
           a{
             img{
@@ -567,8 +568,8 @@ body{
               text-align: center;
               font-size: 16px;
               color: #000;
-              margin-bottom: 8px;
-              height: 35px;
+              margin-bottom: 3px;
+              height: 25px;
             }
           }
           .price{
@@ -579,7 +580,16 @@ body{
             .glyphicon-rub{
               font-size: 17px;
               color: #000;
+              height: 20px;
               font-weight: normal;
+            }
+            .price-old{
+              font-weight: normal;
+              color: #000;
+              font-size: 14px;
+              .glyphicon{
+                font-size: 10px;
+              }
             }
           }
         }

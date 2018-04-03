@@ -27,7 +27,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => '']);
                 </div>
 
                 <div class="sale">
-                    <?= Html::a('Распродажа', ['#']) ?>
+                    <?= Html::a('Распродажа', ['/shop/catalog/sale']) ?>
                 </div>
 
                 <div class="article-menu">
@@ -64,12 +64,12 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => '']);
                         </div>
                         <div class="col-sm-3">
                             <div class="bonus-title text-center">
-                                <a href="<?= Url::to(['#']) ?>">
+                                <a href="<?= Url::to(['/shop/catalog/hit']) ?>">
                                     <h4>Хит продаж</h4>
                                 </a>
                             </div>
                             <div class="bonus-image">
-                                <a href="<?= Url::to(['#']) ?>">
+                                <a href="<?= Url::to(['/shop/catalog/hit']) ?>">
                                     <?= Html::img(Yii::getAlias('@web/files/default/hit_icon.png'), ['alt' => 'Хит продаж', 'class' => 'img-responsive']) ?>
                                 </a>
                             </div>

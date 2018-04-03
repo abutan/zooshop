@@ -114,8 +114,27 @@ class ProductReadRepository
         ]);
     }
 
+    public function getSaleList(): ActiveDataProvider
+    {
+        return new ActiveDataProvider([
+            'query' => Product::find()
+                ->active()
+                ->andWhere(['sale' => 1]),
+            'sort' => false,
+            'pagination' => [
+                'pageSizeLimit' => [15, 100],
+                'defaultPageSize' => 15,
+            ],
+        ]);
+    }
+
     public function getFeatured($limit)
     {
         return Product::find()->with('mainPhoto')->active()->orderBy(['id' => SORT_DESC])->limit($limit)->all();
+    }
+
+    public function getHits($limit)
+    {
+        return Product::find()->with('mainPhoto')->active()->orderBy(['rating' => SORT_DESC])->limit($limit)->all();
     }
 }
