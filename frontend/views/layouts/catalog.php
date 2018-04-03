@@ -34,7 +34,7 @@ use yii\bootstrap\Nav;
                             ['label' => Html::img('/files/default/09_mnu_icon.png', ['alt' => 'Магазины и контакты']).'<p>Магазины и контакты</p>', 'url' => ['/sites/article/node', 'slug' => 'magaziny-i-kontakty']],
                             ['label' => Html::img('/files/default/10_mnu_icon.png', ['alt' => 'Доставка и оплата']).'<p>Доставка и оплата</p>', 'url' => ['/sites/article/node', 'slug' => 'dostavka-i-oplata']],
                             ['label' => Html::img('/files/default/11_mnu_icon.png', ['alt' => 'Ваши предложения']).'<p>Ваши предложения</p>', 'url' => ['/sites/comment/index']],
-                            ['label' => Html::img('/files/default/12_mnu_icon.png', ['alt' => 'Объявления']).'<p>Объявления</p>', 'url' => ['#']]
+                            ['label' => Html::img('/files/default/12_mnu_icon.png', ['alt' => 'Объявления']).'<p>Объявления</p>', 'url' => ['/sites/notification/index']]
                         ],
                     ]);
                     ?>

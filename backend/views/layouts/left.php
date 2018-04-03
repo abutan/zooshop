@@ -45,6 +45,7 @@
                             ['label' => 'Предложения', 'icon' => 'edit', 'url' => ['/sites/comment/index']],
                             ['label' => 'Акции (скидки)', 'icon' => 'line-chart', 'url' => ['/sites/stock/index']],
                             ['label' => 'Бонусы', 'icon' => 'calendar-plus-o', 'url' => ['/sites/bonus/index']],
+                            ['label' => 'Объявления', 'icon' => 'bullhorn', 'url' => ['/sites/notification/index']],
                         ],
 
                     ],
