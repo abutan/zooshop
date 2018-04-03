@@ -83,6 +83,11 @@ class Stock extends ActiveRecord
         $this->status = self::STATUS_DRAFT;
     }
 
+    public function getTitle(): string
+    {
+        return $this->title ?: $this->name;
+    }
+
     public function attributeLabels(): array
     {
         return [

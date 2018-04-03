@@ -76,12 +76,12 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => '']);
                         </div>
                         <div class="col-sm-3">
                             <div class="bonus-title text-center">
-                                <a href="<?= Url::to(['#']) ?>">
+                                <a href="<?= Url::to(['/sites/stock/index']) ?>">
                                     <h4>Акции и скидки</h4>
                                 </a>
                             </div>
                             <div class="bonus-image">
-                                <a href="<?= Url::to(['#']) ?>">
+                                <a href="<?= Url::to(['/sites/stock/index']) ?>">
                                     <?= Html::img(Yii::getAlias('@web/files/default/akcii_icon.png'), ['alt' => 'Акции и скидки', 'class' => 'img-responsive']) ?>
                                 </a>
                             </div>
