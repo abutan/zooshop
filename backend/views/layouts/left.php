@@ -44,6 +44,7 @@
                             ['label' => 'Слайдеры', 'icon' => 'magic', 'url' => ['/sites/slider/index']],
                             ['label' => 'Предложения', 'icon' => 'edit', 'url' => ['/sites/comment/index']],
                             ['label' => 'Акции (скидки)', 'icon' => 'line-chart', 'url' => ['/sites/stock/index']],
+                            ['label' => 'Бонусы', 'icon' => 'calendar-plus-o', 'url' => ['/sites/bonus/index']],
                         ],
 
                     ],

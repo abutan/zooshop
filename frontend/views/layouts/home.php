@@ -88,12 +88,12 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => '']);
                         </div>
                         <div class="col-sm-3">
                             <div class="bonus-title text-center">
-                                <a href="<?= Url::to(['#']) ?>">
+                                <a href="<?= Url::to(['/sites/bonus/index']) ?>">
                                     <h4>Бонусы</h4>
                                 </a>
                             </div>
                             <div class="bonus-image">
-                                <a href="<?= Url::to(['#']) ?>">
+                                <a href="<?= Url::to(['/sites/bonus/index']) ?>">
                                     <?= Html::img(Yii::getAlias('@web/files/default/bonus_icon.png'), ['alt' => 'Бонусы', 'class' => 'img-responsive']) ?>
                                 </a>
                             </div>
