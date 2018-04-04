@@ -9,6 +9,7 @@
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use kartik\widgets\Select2;
+use frontend\widgets\site\CategorySlider;
 
 $this->title = $category->getTitle();
 
@@ -82,6 +83,10 @@ $this->params['active_category'] = $category;
     </div>
     <?= Html::endForm() ?>
 </div>
+
+<?= CategorySlider::widget([
+    'category' => $category
+]) ?>
 
 <?=
 $this->render('_subcategories', [
