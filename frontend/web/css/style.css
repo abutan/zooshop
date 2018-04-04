@@ -430,6 +430,11 @@ body {
     .main-content .col-sm-9 .pagination-panel .product-quantity {
       padding-top: 35px; }
 
+.search-widget {
+  margin-bottom: 10px; }
+  .search-widget .col-sm-1 {
+    padding-top: 7px; }
+
 .featured-node .product-layout.col-sm-4 {
   margin-bottom: 25px; }
   .featured-node .product-layout.col-sm-4 .product-image a img {

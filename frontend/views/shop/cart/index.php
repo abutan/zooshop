@@ -6,7 +6,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use store\helpers\PriceHelper;
-use store\helpers\WeightHelper;
 use yii\widgets\Breadcrumbs;
 
 $this->title = 'Корзина товаров';
@@ -22,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
 
+    <?php if (count($cart->getItems()) > 0 ): ?>
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -116,4 +116,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <strong><i class="fa fa-share"></i> Оформить заказ</strong>
         </a>
     </p>
+    <?php else: ?>
+    <div class="jumbotron">
+        <h1 class="text-center">
+            Корзина пуста
+        </h1>
+    </div>
+    <?php endif; ?>
 </div>

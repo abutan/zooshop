@@ -110,9 +110,9 @@ LtAppAsset::register($this);
             </div><!--shop-phone-->
 
             <div class="shop-search col-sm-3">
-                <?= Html::beginForm(['#'], 'post', ['class' => '']) ?>
+                <?= Html::beginForm(['/shop/catalog/search'], 'get', ['class' => '']) ?>
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Поиск товаров ...">
+                    <input type="text" name="text" class="form-control" placeholder="Поиск товаров ...">
                     <span class="input-group-btn">
                          <button class="btn btn-info" type="button">
                             <i class="glyphicon glyphicon-search"></i>

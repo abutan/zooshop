@@ -2,9 +2,13 @@
 /* @var $this \yii\web\View */
 /* @var $dataProvider \yii\data\DataProviderInterface */
 /* @var $category null|\store\entities\shop\Category */
+/* @var $tagData array */
+/* @var $brandData array */
+/* @var $makerData array */
 
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
+use kartik\widgets\Select2;
 
 $this->title = $category->getTitle();
 
@@ -26,6 +30,58 @@ $this->params['active_category'] = $category;
 <?= Breadcrumbs::widget([
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 ]) ?>
+
+<div class="search-widget">
+    <?= Html::beginForm(['/shop/catalog/fast'], 'get', ['class' => 'form-inline']) ?>
+    <div class="row">
+        <div class="col-sm-1">
+            <strong>Поиск</strong>
+        </div>
+        <div class="col-sm-3">
+            <?=
+            Select2::widget([
+                'name' => 'maker',
+                'data' => $makerData,
+                'theme' => Select2::THEME_KRAJEE,
+                'options' => ['placeholder' => 'Производители ...'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])
+            ?>
+        </div>
+        <div class="col-sm-3">
+            <?=
+            Select2::widget([
+                'name' => 'brand',
+                'data' => $brandData,
+                'theme' => Select2::THEME_KRAJEE,
+                'options' => ['placeholder' => 'Бренды ...'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])
+            ?>
+        </div>
+        <div class="col-sm-3">
+            <?=
+            Select2::widget([
+                'name' => 'tag',
+                'data' => $tagData,
+                'theme' => Select2::THEME_KRAJEE,
+                'options' => ['placeholder' => 'Выберите метку ...'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])
+            ?>
+        </div>
+        <div class="col-sm-2">
+            <?= Html::submitButton('Искать', ['class' => 'btn btn-info']) ?>
+        </div>
+    </div>
+    <?= Html::endForm() ?>
+</div>
 
 <?=
 $this->render('_subcategories', [

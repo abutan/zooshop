@@ -64,10 +64,16 @@ class CatalogController extends Controller
             throw new NotFoundHttpException('Запрашиваемая страница не найдена');
         }
         $dataProvider = $this->products->getAllByCategory($category);
+        $brandData = $this->brands->getToSelect();
+        $tagData = $this->tags->getToSelect();
+        $makerData = $this->makers->getToSelect();
 
         return $this->render('category', [
             'dataProvider' => $dataProvider,
             'category' => $category,
+            'brandData' => $brandData,
+            'tagData' => $tagData,
+            'makerData' => $makerData,
         ]);
     }
 
@@ -156,6 +162,32 @@ class CatalogController extends Controller
         $dataProvider = $this->products->getSaleList();
 
         return $this->render('sale', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionSearch($text)
+    {
+        if (!$text){
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+        $dataProvider = $this->products->searchByText($text);
+
+        return $this->render('search', [
+            'dataProvider' => $dataProvider,
+            'text' => $text,
+        ]);
+    }
+
+    public function actionFast($maker, $brand, $tag)
+    {
+        if (!$maker && !$brand && !$tag){
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+
+        $dataProvider = $this->products->searchByWidget($maker, $brand, $tag);
+
+        return $this->render('fast', [
             'dataProvider' => $dataProvider,
         ]);
     }
