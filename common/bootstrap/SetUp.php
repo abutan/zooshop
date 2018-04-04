@@ -3,14 +3,19 @@
 namespace common\bootstrap;
 
 
+use frontend\urls\CategoryUrlRules;
+use frontend\urls\ProductUrlRules;
 use store\cart\Cart;
 use store\cart\cost\calculator\DynamicCost;
 use store\cart\cost\calculator\SimpleCost;
 use store\cart\storage\HybridStorage;
+use store\frontModels\shop\CategoryReadRepository;
+use store\frontModels\shop\ProductReadRepository;
 use store\services\manage\shop\ProductManageService;
 use store\services\manage\site\CallManageService;
 use store\services\site\CommentService;
 use yii\base\BootstrapInterface;
+use yii\di\Instance;
 use yii\mail\MailerInterface;
 
 class SetUp implements BootstrapInterface
@@ -41,5 +46,19 @@ class SetUp implements BootstrapInterface
                 new DynamicCost(new SimpleCost())
             );
         });
+
+        $container->setSingleton('cache', function () use ($app){
+           return $app->cache;
+        });
+
+        $container->set(CategoryUrlRules::class, [], [
+            Instance::of(CategoryReadRepository::class),
+            Instance::of('cache'),
+        ]);
+
+        $container->set(ProductUrlRules::class, [], [
+            Instance::of(ProductReadRepository::class),
+            Instance::of('cache'),
+        ]);
     }
 }

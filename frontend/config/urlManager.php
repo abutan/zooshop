@@ -11,5 +11,10 @@ return [
         'signup' => 'auth/signup/request',
         'password' => 'auth/reset/request-password-reset',
         'reset' => 'auth/reset/reset-password',
+
+        'cart' => 'shop/cart/index',
+
+        ['class' => 'frontend\urls\CategoryUrlRules'],
+        ['class' => 'frontend\urls\ProductUrlRules'],
     ],
 ];
