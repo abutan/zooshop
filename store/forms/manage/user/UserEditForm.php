@@ -3,8 +3,10 @@
 namespace store\forms\manage\user;
 
 
+use Yii;
 use store\entities\user\User;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 
 class UserEditForm extends Model
 {
@@ -12,6 +14,7 @@ class UserEditForm extends Model
     public $email;
     public $phone;
     public $password;
+    public $role;
 
     private $_user;
 
@@ -21,13 +24,15 @@ class UserEditForm extends Model
         $this->username = $user->username;
         $this->email = $user->email;
         $this->phone = $user->phone;
+        $roles = Yii::$app->authManager->getRolesByUser($user->id);
+        $this->role = $roles ? reset($roles)-> name : null;
         $this->_user = $user;
     }
 
     public function rules()
     {
         return [
-            [['username', 'email', 'phone', 'password'], 'required'],
+            [['username', 'email', 'phone', 'password', 'role'], 'required'],
             [['username', 'email', 'phone'], 'string', 'max' => 255],
             ['password', 'string', 'min' => 6],
             ['email', 'email'],
@@ -42,6 +47,12 @@ class UserEditForm extends Model
             'email' => 'Email',
             'phone' => 'Контактный телефон',
             'password' => 'Пароль',
+            'role' => 'Роль',
         ];
+    }
+
+    public function roleList(): array
+    {
+        return ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'description');
     }
 }

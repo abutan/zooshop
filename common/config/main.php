@@ -10,6 +10,13 @@ return [
             'class' => 'yii\caching\FileCache',
             'cachePath' => '@common/runtime/cache',
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'itemTable' => '{{%auth_items}}',
+            'itemChildTable' => '{{%auth_item_children}}',
+            'assignmentTable' => '{{%auth_assignments}}',
+            'ruleTable' => '{{%auth_rules}}',
+        ],
         'robokassa' => [
             'class' => '\robokassa\Merchant',
             'baseUrl' => 'https://auth.robokassa.ru/Merchant/Index.aspx',

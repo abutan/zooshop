@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use store\entities\user\User;
 use store\helpers\UserHelper;
 use kartik\date\DatePicker;
+use backend\widgets\grid\RoleColumn;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\forms\UserSearch */
@@ -32,6 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'username',
                     'phone',
                     'email:email',
+                    [
+                        'attribute' => 'role',
+                        'filter' => $searchModel->rolesList(),
+                        'class' => RoleColumn::class,
+                    ],
                     [
                         'attribute' => 'status',
                         'filter' => UserHelper::statusList(),

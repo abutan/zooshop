@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]) ?>
             <?= $form->field($model, 'password')->passwordInput() ?>
+            <?= $form->field($model, 'role')->dropDownList($model->roleList(), ['prompt' => '']) ?>
         </div>
     </div>
     <div class="form-group">

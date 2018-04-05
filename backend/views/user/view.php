@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use store\helpers\UserHelper;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model store\entities\user\User */
@@ -33,6 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'username',
                     'phone',
                     'email:email',
+                    [
+                        'label' => 'Роль',
+                        'value' => implode(', ', ArrayHelper::getColumn(Yii::$app->authManager->getRolesByUser($model->id), 'description')),
+                        'format' => 'raw',
+                    ],
                     [
                         'attribute' => 'status',
                         'value' => UserHelper::statusLabel($model->status),

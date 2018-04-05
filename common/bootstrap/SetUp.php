@@ -17,6 +17,7 @@ use store\services\site\CommentService;
 use yii\base\BootstrapInterface;
 use yii\di\Instance;
 use yii\mail\MailerInterface;
+use yii\rbac\ManagerInterface;
 
 class SetUp implements BootstrapInterface
 {
@@ -60,5 +61,9 @@ class SetUp implements BootstrapInterface
             Instance::of(ProductReadRepository::class),
             Instance::of('cache'),
         ]);
+
+        $container->setSingleton(ManagerInterface::class, function () use ($app){
+            return $app->authManager;
+        });
     }
 }

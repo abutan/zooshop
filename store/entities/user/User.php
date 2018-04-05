@@ -44,6 +44,7 @@ class User extends ActiveRecord implements IdentityInterface
         $user->setPassword($password);
         $user->generateEmailConfirmToken();
         $user->generateAuthKey();
+        $user->status = self::STATUS_WAIT;
         $user->created_at = time();
 
         return $user;
@@ -350,6 +351,7 @@ class User extends ActiveRecord implements IdentityInterface
             'username' => 'Логин',
             'email' => 'Email',
             'password' => 'Пароль',
+            'role' => 'Роль',
             'phone' => 'Телефон',
             'status' => 'Состояние',
             'created_at' => 'Создан',
