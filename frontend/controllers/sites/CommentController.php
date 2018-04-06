@@ -5,7 +5,7 @@ namespace frontend\controllers\sites;
 
 use Yii;
 use store\forms\site\CommentForm;
-use store\services\site\CommentService;
+use store\useCases\manage\site\CommentService;
 use yii\base\Module;
 use yii\web\Controller;
 

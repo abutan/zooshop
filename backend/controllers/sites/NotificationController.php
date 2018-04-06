@@ -3,7 +3,7 @@
 namespace backend\controllers\sites;
 
 use store\forms\manage\site\NotificationForm;
-use store\services\site\NotificationService;
+use store\useCases\manage\site\NotificationService;
 use Yii;
 use store\entities\site\Notification;
 use yii\base\Module;

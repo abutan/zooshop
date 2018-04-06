@@ -4,7 +4,7 @@ namespace backend\controllers\shop;
 
 use store\entities\shop\product\Product;
 use store\forms\manage\shop\product\ReviewEditForm;
-use store\services\manage\shop\ProductManageService;
+use store\useCases\manage\shop\ProductManageService;
 use Yii;
 use store\entities\shop\product\Review;
 use yii\base\Module;
@@ -23,7 +23,7 @@ class ReviewController extends Controller
     public function __construct(
         string $id,
         Module $module,
-        ProductManageService $service,
+        \store\useCases\manage\shop\ProductManageService $service,
         array $config = []
     )
     {

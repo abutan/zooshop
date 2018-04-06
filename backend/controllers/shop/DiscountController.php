@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use store\forms\manage\shop\DiscountForm;
-use store\services\manage\shop\DiscountManageService;
+use store\useCases\manage\shop\DiscountManageService;
 use Yii;
 use store\entities\shop\Discount;
 use backend\forms\DiscountSearch;
@@ -22,7 +22,7 @@ class DiscountController extends Controller
     public function __construct(
         string $id,
         Module $module,
-        DiscountManageService $service,
+        \store\useCases\manage\shop\DiscountManageService $service,
         array $config = []
     )
     {

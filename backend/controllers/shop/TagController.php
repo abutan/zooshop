@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use store\forms\manage\shop\TagForm;
-use store\services\manage\shop\TagManageService;
+use store\useCases\manage\shop\TagManageService;
 use Yii;
 use store\entities\shop\Tag;
 use backend\forms\TagSearch;

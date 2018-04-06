@@ -5,7 +5,7 @@ namespace frontend\controllers\cabinet;
 use store\forms\user\ProfileEditForm;
 use Yii;
 use store\entities\user\User;
-use store\services\cabinet\ProfileService;
+use store\useCases\cabinet\ProfileService;
 use yii\base\Module;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -19,7 +19,7 @@ class ProfileController extends Controller
     public function __construct(
         string $id,
         Module $module,
-        ProfileService $service,
+        \store\useCases\cabinet\ProfileService $service,
         array $config = [])
     {
         parent::__construct($id, $module, $config);

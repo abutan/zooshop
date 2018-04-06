@@ -4,7 +4,7 @@ namespace frontend\controllers\cabinet;
 
 use Yii;
 use store\frontModels\shop\ProductReadRepository;
-use store\services\cabinet\WhishlistService;
+use store\useCases\cabinet\WhishlistService;
 use yii\base\Module;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;

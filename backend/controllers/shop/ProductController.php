@@ -9,7 +9,7 @@ use store\forms\manage\shop\product\PriceForm;
 use store\forms\manage\shop\product\ProductCreateForm;
 use store\forms\manage\shop\product\ProductEditForm;
 use store\forms\manage\shop\product\QuantityForm;
-use store\services\manage\shop\ProductManageService;
+use store\useCases\manage\shop\ProductManageService;
 use Yii;
 use store\entities\shop\product\Product;
 use backend\forms\ProductSearch;
@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function __construct(
         string $id,
         Module $module,
-        ProductManageService $service,
+        \store\useCases\manage\shop\ProductManageService $service,
         array $config = []
     )
     {

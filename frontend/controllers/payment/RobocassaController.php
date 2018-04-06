@@ -10,7 +10,7 @@ use robokassa\SuccessAction;
 use Yii;
 use store\entities\shop\order\Order;
 use store\frontModels\shop\OrderReadRepository;
-use store\services\shop\OrderService;
+use store\useCases\shop\OrderService;
 use yii\base\Module;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

@@ -2,7 +2,7 @@
 
 namespace backend\controllers\sites;
 
-use store\services\manage\site\CallManageService;
+use store\useCases\manage\site\CallManageService;
 use Yii;
 use store\entities\site\Call;
 use backend\forms\CallSearch;

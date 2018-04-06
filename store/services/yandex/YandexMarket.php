@@ -56,9 +56,9 @@ class YandexMarket
 
         foreach ($this->categories->getAll() as $category){
             $writer->startElement('category');
-            $writer->writeElement('id', $category->id);
+            $writer->writeAttribute('id', $category->id);
             if ($category->parent_id !== 1){
-                $writer->writeElement('parentId', $category->parent_id);
+                $writer->writeAttribute('parentId', $category->parent_id);
             }
             $writer->writeRaw(Html::encode($category->name));
             $writer->endElement();/* category */

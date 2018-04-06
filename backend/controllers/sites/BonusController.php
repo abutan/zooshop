@@ -3,7 +3,7 @@
 namespace backend\controllers\sites;
 
 use store\forms\site\BonusForm;
-use store\services\site\BonusService;
+use store\useCases\manage\site\BonusService;
 use Yii;
 use store\entities\site\Bonus;
 use backend\forms\BonusSearch;

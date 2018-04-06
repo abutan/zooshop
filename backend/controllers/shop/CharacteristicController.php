@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use store\forms\manage\shop\CharacteristicForm;
-use store\services\manage\shop\CharacteristicManageService;
+use store\useCases\manage\shop\CharacteristicManageService;
 use Yii;
 use store\entities\shop\Characteristic;
 use backend\forms\CharacteristicSearch;
@@ -22,7 +22,7 @@ class CharacteristicController extends Controller
     public function __construct(
         string $id,
         Module $module,
-        CharacteristicManageService $service,
+        \store\useCases\manage\shop\CharacteristicManageService $service,
         array $config = [])
     {
         parent::__construct($id, $module, $config);

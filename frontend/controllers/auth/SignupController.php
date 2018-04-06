@@ -4,7 +4,7 @@ namespace frontend\controllers\auth;
 
 use Yii;
 use store\forms\auth\SignupForm;
-use store\services\auth\SignupService;
+use store\useCases\auth\SignupService;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

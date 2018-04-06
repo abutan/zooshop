@@ -3,7 +3,7 @@
 namespace backend\controllers\sites;
 
 use store\forms\site\CommentEditForm;
-use store\services\site\CommentService;
+use store\useCases\manage\site\CommentService;
 use Yii;
 use store\entities\site\Comment;
 use backend\forms\CommentSearch;

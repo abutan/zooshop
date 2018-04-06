@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use store\forms\manage\order\PaymentForm;
-use store\services\manage\shop\PaymentManageService;
+use store\useCases\manage\shop\PaymentManageService;
 use Yii;
 use store\entities\shop\order\PaymentMethod;
 use yii\base\Module;
@@ -22,7 +22,7 @@ class PaymentController extends Controller
     public function __construct(
         string $id,
         Module $module,
-        PaymentManageService $service,
+        \store\useCases\manage\shop\PaymentManageService $service,
         array $config = []
     )
     {

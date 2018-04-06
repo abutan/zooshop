@@ -5,7 +5,7 @@ namespace backend\controllers\sites;
 use store\forms\manage\site\SliderCreateForm;
 use store\forms\manage\site\SliderEditForm;
 use store\forms\manage\site\SliderPhotosForm;
-use store\services\manage\site\SliderManageService;
+use store\useCases\manage\site\SliderManageService;
 use Yii;
 use store\entities\site\Slider;
 use backend\forms\SliderSearch;

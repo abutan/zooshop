@@ -3,7 +3,7 @@
 namespace backend\controllers\sites;
 
 use store\forms\manage\site\ArticleManageForm;
-use store\services\manage\site\ArticleManageService;
+use store\useCases\manage\site\ArticleManageService;
 use Yii;
 use store\entities\site\Article;
 use backend\forms\ArticleSearch;

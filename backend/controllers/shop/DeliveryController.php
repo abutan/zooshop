@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use store\forms\manage\shop\DeliveryForm;
-use store\services\manage\shop\DeliveryMethodManageService;
+use store\useCases\manage\shop\DeliveryMethodManageService;
 use Yii;
 use store\entities\shop\DeliveryMethod;
 use backend\forms\DeliverySearch;

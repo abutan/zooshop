@@ -2,7 +2,7 @@
 
 namespace frontend\controllers\shop;
 
-use store\services\manage\shop\ProductManageService;
+use store\useCases\manage\shop\ProductManageService;
 use Yii;
 use store\forms\shop\AddToCartForm;
 use store\forms\shop\ReviewForm;
@@ -34,7 +34,7 @@ class CatalogController extends Controller
         MakerReadRepository $makers,
         BrandReadRepository $brands,
         TagReadRepository $tags,
-        ProductManageService $service,
+        \store\useCases\manage\shop\ProductManageService $service,
         array $config = []
     )
     {

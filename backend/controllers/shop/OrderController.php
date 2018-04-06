@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use store\forms\manage\order\OrderEditForm;
-use store\services\manage\order\OrderManageService;
+use store\useCases\manage\order\OrderManageService;
 use Yii;
 use store\entities\shop\order\Order;
 use backend\forms\OrderSearch;

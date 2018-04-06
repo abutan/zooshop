@@ -2,7 +2,7 @@
 namespace backend\controllers;
 
 use store\forms\auth\LoginForm;
-use store\services\auth\AuthService;
+use store\useCases\auth\AuthService;
 use Yii;
 use yii\base\Module;
 use yii\web\Controller;

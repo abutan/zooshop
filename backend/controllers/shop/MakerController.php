@@ -3,7 +3,7 @@
 namespace backend\controllers\shop;
 
 use store\forms\manage\shop\MakerManageForm;
-use store\services\manage\shop\MakerManageService;
+use store\useCases\manage\shop\MakerManageService;
 use Yii;
 use store\entities\shop\Maker;
 use backend\forms\MakerSearch;

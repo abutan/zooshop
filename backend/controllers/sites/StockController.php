@@ -3,7 +3,7 @@
 namespace backend\controllers\sites;
 
 use store\forms\site\StockForm;
-use store\services\manage\site\StockManageService;
+use store\useCases\manage\site\StockManageService;
 use Yii;
 use store\entities\site\Stock;
 use backend\forms\StockSearch;

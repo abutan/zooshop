@@ -5,7 +5,7 @@ namespace backend\controllers\shop;
 use store\entities\shop\product\Product;
 use store\forms\manage\shop\product\ModificationCreateForm;
 use store\forms\manage\shop\product\ModificationEditForm;
-use store\services\manage\shop\ProductManageService;
+use store\useCases\manage\shop\ProductManageService;
 use Yii;
 use store\entities\shop\product\Modification;
 use yii\base\Module;
@@ -24,7 +24,7 @@ class ModificationController extends Controller
     public function __construct(
         string $id,
         Module $module,
-        ProductManageService $service,
+        \store\useCases\manage\shop\ProductManageService $service,
         array $config = []
     )
     {
