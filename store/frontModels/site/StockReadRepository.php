@@ -21,6 +21,11 @@ class StockReadRepository
         return Stock::find()->andWhere(['slug' => $slug])->andWhere(['status' => 1])->one();
     }
 
+    public function getForSitemap(): array
+    {
+        return Stock::find()->andWhere(['status' => 1])->all();
+    }
+
     private function getProvider(ActiveQuery $query): ActiveDataProvider
     {
         return new ActiveDataProvider([

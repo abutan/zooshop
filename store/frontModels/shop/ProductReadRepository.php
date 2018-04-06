@@ -15,10 +15,20 @@ use yii\helpers\ArrayHelper;
 
 class ProductReadRepository
 {
+    public function count(): int
+    {
+        return Product::find()->active()->count();
+    }
+
     public function getAll(): DataProviderInterface
     {
         $query = Product::find()->alias('p')->active('p')->with('mainPhoto');
         return $this->getProvider($query);
+    }
+
+    public function getAllByRange(int $offset, int $limit): array
+    {
+        return Product::find()->alias('p')->active('p')->orderBy(['id' => SORT_ASC])->limit($limit)->offset($offset)->all();
     }
 
     public function getAllIterator(): iterable

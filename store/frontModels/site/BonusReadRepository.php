@@ -20,6 +20,11 @@ class BonusReadRepository
         return Bonus::find()->andWhere(['status' => 1])->andWhere(['slug' => $slug])->one();
     }
 
+    public function getForSiteMap(): array
+    {
+        return Bonus::find()->andWhere(['status' => 1])->all();
+    }
+
     private function getProvider($query): ActiveDataProvider
     {
         return new ActiveDataProvider([

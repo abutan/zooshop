@@ -11,4 +11,9 @@ class ArticleReadRepository
     {
         return Article::find()->andWhere(['slug' => $slug])->andWhere(['status' => 1])->one();
     }
+
+    public function getAll(): array
+    {
+        return Article::find()->andWhere(['status' => 1])->all();
+    }
 }
