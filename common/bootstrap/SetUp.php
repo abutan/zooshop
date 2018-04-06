@@ -14,6 +14,8 @@ use store\frontModels\shop\ProductReadRepository;
 use store\services\manage\shop\ProductManageService;
 use store\services\manage\site\CallManageService;
 use store\services\site\CommentService;
+use store\services\yandex\ShopInfo;
+use store\services\yandex\YandexMarket;
 use yii\base\BootstrapInterface;
 use yii\di\Instance;
 use yii\mail\MailerInterface;
@@ -65,5 +67,9 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(ManagerInterface::class, function () use ($app){
             return $app->authManager;
         });
+
+        $container->setSingleton(YandexMarket::class, [], [
+            new ShopInfo($app->name, $app->name, $app->params['frontendHostInfo'])
+        ]);
     }
 }

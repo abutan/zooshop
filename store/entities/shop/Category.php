@@ -24,6 +24,7 @@ use yii\db\ActiveRecord;
  * @property Category $prev
  * @property Category $next
  * @property Category[] $parents
+ * @property Category parent
  */
 class Category extends ActiveRecord
 {

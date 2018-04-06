@@ -21,6 +21,11 @@ class ProductReadRepository
         return $this->getProvider($query);
     }
 
+    public function getAllIterator(): iterable
+    {
+        return Product::find()->active()->with('mainPhoto', 'brand', 'maker')->each();
+    }
+
     public function getAllByCategory(Category $category): DataProviderInterface
     {
         $query = Product::find()->alias('p')->active('p')->with(['mainPhoto', 'category']);

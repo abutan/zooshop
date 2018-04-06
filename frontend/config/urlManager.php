@@ -12,6 +12,8 @@ return [
         'password' => 'auth/reset/request-password-reset',
         'reset' => 'auth/reset/reset-password',
 
+        ['pattern' => 'yandex-market', 'route' => 'market/index', 'suffix' => '.xml'],
+
         'cart' => 'shop/cart/index',
 
         ['class' => 'frontend\urls\CategoryUrlRules'],
