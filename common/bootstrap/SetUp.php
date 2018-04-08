@@ -11,6 +11,8 @@ use store\cart\cost\calculator\SimpleCost;
 use store\cart\storage\HybridStorage;
 use store\frontModels\shop\CategoryReadRepository;
 use store\frontModels\shop\ProductReadRepository;
+use store\services\newsletter\MailChimp;
+use store\services\newsletter\Newsletter;
 use store\useCases\manage\shop\ProductManageService;
 use store\useCases\manage\site\CallManageService;
 use store\useCases\manage\site\CommentService;
@@ -71,5 +73,12 @@ class SetUp implements BootstrapInterface
         $container->setSingleton(YandexMarket::class, [], [
             new ShopInfo($app->name, $app->name, $app->params['frontendHostInfo'])
         ]);
+
+        $container->setSingleton(Newsletter::class, function () use ($app){
+            return new MailChimp(
+                new \DrewM\MailChimp\MailChimp($app->params['mailChimpKey']),
+                $app->params['mailChimpListId']
+            );
+        });
     }
 }

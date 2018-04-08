@@ -15,6 +15,7 @@ class UserEditForm extends Model
     public $phone;
     public $password;
     public $role;
+    public $subscribe;
 
     private $_user;
 
@@ -24,6 +25,7 @@ class UserEditForm extends Model
         $this->username = $user->username;
         $this->email = $user->email;
         $this->phone = $user->phone;
+        $this->subscribe = $user->subscribe;
         $roles = Yii::$app->authManager->getRolesByUser($user->id);
         $this->role = $roles ? reset($roles)-> name : null;
         $this->_user = $user;
@@ -36,7 +38,9 @@ class UserEditForm extends Model
             [['username', 'email', 'phone'], 'string', 'max' => 255],
             ['password', 'string', 'min' => 6],
             ['email', 'email'],
-            [['username', 'email', 'phone'], 'unique', 'targetClass' => User::class, 'filter' => ['<>', 'id', $this->_user->id]],
+            [['username', 'email'], 'unique', 'targetClass' => User::class, 'filter' => ['<>', 'id', $this->_user->id]],
+            ['phone', 'unique', 'targetClass' => User::class, 'filter' => ['<>', 'phone', $this->_user->phone]],
+            ['subscribe', 'integer'],
         ];
     }
 
@@ -48,6 +52,7 @@ class UserEditForm extends Model
             'phone' => 'Контактный телефон',
             'password' => 'Пароль',
             'role' => 'Роль',
+            'subscribe' => 'Подписать на новостную рассылку сайта',
         ];
     }
 

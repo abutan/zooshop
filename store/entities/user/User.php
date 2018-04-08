@@ -21,6 +21,7 @@ use yii\web\IdentityInterface;
  * @property string $email_confirm_token [varchar(255)]
  * @property string $auth_key
  * @property integer $status
+ * @property integer $subscribe
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
@@ -34,14 +35,17 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_WAIT = 0;
     const STATUS_ACTIVE = 10;
 
+    const UNSUBSCRIBE = 0;
+    const SUBSCRIBE = 1;
 
-    public static function signupRequest($username, $email, $phone, $password): self
+    public static function signupRequest($username, $email, $phone, $password, $subscribe): self
     {
         $user = new static();
         $user->username = $username;
         $user->email = $email;
         $user->phone = $phone;
         $user->setPassword($password);
+        $user->subscribe = $subscribe;
         $user->generateEmailConfirmToken();
         $user->generateAuthKey();
         $user->status = self::STATUS_WAIT;
@@ -71,13 +75,14 @@ class User extends ActiveRecord implements IdentityInterface
 
     }
 
-    public static function create($username, $email, $phone, $password): self
+    public static function create($username, $email, $phone, $password, $subscribe): self
     {
         $user = new static();
         $user->username = $username;
         $user->email = $email;
         $user->phone = $phone;
         $user->setPassword($password);
+        $user->subscribe = $subscribe;
         $user->created_at = time();
         $user->status = self::STATUS_ACTIVE;
         $user->generateAuthKey();
@@ -85,12 +90,13 @@ class User extends ActiveRecord implements IdentityInterface
         return $user;
     }
 
-    public function edit($username, $email, $phone, $password): void
+    public function edit($username, $email, $phone, $password, $subscribe): void
     {
         $this->username = $username;
         $this->email = $email;
         $this->phone = $phone;
         $this->password = $password;
+        $this->subscribe = $subscribe;
         $this->updated_at = time();
     }
 
@@ -111,6 +117,32 @@ class User extends ActiveRecord implements IdentityInterface
     public function isActive(): bool
     {
         return $this->status == self::STATUS_ACTIVE;
+    }
+
+    public function isSubscribe(): bool
+    {
+        return $this->subscribe == self::SUBSCRIBE;
+    }
+
+    public function isUnSubscribe(): bool
+    {
+        return $this->subscribe == self::UNSUBSCRIBE;
+    }
+
+    public function subscribe(): void
+    {
+        if ($this->isSubscribe()){
+            throw new \DomainException('Пользователь уже подписан');
+        }
+        $this->subscribe = self::SUBSCRIBE;
+    }
+
+    public function unSubscribe(): void
+    {
+        if ($this->isUnSubscribe()){
+            throw new \DomainException('Пользователь уже отписан.');
+        }
+        $this->subscribe = self::UNSUBSCRIBE;
     }
 
     ##########
@@ -356,6 +388,7 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => 'Состояние',
             'created_at' => 'Создан',
             'updated_at' => 'Отредактирован',
+            'subscribe' => 'Подписка на рассылки'
         ];
     }
 }

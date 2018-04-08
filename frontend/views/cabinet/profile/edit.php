@@ -6,6 +6,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\MaskedInput;
+use yii\widgets\Breadcrumbs;
 
 $this->title = 'Редактирование профиля';
 
@@ -16,6 +17,13 @@ $this->params['breadcrumbs'][] = 'Профиль';
 <div class="user-update">
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
+
+            <?=
+            Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]);
+            ?>
+
             <?php $form = ActiveForm::begin() ?>
                 <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
                 <?= $form->field($model, 'phone')->widget(MaskedInput::class, [

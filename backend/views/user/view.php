@@ -15,6 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-view">
 
     <p>
+        <?php if ($model->isUnSubscribe()): ?>
+        <?= Html::a('Подписать на рассылку', ['subscribe', 'id' => $model->id], ['class' => 'btn btn-success', 'data-method' => 'post']) ?>
+        <?php else: ?>
+        <?= Html::a('Отписать от рассылки', ['un-subscribe', 'id' => $model->id], ['class' => 'btn btn-warning', 'data-method' => 'post']) ?>
+        <?php endif; ?>
         <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -43,6 +48,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'status',
                         'value' => UserHelper::statusLabel($model->status),
                         'format' => 'html',
+                    ],
+                    [
+                        'attribute' => 'subscribe',
+                        'value' => $model->subscribe ? '<span class="label label-success">Подписан на рассылку</span>' : '<span class="label label-warning">Отписан от рассылки</span>',
+                        'format' => 'raw',
                     ],
                     'created_at:datetime',
                     'updated_at:datetime',

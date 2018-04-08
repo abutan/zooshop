@@ -7,6 +7,7 @@ use store\helpers\PriceHelper;
 use store\helpers\OrderHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\Breadcrumbs;
 
 $this->title = 'Заказ '.$order->id;
 $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => ['/cabinet/default/index']];
@@ -18,6 +19,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="panel panel-default">
         <div class="panel-heading"><h1><?= Html::encode($this->title) ?></h1></div>
         <div class="panel-body">
+
+            <?=
+            Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]);
+            ?>
+
             <?=
             DetailView::widget([
                 'model' => $order,

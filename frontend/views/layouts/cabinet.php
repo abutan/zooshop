@@ -29,6 +29,15 @@ use yii\helpers\Html;
                 <a href="<?= Html::encode(Url::to(['/cabinet/order/index'])) ?>" class="list-group-item">
                     История заказов
                 </a>
+                <?php if (Yii::$app->user->identity['subscribe'] == 0): ?>
+                <a href="<?= Html::encode(Url::to(['/cabinet/subscribe/subscribe'])) ?>" class="list-group-item">
+                    Управление подписками
+                </a>
+                <?php else: ?>
+                <a href="<?= Html::encode(Url::to(['/cabinet/subscribe/un-subscribe'])) ?>" class="list-group-item">
+                    Управление подписками
+                </a>
+                <?php endif; ?>
             </div>
         </aside>
     </div>

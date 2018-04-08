@@ -13,6 +13,7 @@ class SignupForm extends Model
     public $email;
     public $phone;
     public $password;
+    public $subscribe;
     public $accept = true;
 
 
@@ -41,6 +42,8 @@ class SignupForm extends Model
 
             ['accept', 'boolean'],
             ['accept', 'compare', 'compareValue' => true, 'message' => 'Необходимо Ваше согласие на обработку персональных данных.'],
+
+            ['subscribe', 'integer'],
         ];
     }
 
@@ -51,7 +54,8 @@ class SignupForm extends Model
             'email' => 'Email',
             'password' => 'Пароль',
             'phone' => 'Телефон',
-            'accept' => 'Согласен на обработку моих данных'
+            'accept' => 'Согласен на обработку моих данных',
+            'subscribe' => 'Подписать на новостную рассылку сайта',
         ];
     }
 }

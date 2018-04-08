@@ -32,7 +32,8 @@ class SignupService
             $form->username,
             $form->email,
             $form->phone,
-            $form->password
+            $form->password,
+            $form->subscribe
         );
 
         $this->transactions->wrap(function () use ($user){

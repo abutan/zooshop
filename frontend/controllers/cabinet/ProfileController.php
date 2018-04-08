@@ -12,14 +12,14 @@ use yii\web\NotFoundHttpException;
 
 class ProfileController extends Controller
 {
-    public $layout = 'blank';
+    public $layout = 'cabinet';
 
     private $service;
 
     public function __construct(
         string $id,
         Module $module,
-        \store\useCases\cabinet\ProfileService $service,
+        ProfileService $service,
         array $config = [])
     {
         parent::__construct($id, $module, $config);

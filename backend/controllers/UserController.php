@@ -42,6 +42,8 @@ class UserController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
+                    'subscribe' => ['POST'],
+                    'un-subscribe' => ['POST'],
                 ],
             ],
         ];
@@ -124,6 +126,18 @@ class UserController extends Controller
             'model' => $form,
             'user' => $user,
         ]);
+    }
+
+    public function actionSubscribe($id)
+    {
+        $this->service->subscribe($id);
+        return $this->redirect(['view', 'id' => $id]);
+    }
+
+    public function actionUnSubscribe($id)
+    {
+        $this->service->unSubscribe($id);
+        return $this->redirect(['view', 'id' => $id]);
     }
 
     /**

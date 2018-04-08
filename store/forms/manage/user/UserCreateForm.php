@@ -14,6 +14,7 @@ class UserCreateForm extends Model
     public $phone;
     public $password;
     public $role;
+    public $subscribe;
 
     public function rules()
     {
@@ -23,6 +24,7 @@ class UserCreateForm extends Model
             ['email', 'email'],
             ['password', 'string', 'min' => 6],
             [['username', 'email', 'phone'], 'unique', 'targetClass' => User::class],
+            ['subscribe', 'integer'],
         ];
     }
 
@@ -34,6 +36,7 @@ class UserCreateForm extends Model
             'phone' => 'Контактный телефон',
             'password' => 'Пароль',
             'role' => 'Роль',
+            'subscribe' => 'Подписать на новостную рассылку сайта',
         ];
     }
 
