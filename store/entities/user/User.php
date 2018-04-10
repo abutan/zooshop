@@ -32,20 +32,21 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+
     const STATUS_WAIT = 0;
     const STATUS_ACTIVE = 10;
 
     const UNSUBSCRIBE = 0;
     const SUBSCRIBE = 1;
 
-    public static function signupRequest($username, $email, $phone, $password, $subscribe): self
+    public static function signupRequest($username, $email, $phone, $password): self
     {
         $user = new static();
         $user->username = $username;
         $user->email = $email;
         $user->phone = $phone;
         $user->setPassword($password);
-        $user->subscribe = $subscribe;
+        $user->subscribe = self::UNSUBSCRIBE;
         $user->generateEmailConfirmToken();
         $user->generateAuthKey();
         $user->status = self::STATUS_WAIT;
@@ -60,6 +61,7 @@ class User extends ActiveRecord implements IdentityInterface
             throw new \DomainException('Пользователь уже активен.');
         }
         $this->status = self::STATUS_ACTIVE;
+        $this->subscribe = self::SUBSCRIBE;
         $this->removeEmailConfirmToken();
     }
 
@@ -75,14 +77,14 @@ class User extends ActiveRecord implements IdentityInterface
 
     }
 
-    public static function create($username, $email, $phone, $password, $subscribe): self
+    public static function create($username, $email, $phone, $password): self
     {
         $user = new static();
         $user->username = $username;
         $user->email = $email;
         $user->phone = $phone;
         $user->setPassword($password);
-        $user->subscribe = $subscribe;
+        $user->subscribe = self::SUBSCRIBE;
         $user->created_at = time();
         $user->status = self::STATUS_ACTIVE;
         $user->generateAuthKey();

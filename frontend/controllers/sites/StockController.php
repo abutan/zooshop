@@ -5,6 +5,7 @@ namespace frontend\controllers\sites;
 
 use store\frontModels\site\StockReadRepository;
 use yii\base\Module;
+use yii\caching\TagDependency;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -25,6 +26,21 @@ class StockController extends Controller
         $this->stocks = $stocks;
     }
 
+    public function behaviors(): array
+    {
+        return [
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['index'],
+                'duration' => null,
+                'dependency' => [
+                    'class' => 'yii\caching\TagDependency',
+                    'tags' => ['stocks'],
+                ]
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $dataProvider = $this->stocks->getAll();
@@ -36,7 +52,11 @@ class StockController extends Controller
 
     public function actionNode($slug)
     {
-        if (!$stock = $this->stocks->findBySlug($slug)){
+        $stock = \Yii::$app->cache->getOrSet('stock'. $slug, function () use ($slug){
+            return $this->stocks->findBySlug($slug);
+        }, null, new TagDependency(['tags' => ['stocks']]));
+
+        if (!$stock){
             throw new NotFoundHttpException('Запрашиваемая страница не найдена.');
         }
 

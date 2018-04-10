@@ -22,6 +22,7 @@ use store\repositories\manage\shop\TagRepository;
 use store\services\TransactionsManager;
 use yii\helpers\Inflector;
 use yii\mail\MailerInterface;
+use yii\caching\TagDependency;
 
 class ProductManageService
 {
@@ -95,6 +96,7 @@ class ProductManageService
             }
             $this->products->save($product);
         });
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         return $product;
     }
 
@@ -149,6 +151,7 @@ class ProductManageService
 
             $this->products->save($product);
         });
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
     }
 
     public function changePrice($id, PriceForm $form): void
@@ -158,6 +161,7 @@ class ProductManageService
             $form->old,
             $form->new
         );
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -165,6 +169,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->setQuantity($form->quantity);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -172,6 +177,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->activate();
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -179,6 +185,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->draft();
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -188,6 +195,7 @@ class ProductManageService
         foreach ($form->files as $file){
             $product->addPhoto($file);
         }
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -195,6 +203,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->movePhotoUp($photoId);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -202,6 +211,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->movePhotoDown($photoId);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -209,6 +219,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->removePhoto($photoId);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -218,6 +229,7 @@ class ProductManageService
         foreach ($form->productValues as $productValue){
             $product->setProductValue($productValue->characteristicId, $productValue->value);
         }
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
     }
 
     public function addRelatedProduct($id, $otherId): void
@@ -225,6 +237,7 @@ class ProductManageService
         $product = $this->products->get($id);
         $other = $this->products->get($otherId);
         $product->assignRelatedProduct($other->id);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -233,6 +246,7 @@ class ProductManageService
         $product = $this->products->get($id);
         $other = $this->products->get($otherId);
         $product->revokeRelatedProduct($other->id);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -250,6 +264,7 @@ class ProductManageService
         if (!empty($form->image)){
             $product->addModificationPhoto($form->id, $form->image);
         }
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -272,7 +287,7 @@ class ProductManageService
         foreach ($form->modificationValues as $modificationValue){
             $modification->setModificationValue($modificationValue->characteristicId, $modificationValue->value);
         }
-
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -280,6 +295,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->removeModification($modificationId);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -287,17 +303,17 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->addReview($userId, $form->vote, $form->text);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
 
 
         $subject = 'Внимание добавлен комментарий к товару.';
-        $body = '<p>Подробности: <br>';
-        $body .= 'Добавлен отзыв к товару ' . $product->id . '</p>';
-        $body .= '<p>Сайт &laquo;'. \Yii::$app->name .'&raquo;</p>';
-        $sent = $this->mailer->compose()
+        $sent = $this->mailer->compose(
+            ['html' => 'product/reviewAdd-html', 'txt' => 'reviewAdd-txt'],
+            ['product' => $product]
+        )
                     ->setTo($this->adminEmail)
                     ->setSubject($subject)
-                    ->setHtmlBody($body)
                     ->send();
         if (!$sent){
             throw new \DomainException('Ошибка отправки. Попробуйте позже.');
@@ -314,6 +330,7 @@ class ProductManageService
             $form->vote,
             $form->text
         );
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -321,6 +338,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->activateReview($reviewId);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -328,6 +346,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->draftReview($reviewId);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -335,6 +354,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->removeReview($reviewId);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -342,6 +362,7 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->sale();
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
@@ -349,12 +370,14 @@ class ProductManageService
     {
         $product = $this->products->get($id);
         $product->unSale();
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->save($product);
     }
 
     public function remove($id): void
     {
         $product = $this->products->get($id);
+        TagDependency::invalidate(\Yii::$app->cache, ['products']);
         $this->products->remove($product);
     }
 }

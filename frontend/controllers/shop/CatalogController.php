@@ -12,6 +12,7 @@ use store\frontModels\shop\MakerReadRepository;
 use store\frontModels\shop\ProductReadRepository;
 use store\frontModels\shop\TagReadRepository;
 use yii\base\Module;
+use yii\caching\TagDependency;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -34,7 +35,7 @@ class CatalogController extends Controller
         MakerReadRepository $makers,
         BrandReadRepository $brands,
         TagReadRepository $tags,
-        \store\useCases\manage\shop\ProductManageService $service,
+        ProductManageService $service,
         array $config = []
     )
     {
@@ -49,7 +50,9 @@ class CatalogController extends Controller
 
     public function actionIndex()
     {
-        $dataProvider = $this->products->getAll();
+        $dataProvider = Yii::$app->cache->getOrSet('products-all', function (){
+            return $this->products->getAll();
+        }, null, new TagDependency(['tags' => ['products']]));
         $category = $this->categories->getRoot();
 
         return $this->render('index', [

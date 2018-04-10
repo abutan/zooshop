@@ -7,6 +7,7 @@ use store\entities\site\Bonus;
 use store\forms\site\BonusForm;
 use store\repositories\site\BonusRepository;
 use yii\helpers\Inflector;
+use yii\caching\TagDependency;
 
 class BonusService
 {
@@ -29,7 +30,7 @@ class BonusService
             $form->keywords
         );
         $this->repository->save($bonus);
-
+        TagDependency::invalidate(\Yii::$app->cache, ['bonuses']);
         return $bonus;
     }
 
@@ -46,12 +47,14 @@ class BonusService
             $form->keywords
         );
         $this->repository->save($bonus);
+        TagDependency::invalidate(\Yii::$app->cache, ['bonuses']);
     }
 
     public function draft($id): void
     {
         $bonus = $this->repository->get($id);
         $bonus->draft();
+        TagDependency::invalidate(\Yii::$app->cache, ['bonuses']);
         $this->repository->save($bonus);
     }
 
@@ -59,12 +62,14 @@ class BonusService
     {
         $bonus = $this->repository->get($id);
         $bonus->activate();
+        TagDependency::invalidate(\Yii::$app->cache, ['bonuses']);
         $this->repository->save($bonus);
     }
 
     public function remove($id): void
     {
         $bonus = $this->repository->get($id);
+        TagDependency::invalidate(\Yii::$app->cache, ['bonuses']);
         $this->repository->remove($bonus);
     }
 }

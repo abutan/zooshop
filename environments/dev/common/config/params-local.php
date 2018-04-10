@@ -8,4 +8,5 @@ return [
     'staticPath' => dirname(__DIR__, 2). '/static',
     'mailChimpKey' => '',
     'mailChimpListId' => '',
+    'smsRuKey' => '',
 ];

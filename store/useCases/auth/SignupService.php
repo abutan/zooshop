@@ -7,6 +7,7 @@ use store\access\Rbac;
 use store\entities\user\User;
 use store\forms\auth\SignupForm;
 use store\repositories\UserRepository;
+use store\services\newsletter\Newsletter;
 use store\services\RoleManager;
 use store\services\TransactionsManager;
 use yii\mail\MailerInterface;
@@ -17,13 +18,15 @@ class SignupService
     private $transactions;
     private $mailer;
     private $roles;
+    private $newsletter;
 
-    public function __construct(UserRepository $users, TransactionsManager $transactions, MailerInterface $mailer, RoleManager $roles)
+    public function __construct(UserRepository $users, TransactionsManager $transactions, MailerInterface $mailer, RoleManager $roles, Newsletter $newsletter)
     {
         $this->users = $users;
         $this->transactions = $transactions;
         $this->mailer = $mailer;
         $this->roles = $roles;
+        $this->newsletter = $newsletter;
     }
 
     public function signup(SignupForm $form): void
@@ -32,8 +35,7 @@ class SignupService
             $form->username,
             $form->email,
             $form->phone,
-            $form->password,
-            $form->subscribe
+            $form->password
         );
 
         $this->transactions->wrap(function () use ($user){
@@ -42,15 +44,14 @@ class SignupService
         });
 
         $sent = $this->mailer->compose(
-            ['html' => 'emailConfirmToken-html', 'text' => 'emailConfirmToken-text'],
+            ['html' => 'auth/signup/emailConfirmToken-html', 'text' => 'auth/signup/emailConfirmToken-text'],
             ['user' => $user]
         )
             ->setTo($form->email)
-            ->setSubject('Подтверждение Email для регистрации на сайте '. \Yii::$app->name)
+            ->setSubject('Подтверждение Email для "Дежурная ветаптека"')
             ->send();
-
         if (!$sent){
-            throw new \DomainException('Ошибка отправки. Попробуй повторить позже.');
+            throw new \RuntimeException('Ошибка отправки');
         }
     }
 
@@ -61,6 +62,7 @@ class SignupService
         }
         $user = $this->users->getByEmailConfirmToken($token);
         $user->confirmSignup();
+        $this->newsletter->subscribe($user->email);
         $this->users->save($user);
     }
 }

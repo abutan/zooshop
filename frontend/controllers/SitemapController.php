@@ -78,7 +78,7 @@ class SitemapController extends Controller
                     MapItem::WEEKLY
                 );
             }, $this->stockes->getForSitemap()));
-        }, new TagDependency(['tags' => ['stockes']]));
+        }, new TagDependency(['tags' => ['stocks']]));
     }
 
     public function actionBonuses(): Response

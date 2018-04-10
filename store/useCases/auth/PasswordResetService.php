@@ -32,11 +32,11 @@ class PasswordResetService
         $this->users->save($user);
 
         $sent =  $this->mailer->compose(
-            ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
+            ['html' => 'auth/reset/passwordResetToken-html', 'text' => 'auth/reset/passwordResetToken-text'],
             ['user' => $user]
         )
             ->setTo($form->email)
-            ->setSubject('Запрос на восстановление (изменение) пароля. Сайт ' . \Yii::$app->name)
+            ->setSubject('Запрос на восстановление (изменение) пароля. Сайт "Дежурная ветаптека"')
             ->send();
         if (!$sent){
             throw new \DomainException('Ошибка отправки. Попробуйте повторить позже.');

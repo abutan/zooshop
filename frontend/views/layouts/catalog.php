@@ -5,6 +5,7 @@
 use frontend\widgets\shop\CategoryWidget;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
+use yii\caching\TagDependency;
 ?>
 
 <?php $this->beginContent('@frontend/views/layouts/main.php') ?>
@@ -13,11 +14,17 @@ use yii\bootstrap\Nav;
             <aside class="col-sm-3">
                 <div class="aside-menu">
                     <ul>
+                        <?php
+                        $suffix = $this->params['active_category']->id ?? 0;
+                        if ($this->beginCache( 'widget-categories'. $suffix,
+                            ['dependency' => new TagDependency(['tags' => ['categories']]), 'duration' => null])):
+                        ?>
                         <?=
                         CategoryWidget::widget([
                             'active' => $this->params['active_category'] ?? NULL,
-                        ])
+                        ]);
                         ?>
+                        <?php $this->endCache(); endif; ?>
                     </ul>
                 </div>
 

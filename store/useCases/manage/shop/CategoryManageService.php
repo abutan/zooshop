@@ -7,6 +7,7 @@ use store\entities\shop\Category;
 use store\forms\manage\shop\CategoryForm;
 use store\repositories\manage\shop\CategoryRepository;
 use store\repositories\manage\shop\ProductRepository;
+use yii\caching\TagDependency;
 use yii\helpers\Inflector;
 
 class CategoryManageService
@@ -34,6 +35,7 @@ class CategoryManageService
         );
         $category->appendTo($parent);
         $this->categories->save($category);
+        TagDependency::invalidate(\Yii::$app->cache, ['categories']);
 
         return $category;
     }
@@ -57,6 +59,7 @@ class CategoryManageService
         }
 
         $this->categories->save($category);
+        TagDependency::invalidate(\Yii::$app->cache, ['categories']);
     }
 
     public function moveUp($id)
@@ -66,6 +69,7 @@ class CategoryManageService
         if ($prev = $category->prev){
             $category->insertBefore($prev);
         }
+        TagDependency::invalidate(\Yii::$app->cache, ['categories']);
         $this->categories->save($category);
     }
 
@@ -76,6 +80,7 @@ class CategoryManageService
         if ($next = $category->next){
             $category->insertAfter($next);
         }
+        TagDependency::invalidate(\Yii::$app->cache, ['categories']);
         $this->categories->save($category);
     }
 
@@ -86,6 +91,7 @@ class CategoryManageService
         if ($this->products->existsByCategory($category->id)){
             throw new \DomainException('Невозможно удалить категорию к которой привязаны товары.');
         }
+        TagDependency::invalidate(\Yii::$app->cache, ['categories']);
         $this->categories->remove($category);
     }
 

@@ -7,6 +7,7 @@ use store\entities\site\Article;
 use store\forms\manage\site\ArticleManageForm;
 use store\repositories\manage\site\ArticleRepository;
 use yii\helpers\Inflector;
+use yii\caching\TagDependency;
 
 class ArticleManageService
 {
@@ -29,7 +30,7 @@ class ArticleManageService
             $form->keywords
         );
         $this->articles->save($article);
-
+        TagDependency::invalidate(\Yii::$app->cache, ['articles']);
         return $article;
     }
 
@@ -46,12 +47,14 @@ class ArticleManageService
             $form->keywords
         );
         $this->articles->save($article);
+        TagDependency::invalidate(\Yii::$app->cache, ['articles']);
     }
 
     public function draft($id): void
     {
         $article = $this->articles->get($id);
         $article->draft();
+        TagDependency::invalidate(\Yii::$app->cache, ['articles']);
         $this->articles->save($article);
     }
 
@@ -59,12 +62,14 @@ class ArticleManageService
     {
         $article = $this->articles->get($id);
         $article->activate();
+        TagDependency::invalidate(\Yii::$app->cache, ['articles']);
         $this->articles->save($article);
     }
 
     public function remove($id): void
     {
         $article = $this->articles->get($id);
+        TagDependency::invalidate(\Yii::$app->cache, ['articles']);
         $this->articles->remove($article);
     }
 }

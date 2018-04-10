@@ -7,6 +7,7 @@ use frontend\widgets\site\MainSlider;
 use frontend\widgets\site\BrandSlider;
 use frontend\widgets\shop\CategoryWidget;
 use yii\bootstrap\Nav;
+use yii\caching\TagDependency;
 
 $this->title = 'Главная';
 
@@ -20,9 +21,16 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => '']);
             <div class="col-sm-3">
                 <div class="aside-menu">
                     <ul>
-                        <?= CategoryWidget::widget([
-                            'active' => $this->params['active'] ?? null,
-                        ]) ?>
+                        <?php
+                        if ($this->beginCache('widget-categories0',
+                            ['dependency' => new TagDependency(['tags' => ['categories']]), 'duration' => null])):
+                            ?>
+                            <?=
+                            CategoryWidget::widget([
+                                'active' => $this->params['active_category'] ?? NULL,
+                            ]);
+                            ?>
+                            <?php $this->endCache(); endif; ?>
                     </ul>
                 </div>
 
@@ -46,6 +54,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => '']);
                 </div>
             </div>
             <div class="col-sm-9">
+
                 <?= MainSlider::widget() ?>
 
                 <div class="bonus-block">
@@ -102,6 +111,7 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => '']);
                 </div>
 
                 <?= BrandSlider::widget() ?>
+
             </div>
         </div>
     </div>

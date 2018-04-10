@@ -5,6 +5,7 @@ namespace frontend\controllers\sites;
 
 use store\frontModels\site\ArticleReadRepository;
 use yii\base\Module;
+use yii\caching\TagDependency;
 use yii\web\Controller;
 use yii\web\NotAcceptableHttpException;
 
@@ -27,7 +28,10 @@ class ArticleController extends Controller
 
     public function actionNode($slug)
     {
-        if (!$article = $this->articles->findBySlug($slug)){
+        $article = \Yii::$app->cache->getOrSet('article-'.$slug, function () use ($slug) {
+            return $this->articles->findBySlug($slug);
+        }, null, new TagDependency(['tags' => ['articles']]));
+        if (!$article){
             throw new NotAcceptableHttpException('Запрашиваемая страница не найдена.');
         }
 

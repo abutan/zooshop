@@ -64,7 +64,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ->label(FALSE)
                 ->passwordInput(['placeholder' => 'Пароль'])
             ?>
-            <?= $form->field($model, 'subscribe')->checkbox() ?>
             <?= $form->field($model, 'accept')->checkbox() ?>
 
             <div class="row">

@@ -32,13 +32,13 @@ class UserManageService
             $form->username,
             $form->email,
             $form->phone,
-            $form->password,
-            $form->phone
+            $form->password
         );
 
         $this->transactions->wrap(function () use ($user, $form){
             $this->users->save($user);
             $this->roles->assign($user->id, $form->role);
+            $this->newsLetter->subscribe($user->email);
         });
 
         return $user;
@@ -79,6 +79,7 @@ class UserManageService
     public function remove($id): void
     {
         $user = $this->users->get($id);
+        $this->newsLetter->unsubscribe($user->email);
         $this->users->save($user);
     }
 }

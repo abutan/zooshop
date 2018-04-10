@@ -13,6 +13,10 @@ use store\frontModels\shop\CategoryReadRepository;
 use store\frontModels\shop\ProductReadRepository;
 use store\services\newsletter\MailChimp;
 use store\services\newsletter\Newsletter;
+use store\services\sms\LoggedSender;
+use store\services\sms\SmsRu;
+use store\services\sms\SmsSender;
+use store\useCases\cabinet\WhishlistService;
 use store\useCases\manage\shop\ProductManageService;
 use store\useCases\manage\site\CallManageService;
 use store\useCases\manage\site\CommentService;
@@ -42,6 +46,10 @@ class SetUp implements BootstrapInterface
         ]);
 
         $container->setSingleton(CommentService::class, [], [
+            $app->params['adminEmail'],
+        ]);
+
+        $container->setSingleton(WhishlistService::class, [], [
             $app->params['adminEmail'],
         ]);
 
@@ -78,6 +86,13 @@ class SetUp implements BootstrapInterface
             return new MailChimp(
                 new \DrewM\MailChimp\MailChimp($app->params['mailChimpKey']),
                 $app->params['mailChimpListId']
+            );
+        });
+
+        $container->setSingleton(SmsSender::class, function () use ($app){
+            return new LoggedSender(
+                new SmsRu($app->params['smsRuKey']),
+                \Yii::getLogger()
             );
         });
     }

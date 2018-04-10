@@ -7,6 +7,7 @@ use store\entities\site\Stock;
 use store\forms\site\StockForm;
 use store\repositories\site\StockRepository;
 use yii\helpers\Inflector;
+use yii\caching\TagDependency;
 
 class StockManageService
 {
@@ -31,7 +32,7 @@ class StockManageService
             $form->keywords
         );
         $this->stocks->save($stock);
-
+        TagDependency::invalidate(\Yii::$app->cache, ['stocks']);
         return $stock;
     }
 
@@ -50,12 +51,14 @@ class StockManageService
             $form->keywords
         );
         $this->stocks->save($stock);
+        TagDependency::invalidate(\Yii::$app->cache, ['stocks']);
     }
 
     public function draft($id): void
     {
         $stock = $this->stocks->get($id);
         $stock->draft();
+        TagDependency::invalidate(\Yii::$app->cache, ['stocks']);
         $this->stocks->save($stock);
     }
 
@@ -63,12 +66,14 @@ class StockManageService
     {
         $stock = $this->stocks->get($id);
         $stock->activate();
+        TagDependency::invalidate(\Yii::$app->cache, ['stocks']);
         $this->stocks->save($stock);
     }
 
     public function remove($id): void
     {
         $stock = $this->stocks->get($id);
+        TagDependency::invalidate(\Yii::$app->cache, ['stocks']);
         $this->stocks->remove($stock);
     }
 }

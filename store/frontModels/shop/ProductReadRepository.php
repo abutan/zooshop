@@ -43,6 +43,7 @@ class ProductReadRepository
         $query->joinWith(['categoryAssignments ca'], false);
         $query->andWhere(['or', ['p.category_id' => $idx], ['ca.category_id' => $idx]]);
         $query->groupBy('p.id');
+
         return $this->getProvider($query);
     }
 
