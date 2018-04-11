@@ -14,18 +14,16 @@ return [
         'reset' => 'auth/reset/reset-password',
 
         'akcii-i-skidki' => 'sites/stock/index',
-        'akcii-i-skidki/<slug:[\w\-]+>' => 'sites/stock/node',
+
 
         'bonusi' => 'sites/bonus/index',
-        'bonusi/<slug:[\w\-]+>' => 'sites/bonus/node',
+
 
         'obyavlenia' => 'sites/notification/index',
 
         'hits' => 'shop/catalog/hit',
         'novinki' => 'shop/catalog/featured',
         'predlogeniya' => 'sites/comment/index',
-
-        '<slug:[\w\-]+>' => 'sites/article/node',
 
         ['pattern' => 'yandex-market', 'route' => 'market/index', 'suffix' => '.xml'],
 
@@ -44,5 +42,9 @@ return [
         'cabinet/<_c:[\w\-]+>/<id:\d+>' => 'cabinet/<_c>/view',
         'cabinet/<_c:[\w\-]+>/<_a:[\w-]+>' => 'cabinet/<_c>/<_a>',
         'cabinet/<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => 'cabinet/<_c>/<_a>',
+
+        '<slug:[\w\-]+>' => 'sites/article/node',
+        'akcii-i-skidki/<slug:[\w\-]+>' => 'sites/stock/node',
+        'bonusi/<slug:[\w\-]+>' => 'sites/bonus/node',
     ],
 ];

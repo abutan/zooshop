@@ -37,6 +37,9 @@ use yii\helpers\Html;
                 <a href="<?= Html::encode(Url::to(['/cabinet/subscribe/un-subscribe'])) ?>" class="list-group-item">
                     Управление подписками
                 </a>
+                <a href="<?= Html::encode(Url::to(['/contact/index'])) ?>" class="list-group-item">
+                    Написать нам
+                </a>
                 <?php endif; ?>
             </div>
         </aside>

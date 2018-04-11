@@ -13,6 +13,7 @@ use store\repositories\manage\shop\ProductRepository;
 use store\repositories\shop\OrderRepository;
 use store\repositories\UserRepository;
 use store\services\TransactionsManager;
+use yii\mail\MailerInterface;
 
 class OrderService
 {
@@ -22,22 +23,28 @@ class OrderService
     private $users;
     private $deliveryMethods;
     private $transactions;
+    private $mailer;
+    private $adminEmail;
 
     public function __construct(
+        $adminEmail,
         Cart $cart,
         OrderRepository $orders,
         ProductRepository $products,
         UserRepository $users,
         DeliveryRepository $deliveryMethods,
-        TransactionsManager $transactions
+        TransactionsManager $transactions,
+        MailerInterface $mailer
     )
     {
+        $this->adminEmail = $adminEmail;
         $this->cart = $cart;
         $this->orders = $orders;
         $this->products = $products;
         $this->users = $users;
         $this->deliveryMethods = $deliveryMethods;
         $this->transactions = $transactions;
+        $this->mailer = $mailer;
     }
 
     public function checkout($userId, OrderForm $form): Order
@@ -82,6 +89,19 @@ class OrderService
            $this->cart->clear();
         });
 
+        $userName = $user->username ?: 'Пользователь '. $user->id;
+        $subject = 'Пользователь '. $userName . ' сделал заказ на сайте.';
+        $sent = $this->mailer->compose(
+              ['html' => 'order/orderCreate-html', 'txt' => 'order/orderCreate-txt'],
+              ['userName' => $userName, 'order' => $order]
+          )
+              ->setSubject($subject)
+              ->setTo($this->adminEmail)
+              ->send();
+        if (!$sent){
+            throw new \RuntimeException('Ошибка отправки. Попробуйте повторить позже.');
+        }
+
         return $order;
     }
 
@@ -92,6 +112,18 @@ class OrderService
         $order = $this->orders->get($id);
         $order->paid();
         $this->orders->save($order);
+
+        $subject = 'Внимание заказ ' . $order->id .' оплачен';
+        $sent =  $this->mailer->compose(
+                    ['html' => 'order/orderPay-html', 'txt' => 'orderPay-txt'],
+                    ['order' => $order]
+                )
+                    ->setSubject($subject)
+                    ->setTo($this->adminEmail)
+                    ->send();
+        if (!$sent){
+            throw new \RuntimeException('Ошибка отправки');
+        }
     }
 
     public function fail($id): void

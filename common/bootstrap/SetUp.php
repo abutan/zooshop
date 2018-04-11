@@ -17,11 +17,13 @@ use store\services\sms\LoggedSender;
 use store\services\sms\SmsRu;
 use store\services\sms\SmsSender;
 use store\useCases\cabinet\WhishlistService;
+use store\useCases\ContactService;
 use store\useCases\manage\shop\ProductManageService;
 use store\useCases\manage\site\CallManageService;
 use store\useCases\manage\site\CommentService;
 use store\services\yandex\ShopInfo;
 use store\services\yandex\YandexMarket;
+use store\useCases\shop\OrderService;
 use yii\base\BootstrapInterface;
 use yii\di\Instance;
 use yii\mail\MailerInterface;
@@ -50,6 +52,14 @@ class SetUp implements BootstrapInterface
         ]);
 
         $container->setSingleton(WhishlistService::class, [], [
+            $app->params['adminEmail'],
+        ]);
+
+        $container->setSingleton(OrderService::class, [], [
+            $app->params['adminEmail'],
+        ]);
+
+        $container->setSingleton(ContactService::class, [], [
             $app->params['adminEmail'],
         ]);
 

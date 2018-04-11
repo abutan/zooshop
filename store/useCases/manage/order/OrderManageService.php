@@ -46,14 +46,14 @@ class OrderManageService
         $order->complete();
         $this->orders->save($order);
         if ($order->user->email !== null){
+            $userName = $order->user->username ?: 'Пользователь '. $order->user->id;
             $subject = 'Статус Вашего заказа '. $order->id .' изменился.';
-            $body = '<p>Ваш заказ '. $order->id .' укомплектован. <br>';
-            $body .= 'Подробности и историю Ваших заказов можно посмотреть на сайте в Вашем личном кабинете в разделе "ИСТОРИЯ ЗАКАЗОВ"<br>';
-            $body .= 'Команда сайта &laquo;' . \Yii::$app->name . '&raquo;</p>';
-            $sent = $this->mailer->compose()
+            $sent = $this->mailer->compose(
+                ['html' => 'order/orderComplete-html', 'txt' => 'orderComplete-txt.php'],
+                ['order' => $order, 'userName' => $userName]
+            )
                         ->setTo($order->user->email)
                         ->setSubject($subject)
-                        ->setHtmlBody($body)
                         ->send();
             if (!$sent){
                 throw new \DomainException('Ошибка отправки. Попробуйте повторить позже.');
@@ -67,14 +67,14 @@ class OrderManageService
         $order->sent();
         $this->orders->save($order);
         if ($order->user->email){
-            $subject = 'Статус Вашего заказа '. $order->id .' изменился.';
-            $body = '<p>Ваш заказ '. $order->id .' отправлен. <br>';
-            $body .= 'Подробности и историю Ваших заказов можно посмотреть на сайте в Вашем личном кабинете в разделе "ИСТОРИЯ ЗАКАЗОВ"<br>';
-            $body .= 'Команда сайта &laquo;' . \Yii::$app->name . '&raquo;</p>';
-            $sent = $this->mailer->compose()
+            $subject = 'Статус Вашего ЗАКАЗА №'. $order->id .' изменился.';
+            $userName = $order->user->username ?: 'Пользователь '. $order->user->id;
+            $sent = $this->mailer->compose(
+                ['html' => 'order/orderSent-html', 'txt' => 'order/orderSent-txt'],
+                ['order' => $order, 'userName' => $userName]
+            )
                 ->setTo($order->user->email)
                 ->setSubject($subject)
-                ->setHtmlBody($body)
                 ->send();
             if (!$sent){
                 throw new \DomainException('Ошибка отправки. Попробуйте повторить позже.');

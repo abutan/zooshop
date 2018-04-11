@@ -19,6 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::a('Отметить как укомплектованный', ['complete', 'id' => $order->id], ['class' => 'btn btn-primary', 'data-method' => 'post']) ?>
         <?php elseif ($order->isCompleted()): ?>
             <?= Html::a('Отметить как отправленный', ['sent', 'id' => $order->id], ['class' => 'btn btn-success', 'data-method' => 'post']) ?>
+        <?php elseif ($order->isSent()): ?>
+            <?= Html::tag('span', 'Заказ отправлен', ['class' => 'btn btn-success']) ?>
         <?php else: ?>
         <?= Html::tag('span', 'Заказ аннулирован', ['class' => 'btn btn-default']) ?>
         <?php endif; ?>
