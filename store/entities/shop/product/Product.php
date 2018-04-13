@@ -48,7 +48,7 @@ use yii\web\UploadedFile;
  * @property Photo[] $photos
  * @property Photo $mainPhoto
  * @property RelatedAssignment[] $relatedAssignments
- * @property Product $relates
+ * @property Product[] $relates
  * @property Review[] $reviews
  * @property WhishlistItem[] $whishlistItems
  * @property ProductValue[] $productValues

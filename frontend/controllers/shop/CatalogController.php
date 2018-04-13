@@ -138,11 +138,13 @@ class CatalogController extends Controller
         }
 
         $addToCart = new AddToCartForm($product);
+        $relates = $this->products->getRelatesProducts($product->id);
 
         return $this->render('product', [
             'product' => $product,
             'reviewForm' => $reviewForm,
             'addToCart' => $addToCart,
+            'relates' => $relates,
         ]);
     }
 

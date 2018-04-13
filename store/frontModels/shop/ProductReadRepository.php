@@ -144,6 +144,21 @@ class ProductReadRepository
         ]);
     }
 
+    public function getRelatesProducts($id): ActiveDataProvider
+    {
+        $product = Product::findOne($id);
+        $idx = ArrayHelper::getColumn($product->relates, 'id');
+        return new ActiveDataProvider([
+            'query' => Product::find()
+                ->alias('p')
+                ->active('p')
+                ->with('mainPhoto')
+                ->andWhere(['p.id' => $idx]),
+            'sort' => false,
+            'pagination' => false,
+        ]);
+    }
+
     public function searchByText($text): ActiveDataProvider
     {
         $query = Product::find()->active()->andWhere(['like', 'name', $text]);
@@ -163,6 +178,10 @@ class ProductReadRepository
                     'price' => [
                         'asc' => ['price_new' => SORT_ASC],
                         'desc' => ['price_new' => SORT_DESC],
+                    ],
+                    'rating' => [
+                        'asc' => ['rating' => SORT_ASC],
+                        'desc' => ['rating' => SORT_DESC],
                     ],
                 ],
             ],

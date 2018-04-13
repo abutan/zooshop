@@ -46,6 +46,11 @@ div.required label:after {
     height: 90px;
 }
 
+#dropdown-relates{
+    height: 700px;
+    overflow-y: auto;
+}
+
 /* add sorting icons to gridview sort links */
 a.asc:after, a.desc:after {
     position: relative;

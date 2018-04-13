@@ -8,6 +8,7 @@ use store\forms\manage\shop\product\PhotosForm;
 use store\forms\manage\shop\product\PriceForm;
 use store\forms\manage\shop\product\ProductCreateForm;
 use store\forms\manage\shop\product\ProductEditForm;
+use store\forms\manage\shop\product\ProductRelatesForm;
 use store\forms\manage\shop\product\QuantityForm;
 use store\useCases\manage\shop\ProductManageService;
 use Yii;
@@ -29,7 +30,7 @@ class ProductController extends Controller
     public function __construct(
         string $id,
         Module $module,
-        \store\useCases\manage\shop\ProductManageService $service,
+        ProductManageService $service,
         array $config = []
     )
     {
@@ -319,6 +320,36 @@ class ProductController extends Controller
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
         return $this->redirect(['view', 'id' => $id]);
+    }
+
+    /**
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionRelate($id)
+    {
+        $product = $this->findModel($id);
+        $form = new ProductRelatesForm($product);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()){
+            try{
+                $this->service->editRelates($product->id, $form);
+                return $this->redirect(['view', 'id' => $product->id]);
+            }catch (\DomainException $e){
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }
+        return $this->render('relate', [
+            'model' => $form,
+            'product' => $product,
+        ]);
+    }
+
+    public function actionRemoveRelatedProduct($id, $otherId)
+    {
+        $this->service->removeRelatedProduct($id, $otherId);
+        return $this->redirect(['view', 'id' => $id, '#' => 'relates']);
     }
 
     /**

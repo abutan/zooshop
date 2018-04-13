@@ -16,6 +16,7 @@ use yii\helpers\ArrayHelper;
  * @property CategoriesForm $categories
  * @property PhotosForm $photos
  * @property TagsForm $tags
+ * @property ProductRelatesForm $relates
  */
 class ProductCreateForm extends CompositeForm
 {
@@ -37,6 +38,7 @@ class ProductCreateForm extends CompositeForm
         $this->categories = new CategoriesForm();
         $this->photos = new PhotosForm();
         $this->tags = new TagsForm();
+        $this->relates = new ProductRelatesForm();
         parent::__construct($config);
     }
 
@@ -82,7 +84,7 @@ class ProductCreateForm extends CompositeForm
     protected function internalForms(): array
     {
         return [
-            'price', 'quantity', 'categories', 'photos', 'tags',
+            'price', 'quantity', 'categories', 'photos', 'tags', 'relates',
         ];
     }
 }

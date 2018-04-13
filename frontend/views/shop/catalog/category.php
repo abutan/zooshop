@@ -94,6 +94,10 @@ $this->render('_subcategories', [
 )
 ?>
 
+<?= $this->render('_list', [
+    'dataProvider' => $dataProvider
+]) ?>
+
 <?php if (trim($category->description)): ?>
     <div class="panel panel-default">
         <div class="panel-body">
@@ -107,7 +111,3 @@ $this->render('_subcategories', [
         </div>
     </div>
 <?php endif; ?>
-
-<?= $this->render('_list', [
-    'dataProvider' => $dataProvider
-]) ?>

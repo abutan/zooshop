@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $reviewForm \store\forms\shop\ReviewForm */
 /* @var $addToCart \store\forms\shop\AddToCartForm */
+/* @var $relates \yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -119,14 +120,45 @@ $this->params['active_category'] = $product->category;
             ],
         ])
         ?>
+
+        <div class="related-product-block">
+            <?php if (count($relates->getModels()) > 0  ): ?>
+            <h2 class="text-center">С этим товаром покупают</h2>
+
+            <div class="row">
+                <?php foreach ($relates->getModels() as $relate): ?>
+                    <div class="col-sm-4">
+                        <?php if ($relate->main_photo_id): ?>
+                            <a href="<?= Url::to(['/shop/catalog/product', 'id' => $relate->id]) ?>" target="_blank">
+                                <?= Html::img($relate->mainPhoto->getThumbFileUrl('file', 'full'), ['alt' => $relate->name, 'class' => 'img-responsive']) ?>
+                            </a>
+                        <?php endif; ?>
+                        <div class="relate-product-name">
+                            <a href="<?= Url::to(['/shop/catalog/product', 'id' => $relate->id]) ?>" target="_blank">
+                                <h4 data-toggle="tooltip" title="<?= $relate->name ?>">
+                                    <?= Html::encode(StringHelper::truncateWords($relate->name, 2)) ?>
+                                </h4>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <?php endif; ?>
+        </div>
+
     </div>
 
     <div class="col-sm-5">
         <p class="btn-group">
             <?php if (Yii::$app->user->isGuest): ?>
-                <button type="button" data-toggle="tooltip" class="btn btn-default attButton" title="Добавить в избранное" href="<?= Html::encode(Url::to(['/shop/catalog/attention'])) ?>"><i class="fa fa-heart"></i></button>
+                <button type="button" data-toggle="tooltip" class="btn btn-default attButton" title="Добавить в избранное" href="<?= Html::encode(Url::to(['/shop/catalog/attention'])) ?>">
+                    <i class="fa fa-heart" style="color: #ff0000;"></i>
+                </button>
             <?php else: ?>
-                <button type="button" data-toggle="tooltip" class="btn btn-default" title="Добавить в избранное" href="<?= Url::to(['/cabinet/wishlist/add', 'id' => $product->id]) ?>" data-method="post"><i class="fa fa-heart"></i></button>
+                <button type="button" data-toggle="tooltip" class="btn btn-default" title="Добавить в избранное" href="<?= Url::to(['/cabinet/wishlist/add', 'id' => $product->id]) ?>" data-method="post">
+                    <i class="fa fa-heart" style="color: #ff0000;"></i>
+                </button>
             <?php endif; ?>
         </p>
 
@@ -145,6 +177,15 @@ $this->params['active_category'] = $product->category;
             </li>
             <li>
                 Артикул: <?= $product->code ?>
+            </li>
+            <li>
+                <?php if ($product->quantity == 0): ?>
+                <span class="text-danger">
+                    Временно нет в наличии.
+                </span>
+                <?php else: ?>
+                В наличии: <?=  $product->quantity ?>шт.
+                <?php endif; ?>
             </li>
         </ul>
         <ul class="list-unstyled common-price">

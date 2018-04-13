@@ -21,11 +21,13 @@ use yii\widgets\LinkPager;
             <select id="sort-input" class="form-control" onchange="location=this.value">
                 <?php
                 $values = [
-                    '' => 'По умолчанию',
+                    '' => '',
                     'name' => 'По алфавиту',
                     '-name' => 'В обратном порядке',
                     'price' => 'Увеличению цены',
                     '-price' => 'Уменьшению цены',
+                    'rating' => 'Увеличение рейтинга',
+                    '-rating' => 'Уменьшение рейтинга',
                 ];
                 $current = Yii::$app->request->get('sort');
                 ?>

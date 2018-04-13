@@ -16,7 +16,7 @@ $url = Url::to(['product', 'id' => $product->id]);
         <?php if ($product->mainPhoto): ?>
             <div class="product-image">
                 <a href="<?= Html::encode($url) ?>">
-                    <?= Html::img($product->mainPhoto->getThumbFileUrl('file', 'list'), ['alt' => $product->name, 'class' => 'img-responsive']) ?>
+                    <?= Html::img($product->mainPhoto->getThumbFileUrl('file', 'full'), ['alt' => $product->name, 'class' => 'img-responsive', 'style' => 'height: 100px']) ?>
                 </a>
             </div>
         <?php endif; ?>
@@ -48,11 +48,11 @@ $url = Url::to(['product', 'id' => $product->id]);
             </button>
             <?php if (Yii::$app->user->isGuest): ?>
                 <button type="button" class="attButton" href="<?= Html::encode(Url::to(['/shop/catalog/attention']))  ?>" data-toggle="tooltip" title="Добавить в избранное (лист желаний)">
-                    <i class="fa fa-heart text-danger"></i>
+                    <i class="fa fa-heart" style="color: #ff0000;"></i>
                 </button>
             <?php else: ?>
                 <button type="button" href="<?= Url::to(['/cabinet/whishlist/add', 'id' => $product->id]) ?>" data-toggle="tooltip" title="Добавить в избранное (лист желаний)" data-method="post">
-                    <i class="fa fa-heart text-danger"></i>
+                    <i class="fa fa-heart" style="color: #ff0000;"></i>
                 </button>
             <?php endif; ?>
         </div>

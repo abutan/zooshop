@@ -11,6 +11,7 @@ use store\forms\manage\shop\product\PhotosForm;
 use store\forms\manage\shop\product\PriceForm;
 use store\forms\manage\shop\product\ProductCreateForm;
 use store\forms\manage\shop\product\ProductEditForm;
+use store\forms\manage\shop\product\ProductRelatesForm;
 use store\forms\manage\shop\product\QuantityForm;
 use store\forms\manage\shop\product\ReviewEditForm;
 use store\forms\shop\ReviewForm;
@@ -84,6 +85,11 @@ class ProductManageService
         foreach ($form->tags->existing as $tagId){
             $tag = $this->tags->get($tagId);
             $product->assignTag($tag->id);
+        }
+
+        foreach ($form->relates->products as $relateId){
+            $relate = $this->products->get($relateId);
+            $product->assignRelatedProduct($relate->id);
         }
 
         $this->transactions->wrap(function () use ($product, $form){
@@ -374,6 +380,18 @@ class ProductManageService
         $this->products->save($product);
     }
 
+    public function editRelates($id, ProductRelatesForm $form)
+    {
+        $product = $this->products->get($id);
+        $this->transactions->wrap(function () use ($product, $form) {
+            foreach ($form->products as $relateId) {
+                $relate = $this->products->get($relateId);
+                $product->assignRelatedProduct($relate->id);
+                $this->products->save($product);
+            }
+        });
+
+    }
     public function remove($id): void
     {
         $product = $this->products->get($id);

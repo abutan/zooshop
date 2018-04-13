@@ -208,6 +208,25 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
+    <div id="relates" class="box">
+        <div class="box-header with-border">Сопутствующие товары</div>
+        <div class="box-body">
+            <div class="row">
+                <?php foreach ($product->relates as $relate): ?>
+                    <div class="col-sm-3 text-center" style="height: 280px">
+                        <?= Html::a('<span class="glyphicon glyphicon-remove"></span>', ['remove-related-product', 'id' => $product->id, 'otherId' => $relate->id], ['class' => 'btn btn-default']) ?>
+                        <?php if ($relate->main_photo_id): ?>
+                        <?= Html::img($relate->mainPhoto->getThumbFileUrl('file', 'full'), ['class' => 'img-responsive', 'style' => 'height: 150px; margin:auto;']) ?>
+                        <?= $relate->name ?>
+                    </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+
+            <?= Html::a('Редактировать сопутствующие товары', ['relate', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
+        </div>
+    </div>
+
     <div class="box" id="reviews">
         <div class="box-header with-border">Отзывы</div>
         <div class="box-body">

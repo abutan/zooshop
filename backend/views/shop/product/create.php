@@ -83,6 +83,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model->tags, 'text_new')->textInput()->hint('Если Вы решили добавить новые теги к товару прямо сейчас, то впишите их через запятую.') ?>
                 </div>
             </div>
+            <div class="box">
+                <div class="box-header with-border"></div>
+                <div class="box-body">
+                    <button type="button" data-toggle="dropdown" data-loading-text="Загрузка ..." class="dropdown-toggle vetshop-cart" aria-expanded="false">
+                        Сопутствующие товары
+                    </button>
+                    <ul id="dropdown-relates" class="dropdown-menu">
+                        <li>
+                            <?=$form->field($model->relates, 'products')->label(false)->checkboxList($model->relates->relatedList()) ?>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="box box-default">
                 <div class="box-header with-border">Фотографии</div>
                 <div class="box-body">
