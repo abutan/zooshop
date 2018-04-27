@@ -22,12 +22,10 @@ use yii\widgets\LinkPager;
                 <?php
                 $values = [
                     '' => '',
-                    'name' => 'По алфавиту',
-                    '-name' => 'В обратном порядке',
+                    'name' => 'По названию',
                     'price' => 'Увеличению цены',
                     '-price' => 'Уменьшению цены',
-                    'rating' => 'Увеличение рейтинга',
-                    '-rating' => 'Уменьшение рейтинга',
+                    'rating' => 'По рейтингу',
                 ];
                 $current = Yii::$app->request->get('sort');
                 ?>

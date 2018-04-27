@@ -18,7 +18,7 @@ use yii\helpers\Url;
                 <?php if ($product->mainPhoto): ?>
                     <div class="product-image">
                         <a href="<?= Html::encode($url) ?>">
-                            <?= Html::img($product->mainPhoto->getThumbFileUrl('file', 'list'), ['alt' => $product->name, 'class' => 'img-responsive']) ?>
+                            <?= Html::img($product->mainPhoto->getThumbFileUrl('file', 'full'), ['alt' => $product->name, 'class' => 'img-responsive', 'style' => 'height: 100px']) ?>
                         </a>
                     </div>
                 <?php endif; ?>

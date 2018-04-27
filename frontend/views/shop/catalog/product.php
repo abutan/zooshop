@@ -87,7 +87,7 @@ $this->params['active_category'] = $product->category;
             </div>
         <?php endif; ?>
         <?php
-        $description = Yii::$app->formatter->asHtml($product->description, [
+        $description = Yii::$app->formatter->asHtml($product->body, [
             'Attr.AllowedRel' => array('nofollow'),
             'HTML.SafeObject' => true,
             'Output.FlashCompat' => true,
@@ -135,8 +135,8 @@ $this->params['active_category'] = $product->category;
                         <?php endif; ?>
                         <div class="relate-product-name">
                             <a href="<?= Url::to(['/shop/catalog/product', 'id' => $relate->id]) ?>" target="_blank">
-                                <h4 data-toggle="tooltip" title="<?= $relate->name ?>">
-                                    <?= Html::encode(StringHelper::truncateWords($relate->name, 2)) ?>
+                                <h4 class="text-center">
+                                    <?= Html::encode($relate->name) ?>
                                 </h4>
                             </a>
                         </div>

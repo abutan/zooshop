@@ -165,21 +165,34 @@ body {
       padding-top: 6px; }
       .down-block .row .shop-search form .input-group .form-control {
         height: 23px;
-        border-left-color: #9c9c9c;
-        border-top-color: #9c9c9c;
-        border-bottom-color: #9c9c9c;
+        border-left-color: #000000;
+        border-top-color: #000000;
+        border-bottom-color: #000000;
         border-right-color: transparent;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
-        font-size: 12px; }
+        font-size: 10px;
+        text-transform: uppercase; }
+        .down-block .row .shop-search form .input-group .form-control::-webkit-input-placeholder {
+          color: #000000;
+          font-weight: bold; }
+        .down-block .row .shop-search form .input-group .form-control::-moz-placeholder {
+          color: #000000;
+          font-weight: bold; }
+        .down-block .row .shop-search form .input-group .form-control:-moz-placeholder {
+          color: #000000;
+          font-weight: bold; }
+        .down-block .row .shop-search form .input-group .form-control:-ms-input-placeholder {
+          color: #000000;
+          font-weight: bold; }
       .down-block .row .shop-search form .input-group .input-group-btn button {
         height: 23px;
         background-color: transparent;
         color: #000;
         position: relative;
-        border-right-color: #9c9c9c;
-        border-top-color: #9c9c9c;
-        border-bottom-color: #9c9c9c;
+        border-right-color: #000000;
+        border-top-color: #000000;
+        border-bottom-color: #000000;
         border-left-color: transparent;
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px; }
@@ -381,15 +394,60 @@ body {
   .main-content .col-sm-9 .select-panel {
     margin-right: -10px; }
   .main-content .col-sm-9 .product-panel {
-    margin-right: -10px; }
+    margin-right: -10px;
+      /*.product-layout.col-sm-4{
+        margin-bottom: 25px;
+        height: 230px;
+        .product-image{
+          a{
+            img{
+              margin: 0 auto 10px;
+            }
+          }
+        }
+        .product-caption{
+          a{
+
+            h4{
+              text-align: center;
+              font-size: 16px;
+              color: #000;
+              margin-bottom: 3px;
+              height: 25px;
+            }
+          }
+          .price{
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #045DA5;
+            .glyphicon-rub{
+              font-size: 17px;
+              color: #000;
+              height: 20px;
+              font-weight: normal;
+            }
+            .price-old{
+              font-weight: normal;
+              color: #000;
+              font-size: 14px;
+              .glyphicon{
+                font-size: 10px;
+              }
+            }
+          }
+        }
+      }*/ }
     .main-content .col-sm-9 .product-panel .product-layout {
-      margin-bottom: 35px; }
-      .main-content .col-sm-9 .product-panel .product-layout .product-thumb .product-image {
-        margin-bottom: 10px; }
+      margin-bottom: 35px;
+      height: 300px; }
+      .main-content .col-sm-9 .product-panel .product-layout .product-thumb .product-image img {
+        margin: 0 auto 10px; }
       .main-content .col-sm-9 .product-panel .product-layout .product-thumb .product-caption a h4 {
         font-size: 16px;
         color: #000;
-        margin-bottom: 5px; }
+        margin-bottom: 5px;
+        height: auto; }
       .main-content .col-sm-9 .product-panel .product-layout .product-thumb .product-caption .price {
         font-size: 24px;
         font-weight: bold;
@@ -398,33 +456,19 @@ body {
           font-size: 16px;
           color: #000;
           font-weight: normal; }
-    .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 {
-      margin-bottom: 25px;
-      height: 230px; }
-      .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-image a img {
-        margin: 0 auto 10px; }
-      .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-caption a h4 {
-        text-align: center;
-        font-size: 16px;
-        color: #000;
-        margin-bottom: 3px;
-        height: 25px; }
-      .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-caption .price {
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        color: #045DA5; }
-        .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-caption .price .glyphicon-rub {
-          font-size: 17px;
-          color: #000;
-          height: 20px;
-          font-weight: normal; }
-        .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-caption .price .price-old {
-          font-weight: normal;
-          color: #000;
-          font-size: 14px; }
-          .main-content .col-sm-9 .product-panel .product-layout.col-sm-4 .product-caption .price .price-old .glyphicon {
-            font-size: 10px; }
+  .main-content .col-sm-9 .product-list {
+    height: 170px; }
+    .main-content .col-sm-9 .product-list .product-thumb .product-image {
+      float: left;
+      width: 15%;
+      margin: 0 35px 10px 0; }
+    .main-content .col-sm-9 .product-list .product-thumb .product-caption {
+      float: left;
+      width: 40%;
+      margin: 0 35px 10px 0; }
+    .main-content .col-sm-9 .product-list .product-thumb .button-group {
+      float: left;
+      margin: 5% 0 10px 0; }
   .main-content .col-sm-9 .pagination-panel {
     margin-right: -5px; }
     .main-content .col-sm-9 .pagination-panel .product-quantity {
@@ -434,6 +478,9 @@ body {
   margin-bottom: 10px; }
   .search-widget .col-sm-1 {
     padding-top: 7px; }
+  .search-widget form button {
+    background-color: #ff0000;
+    color: #ffffff; }
 
 .featured-node .product-layout.col-sm-4 {
   margin-bottom: 25px; }
@@ -668,12 +715,23 @@ div.required label:after {
 .related-product-block {
   margin-top: 25px;
   margin-bottom: 25px; }
+  .related-product-block h2 {
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 25px; }
   .related-product-block .row .col-sm-4 {
-    height: 200px; }
+    height: 250px; }
     .related-product-block .row .col-sm-4 a img {
       height: 100px;
       margin: 0 auto 7px;
       text-align: center; }
+
+.product-adding form button {
+  background-color: #ff0000;
+  color: #ffffff; }
+  .product-adding form button:hover {
+    background-color: #ff0000;
+    text-decoration: underline; }
 
 /*FOOTER*/
 .footer-push {

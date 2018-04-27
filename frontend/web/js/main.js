@@ -46,13 +46,13 @@ $(document).ready(function () {
 
 $('#list-view').click(function () {
     $('#grid-view').removeClass('active');
-    $('.product-layout').removeClass('col-sm-4');
+    $('.product-layout').removeClass('product-layout col-sm-4').addClass('product-list');
     $('#list-view').addClass('active');
 });
 
 $('#grid-view').click(function () {
     $('#list-view').removeClass('active');
-    $('.product-layout').addClass('col-sm-4');
+    $('.product-list').removeClass('product-list').addClass('product-layout col-sm-4');
     $('#grid-view').addClass('active');
 });
 

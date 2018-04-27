@@ -21,13 +21,15 @@ $url = Url::to(['product', 'id' => $product->id]);
             </div>
         <?php endif; ?>
         <div class="product-caption">
-
+            <p class="brand text-center text-success">
+                <?= $product->brand->name ?>
+            </p>
             <a href="<?= Html::encode($url) ?>">
-                <h4 data-toggle="tooltip" title="<?= $product->name ?>">
-                    <?= Html::encode(StringHelper::truncateWords($product->name, 2)) ?>
+                <h4 class="text-center">
+                    <?= Html::encode($product->name) ?>
                 </h4>
             </a>
-            <p class="price">
+            <p class="price text-center">
                 <?php if ($product->price_old): ?>
 
                     <span class="price-old">
