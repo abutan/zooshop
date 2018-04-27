@@ -483,7 +483,8 @@ body {
     color: #ffffff; }
 
 .featured-node .product-layout.col-sm-4 {
-  margin-bottom: 25px; }
+  margin-bottom: 25px;
+  height: 300px; }
   .featured-node .product-layout.col-sm-4 .product-image a img {
     margin: 0 auto 10px; }
   .featured-node .product-layout.col-sm-4 .product-caption a h4 {
@@ -491,7 +492,7 @@ body {
     font-size: 16px;
     color: #000;
     margin-bottom: 8px;
-    height: 35px; }
+    height: auto; }
   .featured-node .product-layout.col-sm-4 .product-caption .price {
     text-align: center;
     font-size: 24px;

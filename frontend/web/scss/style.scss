@@ -657,6 +657,7 @@ body{
 .featured-node{
   .product-layout.col-sm-4{
     margin-bottom: 25px;
+    height: 300px;
     .product-image{
       a{
         img{
@@ -672,7 +673,7 @@ body{
           font-size: 16px;
           color: #000;
           margin-bottom: 8px;
-          height: 35px;
+          height: auto;
         }
       }
       .price{

@@ -15,9 +15,7 @@ return [
 
         'akcii-i-skidki' => 'sites/stock/index',
 
-
         'bonusi' => 'sites/bonus/index',
-
 
         'obyavlenia' => 'sites/notification/index',
 

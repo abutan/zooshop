@@ -26,7 +26,7 @@ use yii\helpers\Url;
 
                     <a href="<?= Html::encode($url) ?>">
                         <h4 data-toggle="tooltip" title="<?= $product->name ?>">
-                            <?= Html::encode(StringHelper::truncateWords($product->name, 2)) ?>
+                            <?= Html::encode($product->name) ?>
                         </h4>
                     </a>
                     <p class="price">
