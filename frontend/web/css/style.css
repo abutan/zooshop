@@ -479,8 +479,11 @@ body {
   .search-widget .col-sm-1 {
     padding-top: 7px; }
   .search-widget form button {
-    background-color: #ff0000;
+    background-color: #e3000b;
     color: #ffffff; }
+    .search-widget form button:hover {
+      background-color: #e3000b;
+      text-decoration: underline; }
 
 .featured-node .product-layout.col-sm-4 {
   margin-bottom: 25px;

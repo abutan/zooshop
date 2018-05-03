@@ -649,8 +649,12 @@ body{
   }
   form{
     button{
-      background-color: #ff0000;
+      background-color: #e3000b;
       color: #ffffff;
+      &:hover{
+        background-color: #e3000b;
+        text-decoration: underline;
+      }
     }
   }
 }
