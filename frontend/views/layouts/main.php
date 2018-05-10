@@ -4,7 +4,6 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use rmrevin\yii\fontawesome\FA;
 use frontend\assets\AppAsset;
 use frontend\assets\LtAppAsset;
 use yii\helpers\Url;
@@ -100,10 +99,6 @@ LtAppAsset::register($this);
 
     <div class="down-block">
         <div class="row">
-            <!--<div class="shop-address col-sm-2 text-center">
-               <i class="fa fa-map-marker hidden-sm"></i>
-                <?/*= Html::a('Адреса магазинов', ['/article/node', 'alias' => '']) */?>
-            </div>--><!--shop-address-->
 
             <div class="shop-phone col-sm-2 text-center">
                 <i class="fa fa-phone hidden-sm"></i>  <span>+7(999)1234567</span>
