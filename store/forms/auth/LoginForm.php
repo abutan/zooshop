@@ -1,8 +1,6 @@
 <?php
 namespace store\forms\auth;
 
-use store\entities\user\User;
-use Yii;
 use yii\base\Model;
 
 /**
