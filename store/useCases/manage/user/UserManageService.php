@@ -80,6 +80,6 @@ class UserManageService
     {
         $user = $this->users->get($id);
         $this->newsLetter->unsubscribe($user->email);
-        $this->users->save($user);
+        $this->users->remove($user);
     }
 }
