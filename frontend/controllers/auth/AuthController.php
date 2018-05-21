@@ -24,7 +24,7 @@ class AuthController extends Controller
         $this->service = $service;
     }
 
-    public function actionLogin()
+    public function actionEntry()
     {
         $this->layout = 'blank';
 
@@ -43,7 +43,7 @@ class AuthController extends Controller
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
         }
-        return $this->render('login', [
+        return $this->render('entry', [
             'model' => $form,
         ]);
     }

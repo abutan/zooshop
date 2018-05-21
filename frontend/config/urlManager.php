@@ -7,7 +7,7 @@ return [
     'cache' => false,
     'rules' => [
         '' => 'site/index',
-        'login' => 'auth/auth/login',
+        'login' => 'auth/auth/entry',
         'logout' => 'auth/auth/logout',
         'signup' => 'auth/signup/request',
         'password' => 'auth/reset/request-password-reset',
