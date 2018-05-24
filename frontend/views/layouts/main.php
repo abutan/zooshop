@@ -53,14 +53,14 @@ LtAppAsset::register($this);
 
             <?php else: ?>
 
-                <div class="user-office col-sm-3 col-sm-offset-3">
+                <div class="user-office col-sm-3 col-sm-offset-2">
                     <p>
                         <i class="fa fa-user"></i>  <?= Html::a('Личный кабинет', ['/cabinet/default/index']) ?>
 
                     </p>
                 </div><!--user-office-->
 
-                <div class="logout-user col-sm-3">
+                <div class="logout-user col-sm-4">
                     <?= Html::beginForm(['/auth/auth/logout'], 'post') ?>
                     <?= Html::submitButton('<i class="fa fa-sign-out-alt fa-2x pull-left"></i> &nbsp; Выход  '.Yii::$app->user->identity['username'], ['class' => 'btn btn-link logout btn-block btn-lg']) ?>
                     <?= Html::endForm() ?>
