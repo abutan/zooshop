@@ -45,7 +45,7 @@ $url = Url::to(['product', 'id' => $product->id]);
             </p>
         </div>
         <div class="button-group">
-            <button type="button" class="btn btn-add-to-cart" href="<?= Url::to(['/shop/cart/add', 'id' => $product->id])  ?>" data-method="post">
+            <button type="button" class="btn btn-add-to-cart" href="<?= Url::to(['/shop/cart/add-from-button', 'id' => $product->id])  ?>" data-method="post">
                 <i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Добавить в корзину</span>
             </button>
             <?php if (Yii::$app->user->isGuest): ?>

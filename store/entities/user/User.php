@@ -147,6 +147,14 @@ class User extends ActiveRecord implements IdentityInterface
         $this->subscribe = self::UNSUBSCRIBE;
     }
 
+    public function verify(): void
+    {
+        if ($this->isActive()){
+            throw new \DomainException('Email уже подтвержден.');
+        }
+        $this->status = self::STATUS_ACTIVE;
+    }
+
     ##########
 
     public function attachNetwork($identity, $network): void

@@ -41,6 +41,7 @@ class CartController extends Controller
                     'quantity' => ['POST'],
                     'remove' => ['POST'],
                     'clear' => ['POST'],
+                    'add-from-button' => ['POST'],
                 ],
             ],
         ];
@@ -58,7 +59,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function actionAdd($id)
+    public function actionAddFromButton($id)
     {
         if (!$product = $this->products->find($id)){
             throw new NotFoundHttpException('Запрашиваемая страница не найдена.');
@@ -75,13 +76,36 @@ class CartController extends Controller
             }
         }
 
+        return $this->render('add', [
+            'product' => $product,
+            'model' => $form,
+        ]);
+    }
+
+    public function actionAdd($id)
+    {
+        if (!$product = $this->products->find($id)){
+            throw new NotFoundHttpException('Запрашиваемая страница не найдена.');
+        }
+
+        /*if (!$product->modifications){
+            try{
+                $this->service->add($product->id, null, 1);
+                Yii::$app->session->setFlash('success', 'Товар успешно добавлен в корзину.');
+                return $this->redirect(Yii::$app->request->referrer);
+            }catch (\DomainException $e){
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+        }*/
+
         $this->layout = 'blank';
 
         $form = new AddToCartForm($product);
         if ($form->load(Yii::$app->request->post()) && $form->validate()){
             try{
                 $this->service->add($product->id, $form->modification, $form->quantity);
-                return $this->redirect(['index']);
+                return $this->redirect(Yii::$app->request->referrer);
             }catch (\DomainException $e){
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());

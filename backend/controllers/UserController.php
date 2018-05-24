@@ -44,6 +44,7 @@ class UserController extends Controller
                     'delete' => ['POST'],
                     'subscribe' => ['POST'],
                     'un-subscribe' => ['POST'],
+                    'verify' => ['POST'],
                 ],
             ],
         ];
@@ -137,6 +138,12 @@ class UserController extends Controller
     public function actionUnSubscribe($id)
     {
         $this->service->unSubscribe($id);
+        return $this->redirect(['view', 'id' => $id]);
+    }
+
+    public function actionVerify($id)
+    {
+        $this->service->verify($id);
         return $this->redirect(['view', 'id' => $id]);
     }
 

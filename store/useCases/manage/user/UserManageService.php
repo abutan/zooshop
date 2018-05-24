@@ -60,6 +60,13 @@ class UserManageService
         });
     }
 
+    public function verify($id): void
+    {
+        $user = $this->users->get($id);
+        $user->verify();
+        $this->users->save($user);
+    }
+
     public function subscribe($id): void
     {
         $user = $this->users->get($id);
@@ -79,7 +86,9 @@ class UserManageService
     public function remove($id): void
     {
         $user = $this->users->get($id);
-        $this->newsLetter->unsubscribe($user->email);
+        if ($user->isSubscribe()){
+            $this->newsLetter->unsubscribe($user->email);
+        }
         $this->users->remove($user);
     }
 }

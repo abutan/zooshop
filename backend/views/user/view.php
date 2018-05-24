@@ -20,6 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php else: ?>
         <?= Html::a('Отписать от рассылки', ['un-subscribe', 'id' => $model->id], ['class' => 'btn btn-warning', 'data-method' => 'post']) ?>
         <?php endif; ?>
+        <?php if ($model->isWait()): ?>
+            <?= Html::a('Активировать пользователя', ['verify', 'id' => $model->id], ['class' => 'btn btn-success', 'data-method' => 'post']) ?>
+        <?php endif; ?>
         <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
