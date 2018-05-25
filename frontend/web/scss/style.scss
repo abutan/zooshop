@@ -111,9 +111,12 @@ body{
         button{
           color: #ffffff;
           font-size: 16px;
-          text-decoration: underline;
+          /*text-decoration: underline;*/
           text-align: left;
           text-indent: 5px;
+          span{
+            border-bottom: 1px solid #ffffff;
+          }
         }
       }
     }
@@ -1035,6 +1038,14 @@ div.required label:after {
       }
     }
   }
+}
+.fixed{
+  border-top: 1px solid #00cc00;
+  border-bottom: 1px solid #ffed00;
+  background-color: #e7e7e7;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
 }
 
 

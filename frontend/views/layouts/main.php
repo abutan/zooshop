@@ -62,7 +62,7 @@ LtAppAsset::register($this);
 
                 <div class="logout-user col-sm-4">
                     <?= Html::beginForm(['/auth/auth/logout'], 'post') ?>
-                    <?= Html::submitButton('<i class="fa fa-sign-out-alt fa-2x pull-left"></i> &nbsp; Выход  '.Yii::$app->user->identity['username'], ['class' => 'btn btn-link logout btn-block btn-lg']) ?>
+                    <?= Html::submitButton('<i class="fa fa-sign-out-alt fa-2x pull-left"></i> &nbsp; <span>Выход  '.Yii::$app->user->identity['username'].'</span>', ['class' => 'btn btn-link logout btn-block btn-lg']) ?>
                     <?= Html::endForm() ?>
                 </div><!--logout-->
 
@@ -97,39 +97,42 @@ LtAppAsset::register($this);
     </header><!--header-->
 
     <div class="down-block">
-        <div class="row">
+        <div class="down-block-inner">
+            <div class="row">
 
-            <div class="shop-phone col-sm-2 text-center">
-                <i class="fa fa-phone hidden-sm"></i>  <span>+7(999)1234567</span>
-            </div><!--shop-phone-->
+                <div class="shop-phone col-sm-2 text-center">
+                    <i class="fa fa-phone hidden-sm"></i>  <span>+7(999)1234567</span>
+                </div><!--shop-phone-->
 
-            <div class="shop-search col-sm-3">
-                <?= Html::beginForm(['/shop/catalog/search'], 'get', ['class' => '']) ?>
-                <div class="input-group">
-                    <input type="text" name="text" class="form-control" placeholder="Поиск товаров ...">
-                    <span class="input-group-btn">
+                <div class="shop-search col-sm-3">
+                    <?= Html::beginForm(['/shop/catalog/search'], 'get', ['class' => '']) ?>
+                    <div class="input-group">
+                        <input type="text" name="text" class="form-control" placeholder="Поиск товаров ...">
+                        <span class="input-group-btn">
                          <button class="btn btn-info" type="button">
                             <i class="glyphicon glyphicon-search"></i>
                          </button>
                     </span>
-                </div>
-                <?= Html::endForm() ?>
-            </div><!--shop-search-->
+                    </div>
+                    <?= Html::endForm() ?>
+                </div><!--shop-search-->
 
-            <div class="shop-pay col-sm-1 text-right">
-                <i class="fa fa-database hidden-sm"></i>
-                <?= Html::a('Оплата', ['/sites/article/node', 'slug' => 'oplata']) ?>
-            </div><!--shop-pay-->
+                <div class="shop-pay col-sm-1 text-right">
+                    <i class="fa fa-database hidden-sm"></i>
+                    <?= Html::a('Оплата', ['/sites/article/node', 'slug' => 'oplata']) ?>
+                </div><!--shop-pay-->
 
-            <div class="shop-shipping col-sm-2  text-right" >
-                <i class="fa fa-truck hidden-sm"></i>
-                <?= Html::a('Доставка', ['/sites/article/node', 'slug' => 'dostavka']) ?>
-            </div><!--shop-shipping-->
+                <div class="shop-shipping col-sm-2  text-right" >
+                    <i class="fa fa-truck hidden-sm"></i>
+                    <?= Html::a('Доставка', ['/sites/article/node', 'slug' => 'dostavka']) ?>
+                </div><!--shop-shipping-->
 
-            <div class="shop-card col-sm-4 text-center">
-                <?= CartWidget::widget() ?>
-            </div><!--shop-card-->
+                <div class="shop-card col-sm-4 text-center">
+                    <?= CartWidget::widget() ?>
+                </div><!--shop-card-->
+            </div>
         </div>
+
     </div><!--down-block-->
 
     <div class="picture-menu">

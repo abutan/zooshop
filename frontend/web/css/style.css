@@ -84,9 +84,11 @@ body {
   .top-block .row .logout-user form button {
     color: #ffffff;
     font-size: 16px;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     text-align: left;
     text-indent: 5px; }
+    .top-block .row .logout-user form button span {
+      border-bottom: 1px solid #ffffff; }
 
 /*HEADER*/
 .header {
@@ -736,6 +738,14 @@ div.required label:after {
   .product-adding form button:hover {
     background-color: #ff0000;
     text-decoration: underline; }
+
+.fixed {
+  border-top: 1px solid #00cc00;
+  border-bottom: 1px solid #ffed00;
+  background-color: #e7e7e7;
+  position: fixed;
+  z-index: 9999;
+  top: 0; }
 
 /*FOOTER*/
 .footer-push {

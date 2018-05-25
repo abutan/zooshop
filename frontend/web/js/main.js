@@ -56,6 +56,23 @@ $('#grid-view').click(function () {
     $('#grid-view').addClass('active');
 });
 
+$(document).ready(function ($) {
+    var $block = $('.down-block-inner');
+    var $window = $(window);
+    var $h = $block.offset().top;
+    $block.css('width', $block.outerWidth());
+
+    $window.scroll(function () {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > $h){
+            $block.addClass('fixed');
+        } else {
+            $block.removeClass('fixed');
+        }
+    });
+});
+
 $('#comments').find('.comment-reply').click(function () {
    var link = $(this);
    var form = $('#reply-block').find('form');

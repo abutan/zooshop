@@ -98,6 +98,7 @@ class CatalogController extends Controller
         if (!$brand = $this->brands->findBySlug($slug)){
             throw new NotFoundHttpException('Запрашиваемая страница не найдена.');
         }
+
         $dataProvider = $this->products->getAllByBrand($brand);
 
         return $this->render('brand', [
