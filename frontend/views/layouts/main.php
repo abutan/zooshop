@@ -40,14 +40,14 @@ LtAppAsset::register($this);
 
                 <div class="registration col-sm-2 col-sm-offset-1">
                     <p>
-                        <i class="fa fa-user-plus"></i>  <?= Html::a('Регистрация', ['/auth/signup/request']) ?>
+                        <i class="fa fa-user-plus"></i>  <?= Html::a('<span>Регистрация</span>', ['/auth/signup/request']) ?>
 
                     </p>
                 </div><!--registration-->
 
                 <div class="backcall col-sm-3">
                     <p>
-                        <i class="fa fa-phone-volume fa-2x"></i>   <?= Html::a('Обратный звонок', ['/sites/call/node'], ['class' => 'backPhone']) ?>
+                        <i class="fa fa-phone-volume fa-2x"></i>   <?= Html::a('<span>Обратный звонок</span>', ['/sites/call/node'], ['class' => 'backPhone']) ?>
                     </p>
                 </div><!--backcall-->
 
@@ -55,7 +55,7 @@ LtAppAsset::register($this);
 
                 <div class="user-office col-sm-3 col-sm-offset-2">
                     <p>
-                        <i class="fa fa-user"></i>  <?= Html::a('Личный кабинет', ['/cabinet/default/index']) ?>
+                        <i class="fa fa-user"></i>  <?= Html::a('<span>Личный кабинет</span>', ['/cabinet/default/index']) ?>
 
                     </p>
                 </div><!--user-office-->
@@ -68,7 +68,7 @@ LtAppAsset::register($this);
 
                 <div class="backcall col-sm-3">
                     <p>
-                        <i class="fa fa-phone-volume fa-2x"></i>   <?= Html::a('Обратный звонок', ['/sites/call/node'], ['class' => 'backPhone']) ?>
+                        <i class="fa fa-phone-volume fa-2x"></i>   <?= Html::a('<span>Обратный звонок</span>', ['/sites/call/node'], ['class' => 'backPhone']) ?>
                     </p>
                 </div><!--backcall-->
             <?php endif; ?>

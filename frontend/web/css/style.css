@@ -53,9 +53,12 @@ body {
         font-size: 26px; }
       .top-block .row .registration p a {
         color: #ffffff;
-        text-decoration: underline;
         position: absolute;
         top: 10px; }
+        .top-block .row .registration p a:hover {
+          text-decoration: none; }
+        .top-block .row .registration p a span {
+          border-bottom: 1px solid #ffffff; }
   .top-block .row .backcall {
     color: #ffffff;
     padding-right: 0; }
@@ -66,11 +69,14 @@ body {
         padding-top: 7px; }
       .top-block .row .backcall p a {
         color: #ffed00;
-        text-decoration: underline;
         position: absolute;
         top: 10px;
         font-size: 16px;
         font-weight: bold; }
+        .top-block .row .backcall p a:hover {
+          text-decoration: none; }
+        .top-block .row .backcall p a span {
+          border-bottom: 1px solid #ffed00; }
   .top-block .row .user-office {
     color: #ffffff; }
     .top-block .row .user-office p {
@@ -81,9 +87,12 @@ body {
         font-size: 26px; }
       .top-block .row .user-office p a {
         color: #ffffff;
-        text-decoration: underline;
         position: absolute;
         top: 10px; }
+        .top-block .row .user-office p a:hover {
+          text-decoration: none; }
+        .top-block .row .user-office p a span {
+          border-bottom: 1px solid #ffffff; }
   .top-block .row .logout-user form button {
     color: #ffffff;
     font-size: 16px;

@@ -69,9 +69,14 @@ body{
         }
         a{
           color: #ffffff;
-          text-decoration: underline;
           position: absolute;
           top: 10px;
+          &:hover{
+            text-decoration: none;
+          }
+          span{
+            border-bottom: 1px solid #ffffff;
+          }
         }
       }
     }
@@ -86,11 +91,16 @@ body{
         }
         a{
           color: #ffed00;
-          text-decoration: underline;
           position: absolute;
           top: 10px;
           font-size: 16px;
           font-weight: bold;
+          &:hover{
+            text-decoration: none;
+          }
+          span{
+            border-bottom: 1px solid #ffed00;
+          }
         }
       }
     }
@@ -105,9 +115,14 @@ body{
         }
         a{
           color: #ffffff;
-          text-decoration: underline;
           position: absolute;
           top: 10px;
+          &:hover{
+            text-decoration: none;
+          }
+          span{
+            border-bottom: 1px solid #ffffff;
+          }
         }
       }
     }
