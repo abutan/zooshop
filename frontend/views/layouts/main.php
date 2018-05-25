@@ -34,7 +34,7 @@ LtAppAsset::register($this);
             <?php if (Yii::$app->user->isGuest): ?>
                 <div class="enter col-sm-1 col-sm-offset-4">
                     <p>
-                        <i class="fa fa-sign-in-alt fa-2x" ></i>  <?= Html::a('Вход', ['/auth/auth/login']) ?>
+                        <i class="fa fa-sign-in-alt fa-2x" ></i>  <?= Html::a('<span>Вход</span>', ['/auth/auth/login']) ?>
                     </p>
                 </div><!--enter-->
 

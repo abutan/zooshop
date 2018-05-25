@@ -46,9 +46,14 @@ body{
         }
         a{
           color: #ffffff;
-          text-decoration: underline;
           position: absolute;
           top: 10px;
+          &:hover{
+            text-decoration: none;
+          }
+          span{
+            border-bottom: 1px solid #ffffff;
+          }
         }
       }
 
@@ -114,6 +119,9 @@ body{
           /*text-decoration: underline;*/
           text-align: left;
           text-indent: 5px;
+          &:hover{
+            text-decoration: none;
+          }
           span{
             border-bottom: 1px solid #ffffff;
           }

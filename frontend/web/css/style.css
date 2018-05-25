@@ -37,9 +37,12 @@ body {
         padding-top: 7px; }
       .top-block .row .enter p a {
         color: #ffffff;
-        text-decoration: underline;
         position: absolute;
         top: 10px; }
+        .top-block .row .enter p a:hover {
+          text-decoration: none; }
+        .top-block .row .enter p a span {
+          border-bottom: 1px solid #ffffff; }
   .top-block .row .registration {
     color: #ffffff; }
     .top-block .row .registration p {
@@ -87,6 +90,8 @@ body {
     /*text-decoration: underline;*/
     text-align: left;
     text-indent: 5px; }
+    .top-block .row .logout-user form button:hover {
+      text-decoration: none; }
     .top-block .row .logout-user form button span {
       border-bottom: 1px solid #ffffff; }
 
