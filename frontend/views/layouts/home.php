@@ -21,16 +21,11 @@ $this->registerMetaTag(['name' => 'keywords', 'content' => '']);
             <div class="col-sm-3">
                 <div class="aside-menu">
                     <ul>
-                        <?php
-                        if ($this->beginCache('widget-categories0',
-                            ['dependency' => new TagDependency(['tags' => ['categories']]), 'duration' => null])):
-                            ?>
-                            <?=
-                            CategoryWidget::widget([
-                                'active' => $this->params['active_category'] ?? NULL,
-                            ]);
-                            ?>
-                            <?php $this->endCache(); endif; ?>
+                        <?=
+                        CategoryWidget::widget([
+                            'active' => $this->params['active_category'] ?? NULL,
+                        ]);
+                        ?>
                     </ul>
                 </div>
 

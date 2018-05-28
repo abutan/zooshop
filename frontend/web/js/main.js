@@ -38,10 +38,13 @@ $('.backPhone').click(function (e) {
 
 $(document).ready(function () {
     var element = $('.aside-menu a.active');
-       element.click(function (e) {
-       e.preventDefault();
-       $(this).siblings('ul').slideToggle();
-       });
+    element.find('i').removeClass('fa-plus').addClass('fa-minus');
+
+   element.on('click', function (e) {
+        e.preventDefault();
+        $(this).find('i.fa-minus').toggleClass('fa-plus');
+        $(this).siblings('ul').slideToggle();
+   });
 });
 
 $('#list-view').click(function () {
