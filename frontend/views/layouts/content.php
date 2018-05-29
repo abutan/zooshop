@@ -46,9 +46,9 @@ use yii\caching\TagDependency;
                     Nav::widget([
                         'encodeLabels' => FALSE,
                         'items' => [
-                            ['label' => Html::img(Yii::getAlias('@web/files/default/new_13_mnu_icon.png'), ['alt' => 'Новинки']).'<p>Новинки</p>', 'url' => ['/shop/catalog/featured']],
+                            ['label' => Html::img(Yii::getAlias('@web/files/default/13_mnu_icon.png'), ['alt' => 'Новинки']).'<p>Новинки</p>', 'url' => ['/shop/catalog/featured']],
                             ['label' => Html::img(Yii::getAlias('@web/files/default/14_mnu_icon.png'), ['alt' => 'Хит продаж']).'<p>Хит продаж</p>', 'url' => ['/shop/catalog/hit']],
-                            ['label' => Html::img(Yii::getAlias('@web/files/default/new_15_mnu_icon.png'), ['alt' => 'Акции и скидки']).'<p>Акции и скидки</p>', 'url' => ['/sites/stock/index']],
+                            ['label' => Html::img(Yii::getAlias('@web/files/default/15_mnu_icon.png'), ['alt' => 'Акции и скидки']).'<p>Акции и скидки</p>', 'url' => ['/sites/stock/index']],
                             ['label' => Html::img(Yii::getAlias('@web/files/default/16_mnu_icon.png'), ['alt' => 'Бонусы']).'<p>Бонусы</p>', 'url' => ['/sites/bonus/index']],
                         ],
                     ])
