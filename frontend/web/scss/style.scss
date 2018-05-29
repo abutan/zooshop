@@ -628,13 +628,22 @@ body{
               }
             }
             .price{
-              font-size: 24px;
+              font-size: 26px;
               font-weight: bold;
               color: #045DA5;
-              i{
+              .price-old{
                 font-size: 16px;
-                color: #000;
-                font-weight: normal;
+                font-weight: bold;
+                .glyphicon-rub{
+                  font-size: 14px;
+                  font-weight: bold;
+                  text-decoration: line-through;
+                }
+              }
+              .price-new{
+                .glyphicon-rub{
+                  font-size: 22px;
+                }
               }
             }
           }

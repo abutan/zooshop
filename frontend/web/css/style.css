@@ -465,13 +465,18 @@ body {
         margin-bottom: 5px;
         height: 85px; }
       .main-content .col-sm-9 .product-panel .product-layout .product-thumb .product-caption .price {
-        font-size: 24px;
+        font-size: 26px;
         font-weight: bold;
         color: #045DA5; }
-        .main-content .col-sm-9 .product-panel .product-layout .product-thumb .product-caption .price i {
+        .main-content .col-sm-9 .product-panel .product-layout .product-thumb .product-caption .price .price-old {
           font-size: 16px;
-          color: #000;
-          font-weight: normal; }
+          font-weight: bold; }
+          .main-content .col-sm-9 .product-panel .product-layout .product-thumb .product-caption .price .price-old .glyphicon-rub {
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: line-through; }
+        .main-content .col-sm-9 .product-panel .product-layout .product-thumb .product-caption .price .price-new .glyphicon-rub {
+          font-size: 22px; }
   .main-content .col-sm-9 .product-list {
     height: 170px; }
     .main-content .col-sm-9 .product-list .product-thumb .product-image {

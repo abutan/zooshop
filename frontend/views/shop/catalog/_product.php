@@ -33,11 +33,11 @@ $url = Url::to(['product', 'id' => $product->id]);
                 <?php if ($product->price_old): ?>
 
                     <span class="price-old">
-                        <del style="color: #ff0000;">
+                        <s style="color: #ff0000;">
                             <?= PriceHelper::format($product->price_old) ?>
-                        </del>
+                        </s>
                     </span>
-
+                    &nbsp;&nbsp;
                 <?php endif; ?>
                 <span class="price-new">
                     <?= PriceHelper::format($product->price_new) ?>
