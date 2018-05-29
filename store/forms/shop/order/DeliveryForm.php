@@ -27,7 +27,7 @@ class DeliveryForm extends Model
     public function rules(): array
     {
         return [
-            [['index', 'address'], 'required'],
+            [['address'], 'required'],
             ['method', 'integer'],
             ['index', 'string', 'max' => 255],
             ['address', 'string'],
