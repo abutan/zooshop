@@ -160,19 +160,22 @@ body {
       text-decoration: none;
       border-bottom: 1px dotted #000000; }
   .down-block .row .shop-card {
-    color: #e3000b;
+    color: #000000;
     padding-top: 8px;
     padding-bottom: 7px; }
     .down-block .row .shop-card #vetshop-cart button {
       border: none;
+      color: #ff0000;
       border-radius: 0;
       background-color: transparent; }
     .down-block .row .shop-card a {
-      color: #e3000b;
+      color: #000000;
       font-size: 16px;
       font-weight: bold;
       text-decoration: none;
       border-bottom: 1px dotted #e3000b; }
+      .down-block .row .shop-card a i {
+        color: #ffffff; }
   .down-block .row .shop-search form {
     display: block;
     width: 80%;
@@ -500,10 +503,12 @@ body {
   .search-widget .col-sm-1 {
     padding-top: 7px; }
   .search-widget form button {
-    background-color: #e3000b;
+    background-color: #ff7900;
+    border: 1px solid #ff7900;
     color: #ffffff; }
     .search-widget form button:hover {
-      background-color: #e3000b;
+      background-color: #ff7900;
+      border: 1px solid #ff7900;
       text-decoration: underline; }
 
 .featured-node .product-layout.col-sm-4 {
@@ -752,10 +757,12 @@ div.required label:after {
       text-align: center; }
 
 .product-adding form button {
-  background-color: #ff0000;
+  background-color: #ff7900;
+  border: 1px solid #ff7900;
   color: #ffffff; }
   .product-adding form button:hover {
-    background-color: #ff0000;
+    background-color: #ff7900;
+    border: 1px solid #ff7900;
     text-decoration: underline; }
 
 .fixed {
