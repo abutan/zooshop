@@ -321,14 +321,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'options' => ['enctype'=>'multipart/form-data'],
             ]); ?>
 
-            <?php //echo $form->field($photosForm, 'files[]')->label(false)->widget(FileInput::class, [
-//                'options' => [
-//                    'accept' => 'image/*',
-//                    'multiple' => true,
-//                ]
-//            ]) ?>
-
-            <?= $form->field($photosForm, 'files[]')->fileInput(['multiple' => true,]) ?>
+            <?= $form->field($photosForm, 'files[]')->label(false)->widget(FileInput::class, [
+                'options' => [
+                    'accept' => 'image/*',
+                    'multiple' => true,
+                ]
+            ]) ?>
 
             <div class="form-group">
                 <?= Html::submitButton('Закачать', ['class' => 'btn btn-success']) ?>
